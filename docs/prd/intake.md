@@ -1,6 +1,7 @@
 # DSA Atlas: Blueprint intake
 
-**Status:** Draft; module authoring, release scope, and build capacity confirmed.
+**Status:** Draft; scope, build capacity, application packaging, scene adapters,
+and snapshot replay confirmed.
 **Updated:** 3 October 2026
 **Source:** [Product PRD](../../prd.md). Intake started from version 1.1, dated
 1 October 2026; confirmed changes are reflected in version 1.2.
@@ -28,6 +29,9 @@ has not yet been confirmed.
 | IN-04 | Both the complete heap module and graph BFS/DFS are required for submission. | User selected "Heap and BFS/DFS both required" on 3 October 2026, overriding the recommended heap-required, graph-optional release. |
 | IN-05 | Build capacity is one person, 2–3 hours per day. | User answered "2-3 hours and solo" on 3 October 2026. |
 | IN-06 | Use main for production, development for integration, and feature branches with PRs into development for user review and acceptance. | User requested this workflow for Exilitys/DSAVisualizer on 3 October 2026. |
+| IN-07 | Use Next.js with React Three Fiber and an integrated tutor endpoint. | User selected this option over the recommended static React frontend with a separate serverless endpoint on 3 October 2026. |
+| IN-08 | Share visual primitives and controls; provide a scene adapter per lesson. | User selected this option over a universal renderer driven entirely by scene data on 3 October 2026. |
+| IN-09 | Store immutable snapshots for every semantic step. | User selected this option over reconstructing snapshots from an event log on 3 October 2026. |
 
 ## Confirmed framework scope
 
@@ -48,12 +52,31 @@ the reusable framework across both tree/array and graph/frontier behavior.
 At 2–3 hours for each of seven build days, planned effort is approximately
 14–21 hours; optional capabilities remain outside the release.
 
+## Confirmed technical direction
+
+Next.js packages the React interface and tutor route together. The rejected
+static frontend plus serverless endpoint would have kept the frontend build
+independent of server/client conventions, but required separate endpoint
+packaging. The selected approach uses one application project.
+
+Shared visual primitives and controls are used by lesson-specific scene
+adapters. A universal scene-data renderer was not selected because it adds a
+rendering format before the required heap and graph journeys are complete.
+
+Replay stores immutable semantic snapshots. Reconstructing state from an
+event log was not selected: it saves trace storage but makes restoration depend
+on event replay behavior in every lesson. The PRD's scene-size limits bound
+the snapshot approach.
+
 ## Issues to resolve in Blueprint
 
-- **Technical decisions:** the shared module interface, application packaging,
-  and hosting approach remain proposals rather than accepted decisions.
+- **Module interface:** exact function and data shapes still need review in
+  the technical specification. Next.js is selected; the deployment host is
+  still open.
 - **AI integration:** provider and spending limit remain open. These need
   agreement before connecting a paid provider.
+- **Heap edits during repair:** whether learners must finish or restart an
+  unfinished operation before starting another is awaiting a user answer.
 - **Education prompt:** the official site still displayed "Prompt locked" when
   checked on 3 October 2026. Prompt alignment remains open. Source:
   [ForgeHacks tracks](https://www.forgehacks.dev/).

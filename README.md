@@ -11,8 +11,10 @@ requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views.
 
-The build is solo, with 2–3 hours available per day. The working technical
-choices in the PRD are proposals pending review.
+The build is solo, with 2–3 hours available per day. The selected technical
+direction is Next.js with React Three Fiber and an integrated tutor endpoint,
+shared visual primitives with a scene adapter per lesson, and immutable
+snapshots for replay. The complete technical specification remains under review.
 
 ## Project documents
 

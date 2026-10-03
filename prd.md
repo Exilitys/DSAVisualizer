@@ -324,16 +324,16 @@ Test at least 20 questions across normal steps, empty structures, intermediate v
 
 ## 9 System architecture
 
-Use a TypeScript simulation core shared by visual and semantic views. The renderer presents snapshots; it does not decide algorithm behavior. An animation scheduler interpolates between stable snapshots while all inspection, pseudocode, and counters refer to the selected semantic step.
+Use a TypeScript simulation core shared by visual and semantic views. The renderer presents snapshots; it does not decide algorithm behavior. An animation scheduler interpolates between stable snapshots while all inspection, pseudocode, and counters refer to the selected semantic step. On 3 October 2026 the product owner selected Next.js with an integrated tutor endpoint, shared visual primitives with lesson-specific scene adapters, and immutable snapshots for replay.
 
 | Layer | Proposed choice | Responsibility |
 | --- | --- | --- |
-| Application | React and TypeScript | Navigation, controls, inspection, challenges, and responsive layout. |
+| Application | Next.js, React, and TypeScript | Navigation, controls, inspection, challenges, responsive layout, and integrated endpoint packaging. |
 | 3D scene | Three.js with React Three Fiber | Spatial geometry, camera, picking, materials, and animation. |
 | Scene helpers | Drei where useful | Camera controls and readable labels; validate compatibility. |
 | Simulation | Pure TypeScript modules | Input validation, ordered events, invariants, and deterministic traces. |
 | State | Small typed store | Run lifecycle, playback, selection, layout, and learner evidence. |
-| AI service | Thin server-side API | Provider adapter, validated context, limits, and error handling. |
+| AI service | Next.js server-side route | Provider adapter, validated context, limits, and error handling. |
 | Persistence | Browser storage for P0 | Versioned input presets, settings, and local learning progress. |
 | Verification | Unit tests and browser tests | Algorithm correctness, trace replay, interactions, and responsive behavior. |
 
@@ -347,11 +347,11 @@ Use actual 3D geometry for the shipped scenes, not a static image or a flat diag
 
 ### Module boundary
 
-Each lesson supplies metadata, input schema, command schema, initial-state builder, trace generator, invariant checks, scene adapter, pseudocode mapping, and challenge definitions. A new algorithm should reuse playback and tutor context instead of introducing a separate control system.
+Each lesson supplies metadata, input schema, command schema, initial-state builder, trace generator, invariant checks, scene adapter, pseudocode mapping, and challenge definitions. Lesson-specific adapters use shared visual primitives and selection behavior. A new algorithm reuses playback, inspection, challenges, and tutor context instead of introducing a separate control system. The selected approach does not require a universal scene-data rendering language.
 
 ### Deployment boundary
 
-A static frontend plus one server-side AI endpoint is sufficient for P0. Account services and a shared database are P1. Record exact dependency versions in the lockfile during implementation; the stack here is a recommendation rather than a compatibility guarantee.
+The selected P0 packaging is one Next.js application containing the React frontend and POST /api/tutor server route. Account services and a shared database remain P1. The deployment host, provider, and spending cap still need agreement. Record compatible dependency versions in the lockfile during implementation; the stack decision does not assert measured compatibility or performance.
 
 ## 10 State model and service contracts
 
