@@ -4,7 +4,7 @@
 
 **Date:** 1 October 2026
 
-**Updated:** 3 October 2026
+**Updated:** 5 October 2026
 
 **Status:** Draft; scope choices confirmed, technical specification review in progress
 
@@ -16,6 +16,10 @@
 
 **Build horizon:** Seven-day hackathon MVP, followed by a separate product roadmap
 
+**Technical specification:** [Module contracts and state rules](docs/prd/prd.md)
+extend this product brief. [Slice 001](docs/specs/001-heap-insertion.md) defines
+the first implementation checkpoint.
+
 ## Hackathon delivery charter
 
 This PRD is a build specification for a **student hackathon project**. The first release must deliver a complete, memorable learning experience within the event window. The broader DSA atlas is the product vision; the hackathon submission demonstrates that vision through a small number of working modules.
@@ -25,7 +29,7 @@ This PRD is a build specification for a **student hackathon project**. The first
 ### Event constraints
 
 - The published event window is October 3 to 10, 2026. Verify the official deadline and timezone at kickoff.
-- The organizers say specific track prompts are revealed on Day 1. Adapt the lesson and target learner to the actual education prompt before finalizing scope.
+- The education prompt is now published: "Build an AI-powered solution that helps learners move beyond memorization to understand concepts, make connections, and apply what they learn." Rechecked on [the official site](https://www.forgehacks.dev/#tracks) on 5 October 2026. Paired representations, state-aware explanations, and fresh predictions address those aims; learning results still need validation.
 - Use this PRD for preparation. Substantially create the submitted project during the hackathon and clearly disclose any pre-existing work, including the earlier interaction prototype.
 - Build for a concise live demonstration and a 2 to 4 minute submission video, with a working app, source repository, and clear README.
 - The release targets and stack recommendations in this document are proposed specifications, not measured results or confirmed event requirements.
@@ -199,6 +203,11 @@ Open directly into a working example with two choices: play with a heap or explo
 
 Pause stops at a stable semantic boundary. Previous and seek reconstruct an exact trace snapshot. Restart returns to that run's original input. An input edit pauses playback and creates a new run from the chosen stable state. Future steps from the old run are discarded after confirmation when a meaningful lesson would be lost. Camera movement and selection do not change algorithm state.
 
+For heaps, new operations begin only at the original or completed run boundary.
+The learner must finish or restart an unfinished operation before starting
+another, as confirmed on 5 October 2026. Graph adjacency edits create a new
+traversal run; moving a graph node remains a layout change.
+
 ### Learning layers
 
 Explore allows free manipulation. Explain adds authored annotations and synchronized pseudocode. Challenge asks for a prediction before revealing the next event. These layers share the same scene and controls. Switching layers preserves input and camera context; entering a seeded challenge creates a clearly identified new run.
@@ -313,6 +322,11 @@ Responses contain explanation text, referenced entity IDs, optional proposed com
 ### Correctness and availability
 
 Use a server-side provider adapter so model choice can change without altering lessons. Keep API keys out of browser code. Rate-limit anonymous requests, cap context and output, allow cancellation, and show a retry action after timeout. Authored event explanations remain available when AI is offline. Never substitute a fabricated response for a failed model call.
+
+Development testing uses local Ollama, as selected on 5 October 2026. Production
+provider, model and spending limits remain open until deployment integration.
+The technical specification defines the provider-independent route and local
+Ollama contract.
 
 ### Secondary learning diagnosis
 

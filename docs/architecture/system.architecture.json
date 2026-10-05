@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "DSA Atlas architecture - draft",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "learner-controls", "type": "frontend", "label": "Lesson controls", "sublabel": "Input and commands", "pos": [60, 170], "size": [200, 80] },
+    { "id": "lesson-engines", "type": "frontend", "label": "Lesson engines", "sublabel": "Pure TypeScript", "pos": [315, 170], "size": [200, 80] },
+    { "id": "immutable-trace", "type": "frontend", "label": "Immutable trace", "sublabel": "Browser memory", "pos": [570, 170], "size": [200, 80] },
+    { "id": "shared-player", "type": "frontend", "label": "Shared player", "sublabel": "One selected snapshot", "pos": [825, 170], "size": [200, 80] },
+    { "id": "scene-adapters", "type": "frontend", "label": "Paired views", "sublabel": "Scene adapters + inspector", "pos": [1080, 170], "size": [240, 80] },
+    { "id": "tutor-route", "type": "backend", "label": "Tutor route", "sublabel": "Next.js: replay + validate", "pos": [825, 480], "size": [200, 80] },
+    { "id": "ollama-dev", "type": "external", "label": "Ollama", "sublabel": "Development model", "pos": [1150, 480], "size": [160, 80] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "First slice: heap insertion through the shared browser framework", "wraps": ["learner-controls", "lesson-engines", "immutable-trace", "shared-player", "scene-adapters"], "pad": 30 }
+  ],
+  "connections": [
+    { "id": "validated-command", "from": "learner-controls", "to": "lesson-engines", "label": "validate", "variant": "emphasis" },
+    { "id": "generated-trace", "from": "lesson-engines", "to": "immutable-trace", "label": "return", "variant": "emphasis" },
+    { "id": "selected-step", "from": "immutable-trace", "to": "shared-player", "label": "select", "variant": "emphasis" },
+    { "id": "snapshot-views", "from": "shared-player", "to": "scene-adapters", "label": "snapshot", "variant": "emphasis" },
+    { "id": "tutor-context", "from": "shared-player", "to": "tutor-route", "label": "POST /api/tutor", "labelAt": [925, 264] },
+    { "id": "local-generation", "from": "tutor-route", "to": "ollama-dev", "label": "chat + JSON schema" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One state, every view", "items": ["Stable IDs link tree, array and inspection.", "Seek selects a snapshot; motion changes presentation."] },
+    { "dot": "emerald", "title": "Development AI", "items": ["The route reuses the pure engine and checks output.", "Responses are proposals; production provider is deferred."] }
+  ]
+}
