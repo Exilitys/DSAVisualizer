@@ -1,7 +1,6 @@
 # DSA Atlas: Blueprint intake
 
-**Status:** Draft; scope, build capacity, application packaging, scene adapters,
-and snapshot replay confirmed.
+**Status:** Blueprint packet accepted; generated Groundwork context awaiting review.
 **Updated:** 5 October 2026
 **Source:** [Product PRD](../../prd.md). Intake started from version 1.1, dated
 1 October 2026; confirmed changes are reflected in version 1.2.
@@ -92,18 +91,23 @@ the snapshot approach.
 ## Continuation
 
 PR #1 was merged into development by @Exilitys on 5 October 2026; merge commit
-2bd928145d93c3c2b65a84fb6fb4181d7e53dd2c. The new technical spec and slice 001
-are drafts on feature/dsa-atlas-technical-spec. Continue with their validation
-and review diagram. Following human acceptance of the spec, run Groundwork
-Mode A to establish the project context and workflow around those artifacts.
+2bd928145d93c3c2b65a84fb6fb4181d7e53dd2c. The technical spec, slice 001 and
+architecture review packet were then prepared on feature/dsa-atlas-technical-spec.
 
 The owner subsequently instructed "Continue" after the final technical review
 packet on 5 October 2026. This accepts version 1 at d8b8f34, together with slice
 001 and the reviewed architecture artifact. Acceptance metadata is recorded in
 those documents. PR #2 remains open for the owner's merge.
 
-Groundwork Mode A inventory resolves product, architecture, design direction,
-progress, and provenance to existing artifacts. The proposed gaps are root
+Groundwork Mode A inventory resolved product, architecture, design direction,
+progress, and provenance to existing artifacts. It proposed five gaps:
 AGENTS.md, docs/development.md, docs/architecture/invariants.md, docs/backlog.md,
-and scripts/check-context.py. File-list confirmation is pending; UI tokens,
-component registry configuration, and Git hooks are proposed for later setup.
+and scripts/check-context.py.
+
+The owner then selected "Proceed with the minimal context setup (Recommended)"
+and instructed "Continue" on 5 October 2026. The five files are now generated
+as reviewable context. The context guard first failed on the four missing
+documents, then passed after their creation. This confirms the missing-file
+guard is active. Context writing remains Draft until reviewed; file-list
+approval did not approve unseen contents. Hooks, registry configuration, and
+UI token creation remain deferred until application scaffolding.

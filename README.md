@@ -7,8 +7,8 @@ prediction challenges, and explanations tied to the selected state.
 ## Current status
 
 The technical review packet was accepted through the owner's "Continue" on
-5 October 2026. Groundwork has inventoried the context gaps and is awaiting
-confirmation of its minimal file list. The confirmed release
+5 October 2026. The owner approved Groundwork's minimal file list, and the
+generated context is now drafted for review. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views.
@@ -28,6 +28,23 @@ snapshots for replay. The accepted technical specification owns the contracts.
 
 Groundwork is the next phase: project context, development lanes, and contract
 checks. The proposed setup reuses these specs and the diagram.
+
+## Project context
+
+- [Agent router](AGENTS.md)
+- [Development standards and library authority](docs/development.md)
+- [Invariants and contract paths](docs/architecture/invariants.md)
+- [Next work](docs/backlog.md)
+
+With Python 3.10 or newer, run from the repository root:
+
+```text
+python scripts/check-context.py
+```
+
+The standard-library guard checks context pointers, contract-list consistency,
+human acceptance records, and diagram evidence binding. Application checks are
+established with the future application package and implementation.
 
 ## Branch workflow
 
