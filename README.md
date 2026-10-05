@@ -20,6 +20,9 @@ snapshots for replay. The complete technical specification remains under review.
 
 - [Product requirements](prd.md)
 - [Blueprint intake and confirmed choices](docs/prd/intake.md)
+- [Technical specification](docs/prd/prd.md)
+- [First slice: heap insertion](docs/specs/001-heap-insertion.md)
+- [Architecture and state flow](docs/architecture/system.md)
 
 After the technical specification and review diagram are accepted, Groundwork
 will establish the project context, development lanes, and contract checks.
@@ -32,6 +35,7 @@ will establish the project context, development lanes, and contract checks.
 | `development` | Integration | Receive feature PRs after user review and acceptance. |
 | `feature/<topic>` | Focused changes based on `development` | Open a PR targeting `development`. |
 
-The current planning work is on `feature/dsa-atlas-blueprint`. Its PR targets
-`development`. User acceptance is required before merging a feature PR;
-publication of a draft does not mark its specification accepted.
+PR #1 established the brief and was merged into `development` on 5 October
+2026. The next planning work is on `feature/dsa-atlas-technical-spec`, with its
+PR targeting `development`. User acceptance is required before merging a
+feature PR; publication of a draft does not mark its specification accepted.

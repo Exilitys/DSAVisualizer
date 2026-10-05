@@ -2,7 +2,7 @@
 
 **Status:** Draft; scope, build capacity, application packaging, scene adapters,
 and snapshot replay confirmed.
-**Updated:** 3 October 2026
+**Updated:** 5 October 2026
 **Source:** [Product PRD](../../prd.md). Intake started from version 1.1, dated
 1 October 2026; confirmed changes are reflected in version 1.2.
 
@@ -32,6 +32,8 @@ has not yet been confirmed.
 | IN-07 | Use Next.js with React Three Fiber and an integrated tutor endpoint. | User selected this option over the recommended static React frontend with a separate serverless endpoint on 3 October 2026. |
 | IN-08 | Share visual primitives and controls; provide a scene adapter per lesson. | User selected this option over a universal renderer driven entirely by scene data on 3 October 2026. |
 | IN-09 | Store immutable snapshots for every semantic step. | User selected this option over reconstructing snapshots from an event log on 3 October 2026. |
+| IN-10 | Test with Ollama in development and keep production provider options open. | User answered on 5 October 2026: "For now in development keep options open, but i test with ollmaa". |
+| IN-11 | Finish or restart before a new heap operation. | User selected "Finish or restart first (Recommended)" on 5 October 2026. |
 
 ## Confirmed framework scope
 
@@ -73,13 +75,14 @@ the snapshot approach.
 - **Module interface:** exact function and data shapes still need review in
   the technical specification. Next.js is selected; the deployment host is
   still open.
-- **AI integration:** provider and spending limit remain open. These need
-  agreement before connecting a paid provider.
-- **Heap edits during repair:** whether learners must finish or restart an
-  unfinished operation before starting another is awaiting a user answer.
-- **Education prompt:** the official site still displayed "Prompt locked" when
-  checked on 3 October 2026. Prompt alignment remains open. Source:
-  [ForgeHacks tracks](https://www.forgehacks.dev/).
+- **AI integration:** Ollama is selected for development. Production provider,
+  model and spending cap are explicitly deferred until deployment integration.
+- **Heap edits during repair:** resolved on 5 October 2026. New operations
+  start at ordinal 0 or completion; finish or restart first.
+- **Education prompt:** published when rechecked on 5 October 2026. It asks
+  for conceptual understanding, connections, and application. The technical
+  spec maps paired views, explanations, and fresh predictions to that prompt.
+  Source: [ForgeHacks tracks](https://www.forgehacks.dev/#tracks).
 - **Deadline timezone:** Devpost's deadline display says 10 October 2026 at noon
   EDT, equivalent to 23:00 in Bangkok; its rules text labels noon EST instead.
   Resolve this discrepancy before recording a final submission cutoff. Sources:
@@ -88,7 +91,8 @@ the snapshot approach.
 
 ## Continuation
 
-Continue Blueprint with technical decision proposals, a product spec,
-first-slice spec, validation, and a review
-diagram. Following human acceptance of the spec, run Groundwork Mode A to
-establish the project context and workflow around those artifacts.
+PR #1 was merged into development by @Exilitys on 5 October 2026; merge commit
+2bd928145d93c3c2b65a84fb6fb4181d7e53dd2c. The new technical spec and slice 001
+are drafts on feature/dsa-atlas-technical-spec. Continue with their validation
+and review diagram. Following human acceptance of the spec, run Groundwork
+Mode A to establish the project context and workflow around those artifacts.
