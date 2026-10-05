@@ -1,6 +1,9 @@
 # Slice 001 - heap insertion through the shared lesson framework
 
-**Status.** Draft
+**Status.** Accepted 2026-10-05 by @Exilitys
+
+**Reviewed.** Version 1 at commit d8b8f34e493d57b065cb071f4aaad43d57817f7b,
+accepted with the technical review packet through the owner's "Continue".
 
 **Version.** 1, 5 October 2026
 
@@ -130,5 +133,4 @@ reduced motion. A fresh input then tests the parent/index explanation.
 ## 11. Open questions
 
 No clarification remains unanswered. D-007 defines finish/restart behavior.
-The written slice contract remains Draft pending human acceptance of its
-interface and step definitions.
+The written slice contract was accepted with the technical review packet.

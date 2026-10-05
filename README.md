@@ -6,7 +6,9 @@ prediction challenges, and explanations tied to the selected state.
 
 ## Current status
 
-The project is in Blueprint specification review. The confirmed release
+The technical review packet was accepted through the owner's "Continue" on
+5 October 2026. Groundwork has inventoried the context gaps and is awaiting
+confirmation of its minimal file list. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views.
@@ -14,7 +16,7 @@ with synchronized tree and array views.
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
 shared visual primitives with a scene adapter per lesson, and immutable
-snapshots for replay. The complete technical specification remains under review.
+snapshots for replay. The accepted technical specification owns the contracts.
 
 ## Project documents
 
@@ -24,8 +26,8 @@ snapshots for replay. The complete technical specification remains under review.
 - [First slice: heap insertion](docs/specs/001-heap-insertion.md)
 - [Architecture and state flow](docs/architecture/system.md)
 
-After the technical specification and review diagram are accepted, Groundwork
-will establish the project context, development lanes, and contract checks.
+Groundwork is the next phase: project context, development lanes, and contract
+checks. The proposed setup reuses these specs and the diagram.
 
 ## Branch workflow
 

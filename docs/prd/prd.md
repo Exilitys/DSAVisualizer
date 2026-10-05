@@ -1,6 +1,10 @@
 # DSA Atlas - technical specification
 
-**Status.** Draft
+**Status.** Accepted 2026-10-05 by @Exilitys
+
+**Reviewed.** Version 1 at commit d8b8f34e493d57b065cb071f4aaad43d57817f7b,
+together with slice 001 and the architecture diagram. The owner instructed
+"Continue" after the final review packet; this records that instruction.
 
 **Version.** 1, 5 October 2026
 
@@ -473,13 +477,13 @@ live tutor use, and the full challenge set remain required release work.
 
 No clarification remains unanswered for this development design. The owner
 explicitly deferred production AI selection in D-006; its trigger is recorded
-above. Human acceptance of the written interface, guards, and diagram remains
-the next review checkpoint; this document's status stays Draft until then.
+above. The written interface, guards, and diagram were accepted through the
+owner's instruction to continue after the final review packet.
 
 ## 14. Review log
 
 | Round | Date | Reviewer | Outcome | Artifact |
 | --- | --- | --- | --- | --- |
 | Brief | 2026-10-05 | @Exilitys | PR #1 merged into development | Source PRD and intake through IN-09; merge 2bd9281. |
-| Technical 1 | 2026-10-05 | Pending | Review packet prepared; clarifications resolved | This document, slice 001, and architecture diagram. |
+| Technical 1 | 2026-10-05 | @Exilitys | Accepted through "Continue" after the review packet | Version 1 at d8b8f34, slice 001, and the reviewed architecture artifact. |
 | Consistency | 2026-10-05 | Codex, drafting agent | Clarifications resolved; self-review fixes applied | Deep immutability, resting state, unique extraction identities, command boundaries, and tutor context invalidation. |

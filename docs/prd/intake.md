@@ -96,3 +96,14 @@ PR #1 was merged into development by @Exilitys on 5 October 2026; merge commit
 are drafts on feature/dsa-atlas-technical-spec. Continue with their validation
 and review diagram. Following human acceptance of the spec, run Groundwork
 Mode A to establish the project context and workflow around those artifacts.
+
+The owner subsequently instructed "Continue" after the final technical review
+packet on 5 October 2026. This accepts version 1 at d8b8f34, together with slice
+001 and the reviewed architecture artifact. Acceptance metadata is recorded in
+those documents. PR #2 remains open for the owner's merge.
+
+Groundwork Mode A inventory resolves product, architecture, design direction,
+progress, and provenance to existing artifacts. The proposed gaps are root
+AGENTS.md, docs/development.md, docs/architecture/invariants.md, docs/backlog.md,
+and scripts/check-context.py. File-list confirmation is pending; UI tokens,
+component registry configuration, and Git hooks are proposed for later setup.

@@ -1,6 +1,9 @@
 # DSA Atlas - architecture review
 
-**Status:** Draft, version 1, 5 October 2026.
+**Status:** Accepted 2026-10-05 by @Exilitys.
+
+**Reviewed:** Version 1 at d8b8f34, including the exact HTML and diagram-source
+hashes recorded below. The owner's "Continue" accepted the final review packet.
 
 The components below describe the proposed system, not an implemented app.
 [Technical specification](../prd/prd.md) defines the interfaces and ownership;
