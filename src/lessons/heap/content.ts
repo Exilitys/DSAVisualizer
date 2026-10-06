@@ -17,3 +17,10 @@ export function explainStep(snapshot: Snapshot<HeapState>): string {
     default: return 'Insert a value, then follow it from the next open position toward the root.';
   }
 }
+
+export function heapTreePosition(index: number): [number,number,number] {
+  const depth = Math.floor(Math.log2(index+1));
+  const width = 2**depth;
+  const slot = index-(width-1);
+  return [((slot+0.5)/width-0.5)*12,3-depth*1.4,0];
+}

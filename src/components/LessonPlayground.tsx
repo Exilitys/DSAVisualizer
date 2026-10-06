@@ -1,11 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import type { Inspection, Snapshot } from '../core/lesson.ts';
 import { createPlayer, currentSnapshot, startCommand, seek, selectEntity } from '../core/player.ts';
 import { heapEngine, createPreset } from '../lessons/heap/engine.ts';
 import type { HeapState } from '../lessons/heap/engine.ts';
 import { pseudocode, explainStep } from '../lessons/heap/content.ts';
+
+const HeapScene = dynamic(()=>import('../lessons/heap/HeapScene'),{
+  ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>,
+});
 
 export function PlaybackControls({ordinal,lastOrdinal,hasRun,go}: {
   ordinal:number; lastOrdinal:number; hasRun:boolean; go(ordinal:number):void;
@@ -68,11 +73,24 @@ function SemanticHeap({snapshot,selectedId,select}: {
 export default function LessonPlayground() {
   const [player,setPlayer] = useState(()=>createPlayer(heapEngine,createPreset()));
   const [draft,setDraft] = useState('1');
+  const [semanticOnly,setSemanticOnly] = useState(false);
+  const [webglAvailable,setWebglAvailable] = useState(true);
+  const [reducedMotion,setReducedMotion] = useState(false);
+  const [fitRequest,setFitRequest] = useState(0);
+  const [focusRequest,setFocusRequest] = useState(0);
+  const unavailable = useCallback(()=>setWebglAvailable(false),[]);
+  useEffect(()=>{
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(media.matches);
+    update();
+    media.addEventListener('change',update);
+    return ()=>media.removeEventListener('change',update);
+  },[]);
   const snapshot = currentSnapshot(player);
   const lastOrdinal = player.steps ? player.steps.length-1 : 0;
   const canStart = !player.steps || player.ordinal===0 || player.ordinal===lastOrdinal;
   const go = (ordinal:number) => setPlayer(state=>seek(state,ordinal));
-  const select = (id:string) => setPlayer(state=>selectEntity(state,heapEngine,id));
+  const select = useCallback((id:string)=>setPlayer(state=>selectEntity(state,heapEngine,id)),[]);
   const insert = () => setPlayer(state=>draft.trim()===''
     ? {...state,error:'Enter a whole number from 0 to 99.'}
     : startCommand(state,heapEngine,{type:'insert',value:Number(draft)}));
@@ -94,7 +112,20 @@ export default function LessonPlayground() {
     </section>
     <div className="workspace">
       <div className="main-column">
-        <section className="scene scene-placeholder" aria-label="Heap visualization"><p>Your heap, two connected views.</p><span>Explore the tree and array below.</span></section>
+        <section className="scene" aria-label="Heap visualization" data-reduced-motion={reducedMotion}>
+          <div className="scene-caption"><span>Linked 3D view</span><span>{inspection ? `Selected ${inspection.id}` : 'Select an item'}</span></div>
+          {semanticOnly || !webglAvailable
+            ? <p className="scene-notice">{webglAvailable ? 'Semantic view is active. Explore the structure and step controls below.' : '3D is unavailable. Use the structure and step controls below.'}</p>
+            : <HeapScene snapshot={snapshot} selectedIds={inspection ? [inspection.id] : []} select={select} reducedMotion={reducedMotion}
+                fitRequest={fitRequest} focusRequest={focusRequest} unavailable={unavailable} />}
+          <div className="scene-help"><span>Drag to orbit · scroll to zoom</span><span>Tree above · array below</span></div>
+        </section>
+        <div className="scene-controls" aria-label="View controls">
+          <button disabled={semanticOnly || !webglAvailable} onClick={()=>setFitRequest(n=>n+1)}>Fit scene</button>
+          <button disabled={!inspection || semanticOnly || !webglAvailable} onClick={()=>setFocusRequest(n=>n+1)}>Focus selection</button>
+          <label><input type="checkbox" checked={reducedMotion} onChange={event=>setReducedMotion(event.target.checked)} />Reduce motion</label>
+          <label><input type="checkbox" checked={semanticOnly} onChange={event=>setSemanticOnly(event.target.checked)} />Semantic view only</label>
+        </div>
         <section className="panel execution" aria-label="Execution controls">
           <div className="section-heading"><h2>One step at a time</h2><span className={`invariant ${repairing ? 'repairing' : ''}`}>{repairing ? 'Repairing heap order' : 'Heap order holds'}</span></div>
           <PlaybackControls ordinal={player.ordinal} lastOrdinal={lastOrdinal} hasRun={Boolean(player.steps)} go={go} />

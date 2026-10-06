@@ -40,6 +40,19 @@ p { line-height:1.55; }
 .scene { height:480px; min-width:0; position:relative; border:1px solid var(--border); border-radius:16px; background:#edf0f8; overflow:hidden; }
 .scene-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); }
 .scene-placeholder span { font-size:13px; }
+.scene-caption,.scene-help { position:absolute; left:16px; right:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; pointer-events:none; z-index:1; font-size:10px; color:var(--muted); }
+.scene-caption { top:16px; text-transform:uppercase; letter-spacing:.08em; }
+.scene-help { bottom:14px; }
+.scene-notice { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:36px; text-align:center; font-size:13px; color:var(--muted); }
+.scene-controls { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.scene-controls button,.scene-controls label { font-size:11px; }
+.scene-controls label { display:flex; align-items:center; gap:6px; margin-left:auto; color:var(--muted); min-height:44px; cursor:pointer; }
+.scene-controls input { accent-color:var(--selected); }
+.node-label { display:flex; flex-direction:column; align-items:center; gap:1px; min-width:28px; padding:3px; border-radius:6px; color:var(--ink); font-size:9px; line-height:1.05; background:#ffffffd9; border:1px solid #ffffffb0; }
+.node-label strong { font-size:14px; }
+.node-label.is-selected { background:var(--selection-wash); border-color:var(--selected); }
+.renderer { height:100%; width:100%; position:relative; }
+.label-portal { position:absolute; inset:0; pointer-events:none; }
 .section-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
 .section-heading h2 { margin-bottom:0; }
 .invariant { background:#eef5ef; color:#315b3c; border:1px solid #d0e5d4; border-radius:20px; padding:5px 9px; font-size:10px; font-weight:600; }
@@ -83,6 +96,10 @@ footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; p
   .intro { padding-top:28px; }
   .workspace { grid-template-columns:1fr; }
   .scene { height:360px; }
+  .node-label { min-width:20px; padding:2px; font-size:7px; }
+  .node-label strong { font-size:11px; }
+  .node-label.array-label { min-width:16px; padding:1px; }
+  .node-label.array-label strong { font-size:10px; }
   .panel { padding:16px; }
   .operation-controls { flex-wrap:wrap; width:100%; }
   .operation-controls label { flex:1; }

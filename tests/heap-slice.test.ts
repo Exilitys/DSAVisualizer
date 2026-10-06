@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { heapEngine, createPreset } from '../src/lessons/heap/engine.ts';
 import { createPlayer, currentSnapshot, startCommand, seek, selectEntity } from '../src/core/player.ts';
+import { heapTreePosition } from '../src/lessons/heap/content.ts';
 
 test('inserting 1 preserves identity through the nine accepted snapshots', () => {
   const input = createPreset();
@@ -135,4 +136,13 @@ test('selection uses logical identity and follows inspection after rewind', () =
   const inspected = heapEngine.inspect(currentSnapshot(seek(selected,3)),selected.selectedId!);
   assert.equal(inspected!.fields.find(f=>f.label==='Index')!.value,'3');
   assert.equal(selectEntity(selected,heapEngine,'missing').selectedId,null);
+});
+
+test('tree positions keep all fifteen supported slots distinct and finite', () => {
+  const positions = Array.from({length:15},(_,i)=>heapTreePosition(i));
+  assert.equal(new Set(positions.map(p=>p.join(','))).size,15);
+  assert.ok(positions.flat().every(Number.isFinite));
+  assert.deepEqual(positions[0],[0,3,0]);
+  assert.deepEqual(positions[1],[-3,1.6,0]);
+  assert.deepEqual(positions[2],[3,1.6,0]);
 });
