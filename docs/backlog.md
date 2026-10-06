@@ -1,15 +1,14 @@
 # Next work and deferrals
 
-**Status:** Draft context for owner review, 5 October 2026.
+**Status:** Accepted 2026-10-05 by @Exilitys; reviewed at 220124f and merged in PR #2.
 
 The source of release scope is the accepted [technical spec](prd/prd.md).
 This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Review the generated Groundwork context and accept or amend it.
-2. Write and review an implementation plan for [slice 001](specs/001-heap-insertion.md).
-3. Select the execution method, then implement and verify the accepted slice.
+1. Review the [implementation plan](superpowers/plans/2026-10-05-heap-insertion.md) for [slice 001](specs/001-heap-insertion.md).
+2. Select the execution method, then implement and verify the accepted slice.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The approved file list does not approve an unwritten build plan.

@@ -1,6 +1,6 @@
 # DSA Atlas: Blueprint intake
 
-**Status:** Blueprint packet accepted; generated Groundwork context awaiting review.
+**Status:** Blueprint and Groundwork accepted; first-slice implementation plan awaiting review.
 **Updated:** 5 October 2026
 **Source:** [Product PRD](../../prd.md). Intake started from version 1.1, dated
 1 October 2026; confirmed changes are reflected in version 1.2.
@@ -97,7 +97,7 @@ architecture review packet were then prepared on feature/dsa-atlas-technical-spe
 The owner subsequently instructed "Continue" after the final technical review
 packet on 5 October 2026. This accepts version 1 at d8b8f34, together with slice
 001 and the reviewed architecture artifact. Acceptance metadata is recorded in
-those documents. PR #2 remains open for the owner's merge.
+those documents. PR #2 was subsequently merged by the owner.
 
 Groundwork Mode A inventory resolved product, architecture, design direction,
 progress, and provenance to existing artifacts. It proposed five gaps:
@@ -108,6 +108,11 @@ The owner then selected "Proceed with the minimal context setup (Recommended)"
 and instructed "Continue" on 5 October 2026. The five files are now generated
 as reviewable context. The context guard first failed on the four missing
 documents, then passed after their creation. This confirms the missing-file
-guard is active. Context writing remains Draft until reviewed; file-list
-approval did not approve unseen contents. Hooks, registry configuration, and
+guard is active. Context writing was presented for review separately from
+file-list approval. Hooks, registry configuration, and
 UI token creation remain deferred until application scaffolding.
+
+The owner merged PR #2 at 951d474a21b852e77bc910470522044e334681cb and explicitly
+accepted the context on 5 October 2026. Context status records cite reviewed
+revision 220124f. The implementation plan is prepared on feature/heap-insertion-plan
+and remains Draft until the owner reviews it and selects an execution method.

@@ -7,8 +7,8 @@ prediction challenges, and explanations tied to the selected state.
 ## Current status
 
 The technical review packet was accepted through the owner's "Continue" on
-5 October 2026. The owner approved Groundwork's minimal file list, and the
-generated context is now drafted for review. The confirmed release
+5 October 2026. The owner merged and accepted Groundwork in PR #2. The
+first-slice implementation plan is drafted for review. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views.
@@ -24,10 +24,11 @@ snapshots for replay. The accepted technical specification owns the contracts.
 - [Blueprint intake and confirmed choices](docs/prd/intake.md)
 - [Technical specification](docs/prd/prd.md)
 - [First slice: heap insertion](docs/specs/001-heap-insertion.md)
+- [Heap insertion implementation plan](docs/superpowers/plans/2026-10-05-heap-insertion.md)
 - [Architecture and state flow](docs/architecture/system.md)
 
-Groundwork is the next phase: project context, development lanes, and contract
-checks. The proposed setup reuses these specs and the diagram.
+Groundwork establishes the accepted project context, development lanes, and
+contract checks. Implementation begins after review of the written plan.
 
 ## Project context
 
