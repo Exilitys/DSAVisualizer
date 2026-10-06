@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Status:** Draft for owner review, 5 October 2026.
+**Status:** Accepted 2026-10-06 by @Exilitys; reviewed at 2a3fd2c in PR #3.
 
 **Updated:** 6 October 2026; self-review completed against the accepted slice.
 
@@ -14,7 +14,7 @@
 
 **Spec:** [Accepted slice 001](../../specs/001-heap-insertion.md) and [technical contracts](../../prd/prd.md), accepted at d8b8f34. Context accepted in merged PR #2, revision 220124f.
 
-**Execution:** Not selected yet. Recommend Native for these four dependent tasks, followed by a fresh whole-branch review.
+**Execution:** Native, selected by the owner on 6 October 2026, followed by a fresh whole-branch review.
 
 ## Global Constraints
 
