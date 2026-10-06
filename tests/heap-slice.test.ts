@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { heapEngine, createPreset } from '../src/lessons/heap/engine.ts';
+import { createPlayer, currentSnapshot, startCommand, seek, selectEntity } from '../src/core/player.ts';
 
 test('inserting 1 preserves identity through the nine accepted snapshots', () => {
   const input = createPreset();
@@ -76,4 +77,62 @@ test('inspection follows a logical ID and counters do not recycle IDs', () => {
   const again = heapEngine.createTrace(trace[8].state, {type:'insert',value:99});
   assert.equal(again[1].state.items.at(-1)!.id, 'H9');
   assert.equal(again.at(-1)!.state.nextId, 10);
+});
+
+test('seek restores exact state and commands start only at run boundaries', () => {
+  const resting = createPlayer(heapEngine, createPreset());
+  assert.equal(resting.steps, null);
+  const begun = startCommand(resting,heapEngine,{type:'insert',value:1});
+  assert.equal(begun.ordinal,1);
+  const middle = seek(begun,3);
+  const blocked = startCommand(middle,heapEngine,{type:'insert',value:2});
+  assert.equal(blocked.steps,middle.steps);
+  assert.equal(blocked.ordinal,3);
+  assert.match(blocked.error!,/finish or restart/i);
+  const orderedButUnfinished = seek(begun,7);
+  assert.equal(currentSnapshot(orderedButUnfinished).invariants.find(x => x.id==='heap-order')!.status,'holds');
+  assert.match(startCommand(orderedButUnfinished,heapEngine,{type:'insert',value:2}).error!,/finish or restart/i);
+  assert.deepEqual(currentSnapshot(seek(begun,2)).counters,{comparisons:1,swaps:0});
+  const restarted = seek(begun,0);
+  assert.equal(currentSnapshot(restarted).state.items.length,7);
+  const replaced = startCommand(restarted,heapEngine,{type:'insert',value:2});
+  assert.equal(replaced.ordinal,1);
+  assert.equal(currentSnapshot(replaced).state.items.at(-1)!.id,'H8');
+  const continued = startCommand(seek(begun,8),heapEngine,{type:'insert',value:2});
+  assert.equal(currentSnapshot(continued).state.items.at(-1)!.id,'H9');
+});
+
+test('invalid commands, cursors and engine failures preserve the valid run', () => {
+  const begun = startCommand(createPlayer(heapEngine,createPreset()),heapEngine,{type:'insert',value:1});
+  const completed = seek(begun,8);
+  for (const value of [NaN,Infinity,-1,100,1.5,'',null]) {
+    const invalid = startCommand(completed,heapEngine,{type:'insert',value});
+    assert.equal(invalid.ordinal,8);
+    assert.equal(invalid.steps,begun.steps);
+    assert.ok(invalid.error);
+  }
+  for (const ordinal of [-1,9,1.5,NaN]) {
+    const invalid = seek(completed,ordinal);
+    assert.equal(invalid.ordinal,8);
+    assert.equal(invalid.steps,begun.steps);
+  }
+  for (const engine of [
+    {...heapEngine,createTrace:()=>[]},
+    {...heapEngine,createTrace:()=>Array.from({length:513},()=>begun.steps![0])},
+    {...heapEngine,createTrace:()=>{throw new Error('Engine failure');}},
+  ]) {
+    const failed = startCommand(completed,engine,{type:'insert',value:2});
+    assert.equal(failed.steps,begun.steps);
+    assert.equal(failed.ordinal,8);
+    assert.ok(failed.error);
+  }
+});
+
+test('selection uses logical identity and follows inspection after rewind', () => {
+  const begun = startCommand(createPlayer(heapEngine,createPreset()),heapEngine,{type:'insert',value:1});
+  const selected = selectEntity(begun,heapEngine,'H8');
+  assert.equal(selected.selectedId,'H8');
+  const inspected = heapEngine.inspect(currentSnapshot(seek(selected,3)),selected.selectedId!);
+  assert.equal(inspected!.fields.find(f=>f.label==='Index')!.value,'3');
+  assert.equal(selectEntity(selected,heapEngine,'missing').selectedId,null);
 });
