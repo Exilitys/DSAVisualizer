@@ -109,3 +109,9 @@ The reviewer set aside the following scopes, and the executor retained them:
 
 Deferred review minors: none established. The four review scope rulings and
 coverage costs are recorded in the fresh review section above.
+
+## Feature review
+
+[PR #4](https://github.com/Exilitys/DSAVisualizer/pull/4) targets `development`
+from `feature/heap-insertion`. It includes the accepted plan from the still open
+PR #3. The branch is pushed and awaits owner review; nothing was merged.

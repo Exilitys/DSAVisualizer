@@ -667,7 +667,7 @@ document.querySelector('canvas')?.dispatchEvent(new Event('webglcontextlost', {c
 
 - [x] Measure event-to-visible-action samples on the named desktop/browser before claiming the 100 ms p95 target. If a phone is unavailable, report that coverage gap rather than declaring phone verification passed. Check text contrast and focus visibility with the actual rendered palette.
 - [x] Add real source contract paths to both existing literal lists once created: src/core/lesson.ts, src/core/player.ts, src/lessons/heap/engine.ts, and src/app/globals.css. Run the context guard to ensure the mirror matches. Keep diagram bytes frozen; implementation progress does not require regenerating the accepted design artifact.
-- [ ] Self-check coverage against slice 001, fix observed issues, then request a fresh whole-branch review. Native execution uses executing-plans; subagent execution uses subagent-driven-development. Record findings and resolutions. Open the implementation PR into development for the owner's acceptance.
+- [x] Self-check coverage against slice 001, fix observed issues, then request a fresh whole-branch review. Native execution uses executing-plans; subagent execution uses subagent-driven-development. Record findings and resolutions. Open the implementation PR into development for the owner's acceptance.
 
 
 ## Coverage and self-review
