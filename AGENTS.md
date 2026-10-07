@@ -14,6 +14,8 @@ and decision explanations in their owning documents.
 | Development contracts and decision provenance | [Technical specification](docs/prd/prd.md) |
 | First slice | [Heap insertion](docs/specs/001-heap-insertion.md) |
 | First-slice implementation plan | [Heap insertion plan](docs/superpowers/plans/2026-10-05-heap-insertion.md) |
+| Next slice | [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md) |
+| Next build plan | [Extraction and playback plan](docs/superpowers/plans/2026-10-07-heap-extraction-playback.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |

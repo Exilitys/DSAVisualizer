@@ -7,12 +7,13 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Review the [extraction and autoplay specification](specs/002-heap-extraction-playback.md)
-   against the accepted operation and identity contracts.
-2. Review its written specification and build plan before implementation.
+1. Review the [extraction and autoplay build plan](superpowers/plans/2026-10-07-heap-extraction-playback.md).
+2. After plan acceptance, implement and verify [slice 002](specs/002-heap-extraction-playback.md) using Native execution.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.
+Slice 002's written specification was accepted on 7 October 2026; its build plan
+remains pending review.
 
 ## Required release work after the first slice
 
