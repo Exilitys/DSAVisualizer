@@ -1,6 +1,6 @@
 # Heap insertion verification
 
-**Status:** Runtime verification recorded 6 October 2026; final checks and fresh review continued 7 October 2026. Owner feature review pending.
+**Status:** Runtime verification recorded 6 October 2026; final checks and fresh review continued 7 October 2026. Merged in PR #4 on 7 October 2026.
 
 **Scope:** [Slice 001](../specs/001-heap-insertion.md) and its
 [accepted Native plan](../superpowers/plans/2026-10-05-heap-insertion.md).
@@ -114,4 +114,6 @@ coverage costs are recorded in the fresh review section above.
 
 [PR #4](https://github.com/Exilitys/DSAVisualizer/pull/4) targets `development`
 from `feature/heap-insertion`. It includes the accepted plan from the still open
-PR #3. The branch is pushed and awaits owner review; nothing was merged.
+PR #3. PR #4 was merged on 7 October 2026 at commit
+`012e0c38ffb472b66d168b07931c1bf600ddd29e`. The merged branch's eight tests
+passed again before the next slice began.
