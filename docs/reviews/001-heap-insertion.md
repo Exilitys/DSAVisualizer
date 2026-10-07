@@ -64,4 +64,48 @@ authority. Final command results and fresh code review are recorded below.
 
 `npm test`: 8 passed, 0 failed. `npm run typecheck`: passed.
 `npm run build`: passed; `/` prerendered. `python scripts/check-context.py`
-and `git diff --check`: passed. Fresh code review pending.
+and `git diff --check`: passed.
+
+## Fresh branch review and resolution
+
+A fresh GPT-6 Astra reviewer inspected `2a3fd2c..94fda66` read only and
+independently ran the eight tests. It found no critical or minor issue and one
+important issue: a truncated, nonempty trace could replace the valid run and
+expose an unfinished snapshot as its final command boundary.
+
+The preservation regression failed with the truncated trace, then passed after
+the player checked the initial event, contiguous ordinals, final complete event,
+and completed invariant statuses before accepting the trace. The same check
+covers wrong initial events, incorrect ordinals, and repairing final annotations.
+Intermediate repair snapshots remain allowed. The full eight test suite passed.
+The fix follows the accepted failure behavior and changes no engine interface.
+
+The single review fix pass is verified by regression tests and the full suite;
+there is no second reviewer pass. Owner review and merging remain separate gates.
+
+The reviewer set aside the following scopes, and the executor retained them:
+
+- Extraction, graph BFS/DFS, tutoring, autoplay/speed, persistence, and challenges
+  remain required later release work. The release is incomplete until they ship.
+- Arbitrary initial-array editing and configurable authoring remain outside this
+  slice. Exploration currently uses the preset and validated insertions.
+- Physical phone, screen reader, and host preference switching remain untested.
+  Those devices and accessibility paths need separate verification.
+- Engines remain authored code. The player checks the required trace envelope;
+  arbitrary hostile-engine schema defenses are outside this feature. Additional
+  lesson engines must validate their own logical state.
+
+## Implementation rulings
+
+- Item counters use safe integers and reject exhaustion to preserve unique IDs.
+  Cost: externally authored heaps with enormous counters are rejected.
+- Use Next 16 automatic JSX and generated route types, and disable generated
+  agent rules to preserve curated context. Cost: type checking needs Next's
+  generator; upstream agent guidance is read from official documentation.
+- Fit resets orbit orientation before fitting the structures. Cost: Fit discards
+  a deliberately chosen viewing angle in exchange for a readable recovery view.
+- A native Reduce motion checkbox starts from the OS preference. Cost: one extra
+  view control; a later OS preference change updates the session choice.
+
+Deferred review minors: none established. The four review scope rulings and
+coverage costs are recorded in the fresh review section above.

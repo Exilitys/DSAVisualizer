@@ -120,6 +120,10 @@ test('invalid commands, cursors and engine failures preserve the valid run', () 
   for (const engine of [
     {...heapEngine,createTrace:()=>[]},
     {...heapEngine,createTrace:()=>Array.from({length:513},()=>begun.steps![0])},
+    {...heapEngine,createTrace:(...args:Parameters<typeof heapEngine.createTrace>)=>heapEngine.createTrace(...args).slice(0,2)},
+    {...heapEngine,createTrace:(...args:Parameters<typeof heapEngine.createTrace>)=>heapEngine.createTrace(...args).map((s,i)=>i===0 ? {...s,event:{...s.event,type:'compare'}} : s)},
+    {...heapEngine,createTrace:(...args:Parameters<typeof heapEngine.createTrace>)=>heapEngine.createTrace(...args).map((s,i)=>i===2 ? {...s,ordinal:20} : s)},
+    {...heapEngine,createTrace:(...args:Parameters<typeof heapEngine.createTrace>)=>heapEngine.createTrace(...args).map(s=>s.event.type==='complete' ? {...s,invariants:s.invariants.map(i=>({...i,status:'repairing' as const}))} : s)},
     {...heapEngine,createTrace:()=>{throw new Error('Engine failure');}},
   ]) {
     const failed = startCommand(completed,engine,{type:'insert',value:2});

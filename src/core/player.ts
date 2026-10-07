@@ -32,6 +32,10 @@ export function startCommand<I,C,S>(state: PlayerState<I,S>, engine: LessonEngin
   try {
     const steps = engine.createTrace(input.value,command.value);
     if (!steps.length || steps.length > 512) throw new Error('Invalid trace length.');
+    const finalStep = steps[steps.length-1];
+    if (steps[0].event.type!=='initial' || steps.some((step,index)=>step.ordinal!==index) ||
+        finalStep.event.type!=='complete' || finalStep.invariants.some(invariant=>invariant.status!=='holds'))
+      throw new Error('Invalid trace boundaries.');
     const ordinal = Math.min(1,steps.length-1);
     const selectedId = state.selectedId && engine.inspect(steps[ordinal],state.selectedId) ? state.selectedId : null;
     return {...state,input:input.value,resting:steps[0],steps,ordinal,selectedId,error:null};
