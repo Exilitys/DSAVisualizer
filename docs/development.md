@@ -4,8 +4,8 @@
 
 The accepted [technical spec](prd/prd.md) owns interfaces and behavior.
 This guide owns implementation conventions and the authority for library use.
-The repository currently contains planning artifacts and a Python context
-guard. It has no application package manifest or application source tree.
+The [package manifest](../package.json) defines the Next.js application and its
+checks. The [source context](../src/AGENTS.md) routes implementation work.
 
 ## Standards
 
@@ -36,8 +36,8 @@ Verify the actual manifest/lockfile before relying on a version-sensitive API.
 | Ollama | Development tutor through server-side fetch | Official chat/structured-output docs and accepted D-006; model tag stays configurable. |
 | Python | Repository context guard | Standard library; the guard adds no dependency. |
 
-The planned JavaScript libraries are not installed in this repository yet.
-Pin compatible versions during implementation. Keep provider integration in
+The JavaScript libraries are pinned in the manifest and [lockfile](../package-lock.json).
+Use `npm ci` to restore them. Keep provider integration in
 one lesson-neutral function; a second production provider is a deployment choice.
 
 ## Verification and tooling
@@ -47,18 +47,18 @@ real document pointers, the contract-list mirror, human acceptance records,
 and diagram evidence binding. It does not validate application identifiers,
 types, algorithm behavior, or AI inference.
 
-At application scaffolding, establish the real type/build/test commands from
-the package manifest. Guard framework-free engine imports and deep snapshot
-immutability with checks at the engine seam. Use the accepted insertion fixture
-and edge cases; avoid tests that repeat private implementation details.
+Use `npm test` for the Node 24 engine/player checks, `npm run typecheck` for
+Next route generation and TypeScript, and `npm run build` for production.
+The pure engine tests run without React or renderer imports and check nested
+immutability and the accepted fixture. Avoid tests of private implementation details.
 UI verification includes the actual keyboard, pointer, reduced-motion, and
 fallback journeys. Report measured behavior separately from planned targets.
 
 ## UI sources
 
 The [product visual requirements](../prd.md#3-visual-experience-and-information-design)
-are the direction. Theme tokens will live in the actual application style
-source; the component directory will be the gallery. Neither exists yet.
+are the direction. Theme tokens live in [globals.css](../src/app/globals.css);
+the shared controls live in [components](../src/components/).
 
 Live shadcn/Magic UI registry tools are not available in this session and no
 project registry configuration exists. Registry setup is deferred by the owner
@@ -69,6 +69,6 @@ needed control; use installed UI skills and official docs as the interim route.
 ## Deferred tooling
 
 Git contract hooks and registry configuration are deferred until scaffolding.
-Type checking, import constraints, formatting, and UI token checks become real
-tool configuration when the corresponding source and dependencies exist.
+Type checking and engine tests are runnable now. Additional formatting,
+import linting, and UI token checks remain future tooling.
 The manual contract review applies meanwhile; no placeholder enforcement is claimed.

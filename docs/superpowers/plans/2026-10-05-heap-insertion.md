@@ -1,6 +1,6 @@
 # Heap Insertion Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Status:** Accepted 2026-10-06 by @Exilitys; reviewed at 2a3fd2c in PR #3.
 
@@ -76,7 +76,7 @@ Modify .gitignore to exclude .next/, out/, coverage/, and tsconfig.tsbuildinfo.
 **Produces:** `heapEngine: LessonEngine<HeapInput, HeapCommand, HeapState>`,
 `createPreset(): HeapInput`, `deepFreeze<T>(value: T): DeepReadonly<T>`.
 
-- [ ] Create the package scripts below, then install exact dependencies. Do not alter the existing README or root AGENTS.md during setup.
+- [x] Create the package scripts below, then install exact dependencies. Do not alter the existing README or root AGENTS.md during setup.
 
 ```json
 {
@@ -125,7 +125,7 @@ Next.js handles the application through its normal bundler.
 /// <reference types="next/image-types/global" />
 ```
 
-- [ ] Write the engine fixture test first and run `npm test`. It must fail because the engine module is not yet present.
+- [x] Write the engine fixture test first and run `npm test`. It must fail because the engine module is not yet present.
 
 ```typescript
 import test from 'node:test';
@@ -148,7 +148,7 @@ test('the accepted insertion has nine exact snapshots', () => {
 });
 ```
 
-- [ ] Define the accepted contracts in src/core/lesson.ts and these concrete heap types in engine.ts.
+- [x] Define the accepted contracts in src/core/lesson.ts and these concrete heap types in engine.ts.
 
 ```typescript
 export type HeapItem = { id: string; value: number };
@@ -174,7 +174,7 @@ export function deepFreeze<T>(value: T): DeepReadonly<T> {
 }
 ```
 
-- [ ] Implement input validation. Return `{ok:false,message,field}` for any failure; return a cloned input for success. Check array length <=15, integer values 0-99, unique IDs matching `/^H[1-9]\d*$/`, integer nextId greater than every existing ID number, and parent value <= child value. Empty input is valid. Command validation accepts only `{type:'insert',value}` with an integer value in range and fewer than 15 existing items.
+- [x] Implement input validation. Return `{ok:false,message,field}` for any failure; return a cloned input for success. Check array length <=15, integer values 0-99, unique IDs matching `/^H[1-9]\d*$/`, integer nextId greater than every existing ID number, and parent value <= child value. Empty input is valid. Command validation accepts only `{type:'insert',value}` with an integer value in range and fewer than 15 existing items.
 
 The following predicates are the numeric/ordering checks; combine them with
 the object/ID checks above before reading unknown properties.
@@ -186,7 +186,7 @@ const ordered = (items: readonly HeapItem[]) => items.every((item,i) =>
   i === 0 || items[Math.floor((i-1)/2)].value <= item.value);
 ```
 
-- [ ] Implement `createInitialSnapshot(input)` and `createTrace(input, command)` with deterministic IDs `s0`, `s1`, etc. Each emission clones the items and freezes the complete snapshot. Initial variables have null index/parent/insertedId; counters start at zero. Event fields and invariant annotations use the accepted contract.
+- [x] Implement `createInitialSnapshot(input)` and `createTrace(input, command)` with deterministic IDs `s0`, `s1`, etc. Each emission clones the items and freezes the complete snapshot. Initial variables have null index/parent/insertedId; counters start at zero. Event fields and invariant annotations use the accepted contract.
 
 Use this algorithm inside createTrace after validating input/command. `emit`
 is its private closure: it appends a snapshot with current items/nextId,
@@ -241,7 +241,7 @@ return deepFreeze(steps);
 or absent labels, and ordering state, or null when the item is not present.
 Set engine id `heap`, version `1.0.0`, and commandStart `run-boundary`.
 
-- [ ] Add public edge checks and run `npm test`: empty insertion; single root; equality with zero swaps; 0/99 boundaries; a valid size-15 heap rejects insertion; NaN, Infinity, fractions, strings and out-of-range values reject; duplicate IDs and non-heaps reject; nextId is not recycled after a later insertion. Keep engine/core free of framework imports.
+- [x] Add public edge checks and run `npm test`: empty insertion; single root; equality with zero swaps; 0/99 boundaries; a valid size-15 heap rejects insertion; NaN, Infinity, fractions, strings and out-of-range values reject; duplicate IDs and non-heaps reject; nextId is not recycled after a later insertion. Keep engine/core free of framework imports.
 
 ```typescript
 test('guards and equal values preserve valid inputs', () => {
@@ -257,7 +257,7 @@ test('guards and equal values preserve valid inputs', () => {
 });
 ```
 
-- [ ] Commit the passing engine/test/config deliverable: `feat: add deterministic heap insertion engine`.
+- [x] Commit the passing engine/test/config deliverable: `feat: add deterministic heap insertion engine`.
 
 ### Task 2: Shared player and usable semantic playground
 
@@ -284,7 +284,7 @@ export type PlayerState<I,S> = {
 };
 ```
 
-- [ ] Add cursor/preservation tests first and run `npm test`; expect missing player exports to fail.
+- [x] Add cursor/preservation tests first and run `npm test`; expect missing player exports to fail.
 
 ```typescript
 import { createPlayer, currentSnapshot, startCommand, seek } from '../src/core/player.ts';
@@ -310,7 +310,7 @@ test('seek and command boundaries preserve one source of state', () => {
 });
 ```
 
-- [ ] Implement the pure player transitions. `createPlayer` validates input and stores the initial snapshot with no steps. `currentSnapshot` returns resting or steps[ordinal]. `seek` rejects non-integer/out-of-range ordinals and preserves the current snapshot. `startCommand` uses the current boundary snapshot as validated next input, validates the command, creates the trace, and selects its first action. Any validation/trace error preserves steps and ordinal.
+- [x] Implement the pure player transitions. `createPlayer` validates input and stores the initial snapshot with no steps. `currentSnapshot` returns resting or steps[ordinal]. `seek` rejects non-integer/out-of-range ordinals and preserves the current snapshot. `startCommand` uses the current boundary snapshot as validated next input, validates the command, creates the trace, and selects its first action. Any validation/trace error preserves steps and ordinal.
 
 ```typescript
 export function currentSnapshot<I,S>(state: PlayerState<I,S>): Snapshot<S> {
@@ -358,7 +358,7 @@ snapshot.state to engine.validateInput; createTrace uses that returned input.
 Keep selectedId only if engine.inspect accepts it in the new selected snapshot.
 `selectEntity` similarly validates via inspect, never value equality.
 
-- [ ] Create authored content, including these code-line IDs and event explanations. `explainStep` consumes only its Snapshot; `pseudocode` is an exported array of `{id,text}`.
+- [x] Create authored content, including these code-line IDs and event explanations. `explainStep` consumes only its Snapshot; `pseudocode` is an exported array of `{id,text}`.
 
 ```typescript
 export const pseudocode = [
@@ -379,7 +379,7 @@ export function explainStep(snapshot: Snapshot<HeapState>): string {
 }
 ```
 
-- [ ] Create a client playground using React state and the pure transitions. Keep semantic tree/array and inspection visible before loading 3D. Native operation and timeline controls use these labels and guards.
+- [x] Create a client playground using React state and the pure transitions. Keep semantic tree/array and inspection visible before loading 3D. Native operation and timeline controls use these labels and guards.
 
 The heap binding supplies these values and handlers. Export its timeline
 controls as `PlaybackControls({ordinal,lastOrdinal,hasRun,go})` so the next
@@ -426,7 +426,7 @@ relations use 'Absent'. Counters expose `data-testid="comparisons"` and
 `data-testid="swaps"`; selection exposes `data-selected-id` on the playground.
 Pseudocode marks the current line with `aria-current="step"`.
 
-- [ ] Add the root layout/page and actual CSS tokens. The page renders LessonPlayground; the root layout imports globals.css and has html lang=en and body. Use the rules below for the initial layout; preserve controls at mobile widths.
+- [x] Add the root layout/page and actual CSS tokens. The page renders LessonPlayground; the root layout imports globals.css and has html lang=en and body. Use the rules below for the initial layout; preserve controls at mobile widths.
 
 ```css
 :root { --page:#f5f7fb; --surface:#fff; --ink:#172033; --muted:#526077;
@@ -463,7 +463,7 @@ import LessonPlayground from '../components/LessonPlayground';
 export default function Page() { return <LessonPlayground />; }
 ```
 
-- [ ] Run `npm test`, `npm run typecheck`, `npm run build`. Run the app and verify insertion/ordinal 3/ordinal 2/restart through semantic controls. Commit `feat: add shared snapshot player and semantic heap playground`.
+- [x] Run `npm test`, `npm run typecheck`, `npm run build`. Run the app and verify insertion/ordinal 3/ordinal 2/restart through semantic controls. Commit `feat: add shared snapshot player and semantic heap playground`.
 
 ### Task 3: Actual paired 3D representations and camera recovery
 
@@ -473,7 +473,7 @@ export default function Page() { return <LessonPlayground />; }
 **Produces:** HeapScene default React component with the accepted SceneAdapterProps
 and camera action requests `fitRequest` and `focusRequest` supplied by the playground.
 
-- [ ] Add a layout check to the existing Node test file before implementing its pure exported layout function. `heapTreePosition(index): [number,number,number]` uses depth floor(log2(index+1)) and slot position; every index through 14 must produce a finite, distinct position. Put this function in heap/content.ts so the test does not import React/Three.js.
+- [x] Add a layout check to the existing Node test file before implementing its pure exported layout function. `heapTreePosition(index): [number,number,number]` uses depth floor(log2(index+1)) and slot position; every index through 14 must produce a finite, distinct position. Put this function in heap/content.ts so the test does not import React/Three.js.
 
 ```typescript
 export function heapTreePosition(index: number): [number,number,number] {
@@ -484,7 +484,7 @@ export function heapTreePosition(index: number): [number,number,number] {
 }
 ```
 
-- [ ] Load the scene dynamically from the client playground with SSR disabled. Use R3F Canvas, ambient/directional lighting, node spheres or value blocks, links, and a separate 3D array row. Set dpr=[1,1.5] and frameloop=demand. Use Html labels with pointerEvents=none and aria-hidden=true; accessible selection remains in the semantic list.
+- [x] Load the scene dynamically from the client playground with SSR disabled. Use R3F Canvas, ambient/directional lighting, node spheres or value blocks, links, and a separate 3D array row. Set dpr=[1,1.5] and frameloop=demand. Use Html labels with pointerEvents=none and aria-hidden=true; accessible selection remains in the semantic list.
 
 ```tsx
 const HeapScene = dynamic(() => import('../lessons/heap/HeapScene'), {
@@ -569,7 +569,7 @@ Step changes snap logical scene positions in this initial slice; the authored
 compare/swap event remains independently inspectable. Smooth object travel can
 be added only without changing the selected-snapshot contract.
 
-- [ ] Wrap only the structures in Bounds; keep the ground outside those bounds. OrbitControls handles navigation. A Canvas child uses useBounds for Fit scene and Focus selection; reducedMotion sets maxDuration=0, otherwise use 0.3 seconds for camera recovery.
+- [x] Wrap only the structures in Bounds; keep the ground outside those bounds. OrbitControls handles navigation. A Canvas child uses useBounds for Fit scene and Focus selection; reducedMotion sets maxDuration=0, otherwise use 0.3 seconds for camera recovery.
 
 ```tsx
 <Bounds fit clip observe margin={1.3} maxDuration={reducedMotion ? 0 : 0.3}>
@@ -610,7 +610,7 @@ HeapScene keeps the meshRefs map with useRef and passes it to both children.
 Selected-ID changes alone must not move the camera: track the last consumed
 focusRequest or depend on its change only, reading the current ID from a ref.
 
-- [ ] Put a React error boundary around the canvas and use its fallback prop for renderer creation failure. A Canvas child registers webglcontextlost, prevents default, and tells the playground to show semantic mode; remove the listener on unmount.
+- [x] Put a React error boundary around the canvas and use its fallback prop for renderer creation failure. A Canvas child registers webglcontextlost, prevents default, and tells the playground to show semantic mode; remove the listener on unmount.
 
 The React boundary uses the required class API and keeps the failure within
 the scene region. It does not own player state:
@@ -644,7 +644,7 @@ below.' A semantic-only toggle provides the same path without needing a GPU.
 Native Fit scene/Focus selection buttons are outside the canvas. The normal
 keyboard journey does not rely on those camera buttons.
 
-- [ ] Run logic/type/build checks, then verify actual orbit, zoom, focus, fit, mesh selection and paired semantic highlighting at 1280 px and 360 px. Commit `feat: add paired 3D heap scene and camera recovery`.
+- [x] Run logic/type/build checks, then verify actual orbit, zoom, focus, fit, mesh selection and paired semantic highlighting at 1280 px and 360 px. Commit `feat: add paired 3D heap scene and camera recovery`.
 
 ### Task 4: Verify the complete first-slice journey and record evidence
 
@@ -655,19 +655,20 @@ development/context pointers for actual commands/source paths.
 **Consumes:** Built engine, player, semantic playground and scene adapter.
 **Produces:** A verified first slice with actual build/browser evidence and its feature PR.
 
-- [ ] Run `npm test`, `npm run typecheck`, `npm run build`, `python scripts/check-context.py`, and `git diff --check`. Keep outputs in the verification report with runtime/device identifiers. These commands are expectations in this plan, not current results.
-- [ ] Start `npm run dev` and use the browser at http://127.0.0.1:3000. Insert 1, select H8, seek ordinal 3, verify index 3/counts 1 and 1, seek ordinal 2/counts 1 and 0, then restart to seven items. Repeat with keyboard alone and with reduced-motion preference. Previous/next are disabled at boundaries; insertion is blocked at intermediate ordinals.
-- [ ] Test blank entry, 100, -1 and 1.5 at a valid boundary, then a valid duplicate. Errors preserve the run. Complete insertion and insert another value; IDs remain unique and counters restart for that new run.
-- [ ] At both viewport widths, inspect labels, controls, panel opening, zoom and camera recovery. Rapid seek between 2/3/8/0 must change all views to the selected snapshot. Record both a normal 3D screenshot and semantic/reduced-motion screenshot; use actual app output.
-- [ ] Exercise WebGL context loss and semantic-only mode, verifying that the same run is still inspectable and operable. The browser check can dispatch the actual canvas event to simulate this failure:
+- [x] Run `npm test`, `npm run typecheck`, `npm run build`, `python scripts/check-context.py`, and `git diff --check`. Keep outputs in the verification report with runtime/device identifiers. These commands are expectations in this plan, not current results.
+- [x] Start `npm run dev` and use the browser at http://127.0.0.1:3000. Insert 1, select H8, seek ordinal 3, verify index 3/counts 1 and 1, seek ordinal 2/counts 1 and 0, then restart to seven items. Repeat with keyboard alone and with reduced-motion preference. Previous/next are disabled at boundaries; insertion is blocked at intermediate ordinals.
+- [x] Test blank entry, 100, -1 and 1.5 at a valid boundary, then a valid duplicate. Errors preserve the run. Complete insertion and insert another value; IDs remain unique and counters restart for that new run.
+- [x] At both viewport widths, inspect labels, controls, panel opening, zoom and camera recovery. Rapid seek between 2/3/8/0 must change all views to the selected snapshot. Record both a normal 3D screenshot and semantic/reduced-motion screenshot; use actual app output.
+- [x] Exercise WebGL context loss and semantic-only mode, verifying that the same run is still inspectable and operable. The browser check can dispatch the actual canvas event to simulate this failure:
 
 ```javascript
 document.querySelector('canvas')?.dispatchEvent(new Event('webglcontextlost', {cancelable:true}));
 ```
 
-- [ ] Measure event-to-visible-action samples on the named desktop/browser before claiming the 100 ms p95 target. If a phone is unavailable, report that coverage gap rather than declaring phone verification passed. Check text contrast and focus visibility with the actual rendered palette.
-- [ ] Add real source contract paths to both existing literal lists once created: src/core/lesson.ts, src/core/player.ts, src/lessons/heap/engine.ts, and src/app/globals.css. Run the context guard to ensure the mirror matches. Keep diagram bytes frozen; implementation progress does not require regenerating the accepted design artifact.
+- [x] Measure event-to-visible-action samples on the named desktop/browser before claiming the 100 ms p95 target. If a phone is unavailable, report that coverage gap rather than declaring phone verification passed. Check text contrast and focus visibility with the actual rendered palette.
+- [x] Add real source contract paths to both existing literal lists once created: src/core/lesson.ts, src/core/player.ts, src/lessons/heap/engine.ts, and src/app/globals.css. Run the context guard to ensure the mirror matches. Keep diagram bytes frozen; implementation progress does not require regenerating the accepted design artifact.
 - [ ] Self-check coverage against slice 001, fix observed issues, then request a fresh whole-branch review. Native execution uses executing-plans; subagent execution uses subagent-driven-development. Record findings and resolutions. Open the implementation PR into development for the owner's acceptance.
+
 
 ## Coverage and self-review
 

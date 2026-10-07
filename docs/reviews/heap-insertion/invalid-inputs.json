@@ -1,0 +1,26 @@
+[
+  {
+    "value": "",
+    "ordinal": "8",
+    "items": 8,
+    "error": "Enter a whole number from 0 to 99."
+  },
+  {
+    "value": "100",
+    "ordinal": "8",
+    "items": 8,
+    "error": "Enter a whole number from 0 to 99."
+  },
+  {
+    "value": "-1",
+    "ordinal": "8",
+    "items": 8,
+    "error": "Enter a whole number from 0 to 99."
+  },
+  {
+    "value": "1.5",
+    "ordinal": "8",
+    "items": 8,
+    "error": "Enter a whole number from 0 to 99."
+  }
+]
