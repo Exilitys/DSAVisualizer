@@ -1,6 +1,6 @@
 # Development guide
 
-**Status:** Draft for owner review, 5 October 2026.
+**Status:** Accepted 2026-10-05 by @Exilitys; reviewed at 220124f and merged in PR #2.
 
 The accepted [technical spec](prd/prd.md) owns interfaces and behavior.
 This guide owns implementation conventions and the authority for library use.

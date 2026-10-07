@@ -1,7 +1,7 @@
 # AGENTS.md
 
-**Context status:** Draft for owner review, 5 October 2026. Accepted specs and
-direct user instructions govern; generated context is awaiting acceptance.
+**Context status:** Accepted 2026-10-05 by @Exilitys. Reviewed at 220124f;
+the owner merged PR #2 and explicitly said "continue accpeted".
 
 This file routes work to its source. Keep product descriptions, architecture,
 and decision explanations in their owning documents.
@@ -13,6 +13,7 @@ and decision explanations in their owning documents.
 | Product features and release acceptance | [Product PRD](prd.md) |
 | Development contracts and decision provenance | [Technical specification](docs/prd/prd.md) |
 | First slice | [Heap insertion](docs/specs/001-heap-insertion.md) |
+| First-slice implementation plan | [Heap insertion plan](docs/superpowers/plans/2026-10-05-heap-insertion.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |

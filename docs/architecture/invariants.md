@@ -1,6 +1,6 @@
 # Invariants and contract paths
 
-**Status:** Draft context for owner review, 5 October 2026.
+**Status:** Accepted 2026-10-05 by @Exilitys; reviewed at 220124f and merged in PR #2.
 
 The accepted [technical specification](../prd/prd.md) owns the behavior and
 decision reasons. This document indexes those commitments and owns the literal
