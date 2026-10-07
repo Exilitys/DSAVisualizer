@@ -1,6 +1,8 @@
 # Slice 002: heap extraction and shared autoplay
 
-**Status.** Draft for owner review, 7 October 2026.
+**Status.** Accepted 2026-10-07 by @Exilitys.
+**Reviewed.** Version 1 at `339de4bd788a132bb5c6ae5acdad250e86f11062` in PR #5,
+accepted through the owner's "Continue" after the written-spec review request.
 **Owner.** Jonathan Carlo (@Exilitys).
 **Version.** 1.
 **Source.** [Technical contracts](../prd/prd.md), data model and interfaces;
@@ -61,10 +63,10 @@ result object, or a universal scene-description language.
   the slice; both capabilities remain required.
 - **Provenance.** Chosen with @Exilitys on 7 October 2026: "Extraction plus autoplay".
 
-Detailed data fields and timing rules below are proposals for this written review,
-not decisions already accepted through the two scope replies.
+Detailed data fields and timing rules below were accepted with the written review;
+the earlier two scope replies alone did not approve an unwritten artifact.
 
-## 6. Data and interfaces proposed for review
+## 6. Data and interfaces
 
 Keep the accepted `LessonEngine`, `Snapshot`, and `Inspection` interfaces.
 Keep `HeapInput = {items: readonly HeapItem[]; nextId: number}`.
@@ -75,7 +77,7 @@ type HeapCommand = {type:'insert'; value:number} | {type:'extract'};
 type HeapState = HeapInput & {result: HeapItem | null};
 ```
 
-Proposed heap version: `1.1.0`. Every initial snapshot has `result:null`.
+Heap version: `1.1.0`. Every initial snapshot has `result:null`.
 Insertion also uses this shape; its existing event ordering, IDs, counters,
 values, and nine-step fixture remain unchanged.
 
@@ -130,7 +132,7 @@ Equality, one-child repair, 0/99, maximum-size heaps, and repeated insert/extrac
 sequences must retain ordering and identity. The player must continue rejecting
 broken trace envelopes before replacing a valid run.
 
-## 8. Shared playback proposal
+## 8. Shared playback
 
 The browser owns playback mode and a cancellable timer. The pure engine and player
 remain independent of clocks, React, and renderer resources. Heap and graph use
@@ -139,7 +141,7 @@ the same browser playback logic and native control markup.
 - A valid operation selects its first action step and starts paused.
 - Play advances one existing ordinal per tick. No run means disabled Play;
   complete means disabled Play and never creates a new operation.
-- Proposed speeds are 0.5×, 1×, and 2×. At 1×, one semantic step lasts 1000 ms;
+- Speeds are 0.5×, 1×, and 2×. At 1×, one semantic step lasts 1000 ms;
   the others use 2000 ms and 500 ms. These are teaching speeds, not runtime claims.
 - Pause keeps the selected snapshot. Completion automatically stops playback.
 - Previous, Next, seek, Restart, and operation submission stop playback before
@@ -196,13 +198,9 @@ browser delays execution. Do not claim physical-phone coverage without testing i
 
 ## 13. Open questions and review gate
 
-Scope and result-card choice are confirmed. Review the proposed state extension,
-exact extraction trace, and timer cancellation rules before implementation.
-The written implementation plan follows acceptance of this specification;
-Native execution remains the previously selected workflow.
-
-No unanswered scope question remains. Detailed proposals in this draft await
-owner acceptance; this file does not record that acceptance on the owner's behalf.
+The written specification is accepted. The written implementation plan still
+requires review before implementation; Native execution remains the selected
+workflow. No unanswered scope question remains.
 
 ## Review record
 
