@@ -17,6 +17,7 @@ and decision explanations in their owning documents.
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |
+| Application source | [Source context](src/AGENTS.md) |
 | Next work and deferred-item pointers | [Backlog](docs/backlog.md) |
 | Progress | Git history, PR state, and document status headers |
 
@@ -44,6 +45,10 @@ prd.md
 docs/prd/prd.md
 docs/specs/
 docs/architecture/
+src/core/lesson.ts
+src/core/player.ts
+src/lessons/heap/engine.ts
+src/app/globals.css
 ```
 
 Changes to accepted behavior, interfaces, or deferred decisions require an
@@ -75,8 +80,9 @@ python scripts/check-context.py
 git diff --check
 ```
 
-The context guard checks documentation integrity. Discover application checks
-from the real package manifest once it exists; do not claim an unrun app check.
+The context guard checks documentation integrity. The [package manifest](package.json)
+defines `npm test`, `npm run typecheck`, and `npm run build`; use Node 24.15 or
+newer within Node 24. Do not claim an unrun app check.
 
 ## Non-negotiables
 

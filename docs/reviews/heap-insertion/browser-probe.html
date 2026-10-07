@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Heap browser verification probe</title>
+<style>body{margin:0;font:12px system-ui}header{padding:8px;background:#eef0f7}button{min-height:36px;margin:2px}iframe{display:block;width:100%;height:calc(100vh - 130px);border:0}pre{margin:0;padding:6px;max-height:64px;overflow:auto}</style></head>
+<body><header>
+<button id="normal">Load application</button><button id="arm">Arm timings</button>
+<button id="summary">Summarize timings</button><button id="lose">Lose WebGL context</button>
+<button id="no-webgl">Load without WebGL</button>
+<pre id="result" role="status">Ready</pre></header>
+<iframe id="app" title="Application under test" src="/"></iframe>
+<script>
+const frame=document.getElementById('app');
+const result=document.getElementById('result');
+let samples=[];
+let disarm=()=>{};
+document.getElementById('normal').onclick=()=>{disarm();frame.removeAttribute('srcdoc');frame.src='/';result.textContent='Normal application loaded';};
+document.getElementById('arm').onclick=()=>{
+  disarm();samples=[];
+  const w=frame.contentWindow;
+  const capture=event=>{
+    if(!event.isTrusted || !event.target.closest('button,input'))return;
+    const start=w.performance.now();
+    const target=event.target.closest('button,input');
+    const before=Number(w.document.querySelector('main')?.dataset.ordinal);
+    const action=target.textContent || target.id;
+    const expected=action.includes('Next')?before+1:action.includes('Previous')?before-1:null;
+    w.requestAnimationFrame(()=>w.requestAnimationFrame(()=>samples.push({
+      milliseconds:w.performance.now()-start,
+      action,ordinal:w.document.querySelector('main')?.dataset.ordinal,
+      selected:w.document.querySelector('main')?.dataset.selectedId,
+      reflected:expected!==null?Number(w.document.querySelector('main')?.dataset.ordinal)===expected:
+        !target.dataset.entityId || w.document.querySelector('main')?.dataset.selectedId===target.dataset.entityId
+    })));
+  };
+  w.document.addEventListener('click',capture,true);
+  disarm=()=>w.document.removeEventListener('click',capture,true);
+  result.textContent='Armed. Perform ordinary application clicks.';
+};
+document.getElementById('summary').onclick=()=>{
+  disarm();const ordered=samples.map(s=>s.milliseconds).sort((a,b)=>a-b);
+  result.textContent=JSON.stringify({method:'trusted click capture to second animation frame',count:samples.length,
+    p95:ordered[Math.ceil(ordered.length*.95)-1] ?? null,max:ordered.at(-1) ?? null,
+    browser:frame.contentWindow.navigator.userAgent,samples});
+};
+document.getElementById('lose').onclick=()=>{
+  const canvas=frame.contentDocument.querySelector('canvas');
+  const gl=canvas?.getContext('webgl2');
+  const extension=gl?.getExtension('WEBGL_lose_context');
+  if(extension){extension.loseContext();result.textContent='Actual WebGL context loss requested';}
+  else if(canvas){canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));result.textContent='Context loss event dispatched';}
+  else result.textContent='No canvas to lose';
+};
+document.getElementById('no-webgl').onclick=()=>{
+  disarm();
+  frame.removeAttribute('srcdoc');
+  frame.src='/__heap_no_webgl.html';
+  result.textContent='WebGL creation disabled before application initialization';
+};
+</script></body></html>

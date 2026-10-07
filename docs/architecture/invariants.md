@@ -10,15 +10,15 @@ contract path list used by the root router and any later hook.
 
 | Must hold | Source | Verification state |
 | --- | --- | --- |
-| The pure engine decides logical behavior; views consume its snapshots | Technical spec sections 6-7 | Application check to be established with source. |
-| Snapshots, including nested state, remain immutable | D-005 and trace contract | Insertion fixture/replay checks in implementation. |
-| One selected ordinal supplies values, counts, pseudocode and explanations | Player contract | Keyboard, seek and paired-view verification in implementation. |
-| Stable IDs link representations and preserve extraction results | Data model and slice 001 | Fixture/identity checks in implementation. |
-| Heap commands start at original/completed boundaries | D-007 | Boundary interaction checks in implementation. |
+| The pure engine decides logical behavior; views consume its snapshots | Technical spec sections 6-7 | `npm test`; pure Node engine/player checks. |
+| Snapshots, including nested state, remain immutable | D-005 and trace contract | Frozen fixture/replay checks in `npm test`. |
+| One selected ordinal supplies values, counts, pseudocode and explanations | Player contract | [Runtime evidence](../reviews/001-heap-insertion.md). |
+| Stable IDs link representations and preserve extraction results | Data model and slice 001 | Insertion identity checks pass; extraction remains later work. |
+| Heap commands start at original/completed boundaries | D-007 | Player boundary checks and runtime evidence. |
 | Tutor replies are validated, correlated, and unable to mutate runs directly | Tutor contract | Route and stale-response checks in implementation. |
 | Declared context paths are real; diagram evidence matches its HTML | Context integrity | `python scripts/check-context.py` is runnable now. |
 
-These are commitments, not claims that application tests have already passed.
+Verification covers slice 001; later capabilities retain their own checks.
 
 ## Contract paths
 
@@ -27,6 +27,10 @@ prd.md
 docs/prd/prd.md
 docs/specs/
 docs/architecture/
+src/core/lesson.ts
+src/core/player.ts
+src/lessons/heap/engine.ts
+src/app/globals.css
 ```
 
 Each line is a file or directory prefix. These paths exist now. Add actual

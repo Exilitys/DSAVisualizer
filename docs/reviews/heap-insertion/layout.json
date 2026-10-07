@@ -1,0 +1,16 @@
+{
+  "desktop": {
+    "height": 720,
+    "labelCount": 16,
+    "overlaps": [],
+    "pageWidth": 1265,
+    "width": 1280
+  },
+  "mobile": {
+    "height": 780,
+    "labelCount": 16,
+    "overlaps": [],
+    "pageWidth": 345,
+    "width": 360
+  }
+}

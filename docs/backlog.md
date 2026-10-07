@@ -7,11 +7,11 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Review the [implementation plan](superpowers/plans/2026-10-05-heap-insertion.md) for [slice 001](specs/001-heap-insertion.md).
-2. Select the execution method, then implement and verify the accepted slice.
+1. Review the implementation feature PR and [verification evidence](reviews/001-heap-insertion.md) for [slice 001](specs/001-heap-insertion.md).
+2. After owner acceptance, plan the next required release slice below.
 
 The first slice's acceptance is defined by its insertion fixture and user
-journey. The approved file list does not approve an unwritten build plan.
+journey. The owner accepted the written plan and Native execution on 6 October 2026.
 
 ## Required release work after the first slice
 
@@ -37,6 +37,6 @@ is the [development guide](development.md#deferred-tooling).
 
 ## Progress
 
-Use Git history, PR state and artifact status headers. The application has not
-been implemented by this planning work. Keep measured results in verification
+Use Git history, PR state and artifact status headers. Heap insertion is built
+on its feature branch, pending owner review. Keep measured results in verification
 reports; do not turn proposed targets into accomplishments.

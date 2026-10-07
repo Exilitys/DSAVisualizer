@@ -1,0 +1,36 @@
+[
+  {
+    "ordinal": "2",
+    "comparisons": "1",
+    "swaps": "0",
+    "inspection": "FOLLOW AN IDENTITY\n\nItem H8\nValue\n1\nIndex\n7\nParent\nH4 · 12\nLeft child\nAbsent\nRight child\nAbsent\nHeap order\nrepairing",
+    "activeLine": [
+      "Compare the inserted value with its parent"
+    ]
+  },
+  {
+    "ordinal": "3",
+    "comparisons": "1",
+    "swaps": "1",
+    "inspection": "FOLLOW AN IDENTITY\n\nItem H8\nValue\n1\nIndex\n3\nParent\nH2 · 7\nLeft child\nH4 · 12\nRight child\nAbsent\nHeap order\nrepairing",
+    "activeLine": [
+      "If strictly smaller, swap and continue upward"
+    ]
+  },
+  {
+    "ordinal": "8",
+    "comparisons": "3",
+    "swaps": "3",
+    "inspection": "FOLLOW AN IDENTITY\n\nItem H8\nValue\n1\nIndex\n0\nParent\nAbsent\nLeft child\nH1 · 3\nRight child\nH3 · 5\nHeap order\nholds",
+    "activeLine": [
+      "Return the ordered heap"
+    ]
+  },
+  {
+    "ordinal": "0",
+    "comparisons": "0",
+    "swaps": "0",
+    "inspection": "FOLLOW AN IDENTITY\n\nInspect an item\n\nSelect an item in either view to see its value, index, and relationships at this step.",
+    "activeLine": []
+  }
+]
