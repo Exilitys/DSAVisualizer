@@ -2,12 +2,12 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
 
-**Status:** Draft for owner review, 7 October 2026.
+**Status:** Accepted 2026-10-07 by @Exilitys; reviewed at `55c7780` in merged PR #6 and confirmed through "ontinue and open pr less often".
 **Goal:** Extract the minimum, inspect its stable identity, and replay either heap operation with shared cancellable autoplay.
 **Architecture:** Extend the heap engine's immutable state with its result. A browser-only playback controller schedules cursor changes through a generic React binding; pure engine/player contracts remain unchanged. Move shared control markup out of the heap binding so graph can reuse it.
 **Tech Stack:** Existing pinned Next.js 16.3.8, React 19.3.0, R3F 9.8.1, Drei 10.7.9, Three 0.186.1, TypeScript 5.9.3, Node 24.15.0. No new dependencies.
 **Spec:** [Accepted slice 002](../../specs/002-heap-extraction-playback.md), version 1 at `339de4b`, and [technical contracts](../../prd/prd.md).
-**Execution:** Native, preserved from the owner's prior selection. This plan needs review before product code changes.
+**Execution:** Native, preserved from the owner's prior selection. Planning/context updates stay in the implementation branch; open one feature PR after the slice is verified.
 
 ## Global Constraints
 

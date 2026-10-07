@@ -150,3 +150,71 @@ test('tree positions keep all fifteen supported slots distinct and finite', () =
   assert.deepEqual(positions[1],[-3,1.6,0]);
   assert.deepEqual(positions[2],[3,1.6,0]);
 });
+
+test('extracts the preset minimum in seven exact immutable snapshots', () => {
+  const input=createPreset();
+  const steps=heapEngine.createTrace(input,{type:'extract'});
+  assert.deepEqual(steps.map(s=>s.event.type),['initial','replace','compare','compare','swap','compare','complete']);
+  assert.deepEqual(steps.map(s=>[s.counters.comparisons,s.counters.swaps]),
+    [[0,0],[0,0],[1,0],[2,0],[2,1],[3,1],[3,1]]);
+  assert.deepEqual(steps[6].state.items.map(i=>i.value),[5,7,6,12,9,8]);
+  assert.deepEqual(steps[6].state.items.map(i=>i.id),['H3','H2','H7','H4','H5','H6']);
+  assert.deepEqual(steps[4].state.result,{id:'H1',value:3});
+  assert.equal(steps[4].state.items.findIndex(i=>i.id==='H7'),2);
+  assert.equal(steps[6].state.nextId,8);
+  assert.equal(heapEngine.inspect(steps[4],'H1')!.fields.find(f=>f.label==='Index')!.value,'Absent');
+  assert.equal(steps[0].state.result,null);
+  for(const s of steps) {
+    assert.equal(s.state.items.some(i=>i.id===s.state.result?.id),false);
+    assert.ok(Object.isFrozen(s.state));
+    if(s.state.result) assert.ok(Object.isFrozen(s.state.result));
+  }
+  assert.deepEqual(input.items.map(i=>i.value),[3,7,5,12,9,8,6]);
+  assert.deepEqual(steps,heapEngine.createTrace(createPreset(),{type:'extract'}));
+});
+
+test('empty, single, equal-child and lone-child extraction respect identity and comparisons',()=>{
+  const empty=heapEngine.createTrace({items:[],nextId:8},{type:'extract'});
+  assert.deepEqual(empty.map(s=>s.event.type),['initial','complete']);
+  assert.equal(empty[1].state.result,null);
+  assert.deepEqual(empty[1].counters,{comparisons:0,swaps:0});
+  const one=heapEngine.createTrace({items:[{id:'H7',value:99}],nextId:8},{type:'extract'});
+  assert.deepEqual(one.map(s=>s.event.type),['initial','replace','complete']);
+  assert.deepEqual(one[2].state.items,[]);
+  assert.deepEqual(one[2].state.result,{id:'H7',value:99});
+  const equal=heapEngine.createTrace({items:[1,4,4,8,6,7,9].map((value,i)=>({id:`H${i+1}`,value})),nextId:8},{type:'extract'});
+  assert.equal(equal[2].variables.chosenChildId,'H2');
+  assert.deepEqual(equal.at(-1)!.state.items.map(i=>i.value),[4,6,4,8,9,7]);
+  assert.deepEqual(equal.at(-1)!.counters,{comparisons:4,swaps:2});
+  const lone=heapEngine.createTrace({items:[1,5,7].map((value,i)=>({id:`H${i+1}`,value})),nextId:4},{type:'extract'});
+  assert.deepEqual(lone.at(-1)!.counters,{comparisons:1,swaps:1});
+  const same=heapEngine.createTrace({items:[0,99,99].map((value,i)=>({id:`H${i+1}`,value})),nextId:4},{type:'extract'});
+  assert.deepEqual(same.at(-1)!.counters,{comparisons:1,swaps:0});
+  const full={items:Array.from({length:15},(_,i)=>({id:`H${i+1}`,value:i})),nextId:16};
+  assert.equal(heapEngine.createTrace(full,{type:'extract'}).at(-1)!.state.items.length,14);
+});
+
+test('result selection rewinds into the heap and subsequent operations never recycle removed IDs',()=>{
+  const begun=startCommand(createPlayer(heapEngine,createPreset()),heapEngine,{type:'extract'});
+  const complete=selectEntity(seek(begun,6),heapEngine,'H1');
+  assert.equal(complete.selectedId,'H1');
+  const restarted=seek(complete,0);
+  assert.equal(currentSnapshot(restarted).state.result,null);
+  assert.equal(heapEngine.inspect(currentSnapshot(restarted),'H1')!.fields.find(f=>f.label==='Index')!.value,'0');
+  const next=startCommand(complete,heapEngine,{type:'extract'});
+  assert.equal(next.selectedId,null);
+  assert.deepEqual(currentSnapshot(next).state.result,{id:'H3',value:5});
+  let input=createPreset();
+  const removed:number[]=[];
+  while(input.items.length) {
+    const end=heapEngine.createTrace(input,{type:'extract'}).at(-1)!;
+    removed.push(end.state.result!.value);
+    const valid=heapEngine.validateInput(end.state);
+    assert.ok(valid.ok);
+    if(valid.ok) input=valid.value;
+  }
+  assert.deepEqual(removed,[3,5,6,7,8,9,12]);
+  const inserted=heapEngine.createTrace(input,{type:'insert',value:1});
+  assert.equal(inserted.at(-1)!.state.items[0].id,'H8');
+  assert.equal(inserted.at(-1)!.state.result,null);
+});
