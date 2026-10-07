@@ -7,7 +7,8 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Specify heap extraction against the accepted operation and identity contracts.
+1. Review the [extraction and autoplay specification](specs/002-heap-extraction-playback.md)
+   against the accepted operation and identity contracts.
 2. Review its written specification and build plan before implementation.
 
 The first slice's acceptance is defined by its insertion fixture and user
