@@ -2,42 +2,17 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import type { Inspection, Snapshot } from '../core/lesson.ts';
-import { createPlayer, currentSnapshot, startCommand, seek, selectEntity } from '../core/player.ts';
+import type { Snapshot } from '../core/lesson.ts';
+import { currentSnapshot } from '../core/player.ts';
 import { heapEngine, createPreset } from '../lessons/heap/engine.ts';
 import type { HeapState } from '../lessons/heap/engine.ts';
-import { pseudocode, explainStep } from '../lessons/heap/content.ts';
+import { getPseudocode, explainStep } from '../lessons/heap/content.ts';
+import {useLessonPlayer} from './useLessonPlayer';
+import {PlaybackControls,InspectionPanel} from './LessonControls';
 
 const HeapScene = dynamic(()=>import('../lessons/heap/HeapScene'),{
   ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>,
 });
-
-export function PlaybackControls({ordinal,lastOrdinal,hasRun,go}: {
-  ordinal:number; lastOrdinal:number; hasRun:boolean; go(ordinal:number):void;
-}) {
-  return <div className="playback">
-    <div className="playback-buttons">
-      <button disabled={!hasRun || ordinal===0} onClick={()=>go(ordinal-1)}>← Previous</button>
-      <button className="primary" disabled={!hasRun || ordinal===lastOrdinal} onClick={()=>go(ordinal+1)}>Next →</button>
-      <button disabled={!hasRun} onClick={()=>go(0)}>Restart</button>
-    </div>
-    <div className="timeline">
-      <label htmlFor="step-range">Step <strong>{ordinal} / {lastOrdinal}</strong></label>
-      <input id="step-range" type="range" min={0} max={lastOrdinal} disabled={!hasRun} value={ordinal}
-        aria-valuetext={`Step ${ordinal} of ${lastOrdinal}`} onChange={event=>go(Number(event.target.value))} />
-    </div>
-  </div>;
-}
-
-export function InspectionPanel({inspection}: {inspection:Inspection|null}) {
-  return <section className="panel inspection" aria-label="Item inspection">
-    <p className="eyebrow">Follow an identity</p>
-    <h2>{inspection?.label ?? 'Inspect an item'}</h2>
-    {inspection ? <dl>{inspection.fields.map(field=><div key={field.label}>
-      <dt>{field.label}</dt><dd>{field.value}</dd>
-    </div>)}</dl> : <p className="muted">Select an item in either view to see its value, index, and relationships at this step.</p>}
-  </section>;
-}
 
 function SemanticHeap({snapshot,selectedId,select}: {
   snapshot:Snapshot<HeapState>; selectedId:string|null; select(id:string):void;
@@ -71,7 +46,8 @@ function SemanticHeap({snapshot,selectedId,select}: {
 }
 
 export default function LessonPlayground() {
-  const [player,setPlayer] = useState(()=>createPlayer(heapEngine,createPreset()));
+  const lesson=useLessonPlayer(heapEngine,createPreset());
+  const {player,go,select}=lesson;
   const [draft,setDraft] = useState('1');
   const [semanticOnly,setSemanticOnly] = useState(false);
   const [webglAvailable,setWebglAvailable] = useState(true);
@@ -89,25 +65,25 @@ export default function LessonPlayground() {
   const snapshot = currentSnapshot(player);
   const lastOrdinal = player.steps ? player.steps.length-1 : 0;
   const canStart = !player.steps || player.ordinal===0 || player.ordinal===lastOrdinal;
-  const go = (ordinal:number) => setPlayer(state=>seek(state,ordinal));
-  const select = useCallback((id:string)=>setPlayer(state=>selectEntity(state,heapEngine,id)),[]);
-  const insert = () => setPlayer(state=>draft.trim()===''
-    ? {...state,error:'Enter a whole number from 0 to 99.'}
-    : startCommand(state,heapEngine,{type:'insert',value:Number(draft)}));
+  const insert=()=>lesson.start({type:'insert',value:draft.trim()==='' ? NaN : Number(draft)});
+  const extract=()=>lesson.start({type:'extract'});
   const inspection = player.selectedId ? heapEngine.inspect(snapshot,player.selectedId) : null;
+  const focusable=Boolean(player.selectedId && snapshot.state.items.some(item=>item.id===player.selectedId));
+  const extraction=snapshot.event.explanationKey.startsWith('heap.extract.');
   const repairing = snapshot.invariants.some(x=>x.status==='repairing');
 
-  return <main className="playground" data-selected-id={player.selectedId ?? ''} data-ordinal={player.ordinal}>
+  return <main className="playground" data-selected-id={player.selectedId ?? ''} data-ordinal={player.ordinal} data-playing={lesson.playback.playing}>
     <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><span className="lesson-tag">01 / Min heap</span></header>
     <div className="intro"><p className="eyebrow">Learn by following the change</p><h1>Follow the smallest value.</h1>
-      <p>Insert an item. Compare it with its parent. See why it moves.</p></div>
-    <section className="panel operation" aria-label="Heap insertion">
-      <div><h2>Try an insertion</h2><p className="muted">Start with 1 to follow H8 all the way to the root.</p></div>
+      <p>Insert an item or remove the minimum. See why the heap changes.</p></div>
+    <section className="panel operation" aria-label="Heap operations">
+      <div><h2>Try a heap operation</h2><p className="muted">Insert 1 to follow H8 upward, or extract the minimum to watch the repair.</p></div>
       <div className="operation-controls"><label htmlFor="insert-value">Value to insert</label>
         <input id="insert-value" type="number" min={0} max={99} step={1} value={draft}
           aria-describedby="operation-help" aria-invalid={Boolean(player.error)} onChange={event=>setDraft(event.target.value)} />
-        <button className="primary" disabled={!canStart} onClick={insert}>Insert</button></div>
-      <p id="operation-help" className="operation-help muted">{canStart ? 'Whole numbers 0–99. Equal values are welcome.' : 'Finish or restart first to insert another item.'}</p>
+        <button className="primary" disabled={!canStart} onClick={insert}>Insert</button>
+        <button disabled={!canStart} onClick={extract}>Extract minimum</button></div>
+      <p id="operation-help" className="operation-help muted">{canStart ? 'Whole numbers 0–99. Equal values are welcome.' : 'Finish or restart first to start another operation.'}</p>
       {player.error && <p className="error" role="alert">{player.error}</p>}
     </section>
     <div className="workspace">
@@ -122,24 +98,35 @@ export default function LessonPlayground() {
         </section>
         <div className="scene-controls" aria-label="View controls">
           <button disabled={semanticOnly || !webglAvailable} onClick={()=>setFitRequest(n=>n+1)}>Fit scene</button>
-          <button disabled={!inspection || semanticOnly || !webglAvailable} onClick={()=>setFocusRequest(n=>n+1)}>Focus selection</button>
+          <button disabled={!focusable || semanticOnly || !webglAvailable} onClick={()=>setFocusRequest(n=>n+1)}>Focus selection</button>
           <label><input type="checkbox" checked={reducedMotion} onChange={event=>setReducedMotion(event.target.checked)} />Reduce motion</label>
           <label><input type="checkbox" checked={semanticOnly} onChange={event=>setSemanticOnly(event.target.checked)} />Semantic view only</label>
         </div>
+        {snapshot.state.result && <section className="panel result-card" aria-label="Extraction result">
+          <div><p className="eyebrow">Minimum removed</p><h2>Outside the active heap</h2></div>
+          <button className="result-item" data-entity-id={snapshot.state.result.id}
+            aria-pressed={player.selectedId===snapshot.state.result.id}
+            aria-label={`Select extracted ${snapshot.state.result.id}, value ${snapshot.state.result.value}`}
+            onClick={()=>select(snapshot.state.result!.id)}>
+            <span className="item-id">{snapshot.state.result.id}</span><strong>{snapshot.state.result.value}</strong>
+          </button>
+        </section>}
+        {snapshot.event.explanationKey==='heap.extract.empty' && <p className="panel muted">No minimum: the heap is empty.</p>}
         <section className="panel execution" aria-label="Execution controls">
           <div className="section-heading"><h2>One step at a time</h2><span className={`invariant ${repairing ? 'repairing' : ''}`}>{repairing ? 'Repairing heap order' : 'Heap order holds'}</span></div>
-          <PlaybackControls ordinal={player.ordinal} lastOrdinal={lastOrdinal} hasRun={Boolean(player.steps)} go={go} />
+          <PlaybackControls ordinal={player.ordinal} lastOrdinal={lastOrdinal} hasRun={Boolean(player.steps)} go={go}
+            playback={lesson.playback} play={lesson.play} pause={lesson.pause} setSpeed={lesson.setSpeed} />
           <div className="explanation" role="status" aria-live="polite"><span className="event-name">{snapshot.event.type}</span><p>{explainStep(snapshot)}</p></div>
           <div className="counters"><div><span className="muted">Comparisons</span><strong data-testid="comparisons">{snapshot.counters.comparisons}</strong></div><div><span className="muted">Swaps</span><strong data-testid="swaps">{snapshot.counters.swaps}</strong></div></div>
         </section>
         <SemanticHeap snapshot={snapshot} selectedId={player.selectedId} select={select} />
       </div>
       <aside className="details-column"><InspectionPanel inspection={inspection} />
-        <section className="panel code" aria-label="Insertion pseudocode"><p className="eyebrow">The idea in four lines</p><h2>Sift upward</h2>
-          <ol>{pseudocode.map(line=><li key={line.id} aria-current={snapshot.event.codeLineId===line.id ? 'step' : undefined}>{line.text}</li>)}</ol>
-          <p className="muted">Parent index = ⌊(index − 1) / 2⌋. Only a smaller value swaps.</p>
+        <section className="panel code" aria-label="Heap pseudocode"><p className="eyebrow">Follow the current decision</p><h2>{extraction ? 'Sift down' : 'Sift upward'}</h2>
+          <ol>{getPseudocode(snapshot).map(line=><li key={line.id} aria-current={snapshot.event.codeLineId===line.id ? 'step' : undefined}>{line.text}</li>)}</ol>
+          <p className="muted">{extraction ? 'Children: 2 × index + 1 and 2 × index + 2. Choose the smaller; prefer the left on equality.' : 'Parent index = ⌊(index − 1) / 2⌋. Only a smaller value swaps.'}</p>
         </section>
-        <p className="learning-note">Try a larger value next. Where does it stop, and why?</p>
+        <p className="learning-note">{extraction ? 'Which child should the replacement follow, and why?' : 'Try a larger value next. Where does it stop, and why?'}</p>
       </aside>
     </div>
     <footer>DSA Atlas <span>See the structure. Explain the change.</span></footer>

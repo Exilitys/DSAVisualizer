@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { heapEngine, createPreset } from '../src/lessons/heap/engine.ts';
 import { createPlayer, currentSnapshot, startCommand, seek, selectEntity } from '../src/core/player.ts';
-import { heapTreePosition } from '../src/lessons/heap/content.ts';
+import { heapTreePosition, explainStep, getPseudocode } from '../src/lessons/heap/content.ts';
 
 test('inserting 1 preserves identity through the nine accepted snapshots', () => {
   const input = createPreset();
@@ -217,4 +217,15 @@ test('result selection rewinds into the heap and subsequent operations never rec
   const inserted=heapEngine.createTrace(input,{type:'insert',value:1});
   assert.equal(inserted.at(-1)!.state.items[0].id,'H8');
   assert.equal(inserted.at(-1)!.state.result,null);
+});
+
+test('extraction content follows the chosen snapshot and comparison kind',()=>{
+  const t=heapEngine.createTrace(createPreset(),{type:'extract'});
+  assert.match(explainStep(t[2]),/7.*5.*H3/s);
+  assert.match(explainStep(t[4]),/6.*5/s);
+  assert.equal(getPseudocode(t[2]).some(line=>line.id===t[2].event.codeLineId),true);
+  assert.equal(t[2].event.codeLineId,'choose-child');
+  assert.equal(t[3].event.codeLineId,'compare-child');
+  const empty=heapEngine.createTrace({items:[],nextId:8},{type:'extract'});
+  assert.match(explainStep(empty[1]),/no minimum/i);
 });
