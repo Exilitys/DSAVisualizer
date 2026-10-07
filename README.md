@@ -9,7 +9,8 @@ prediction challenges, and explanations tied to the selected state.
 The technical review packet was accepted through the owner's "Continue" on
 5 October 2026. The owner merged and accepted Groundwork in PR #2. The
 owner accepted the first-slice implementation plan and Native execution on
-6 October 2026. Heap insertion is implemented and pending feature review. The confirmed release
+6 October 2026. Heap insertion was merged into `development` in PR #4 on
+7 October 2026. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views.

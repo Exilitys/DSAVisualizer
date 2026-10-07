@@ -7,8 +7,9 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Review the implementation feature PR and [verification evidence](reviews/001-heap-insertion.md) for [slice 001](specs/001-heap-insertion.md).
-2. After owner acceptance, plan the next required release slice below.
+1. Review the [extraction and autoplay specification](specs/002-heap-extraction-playback.md)
+   against the accepted operation and identity contracts.
+2. Review its written specification and build plan before implementation.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.
@@ -38,5 +39,6 @@ is the [development guide](development.md#deferred-tooling).
 ## Progress
 
 Use Git history, PR state and artifact status headers. Heap insertion is built
-on its feature branch, pending owner review. Keep measured results in verification
+and merged in [PR #4](https://github.com/Exilitys/DSAVisualizer/pull/4) on
+7 October 2026. Keep measured results in verification
 reports; do not turn proposed targets into accomplishments.
