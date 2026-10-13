@@ -1,8 +1,8 @@
 # Heap extraction and autoplay verification
 
 **Status:** Native implementation complete; runtime verification began 7 October
-2026 and final production evidence was recorded 13 October 2026. Owner feature
-review and the target-learner explanation check remain outstanding.
+2026 and final production evidence was recorded 13 October 2026. The owner merged
+PR #7 that day. The target-learner explanation check remains outstanding.
 
 **Scope:** [Accepted slice 002](../specs/002-heap-extraction-playback.md) and its
 [accepted plan](../superpowers/plans/2026-10-07-heap-extraction-playback.md).
@@ -93,7 +93,9 @@ was added. The architecture HTML and its bound evidence were preserved.
 ## Feature review
 
 [PR #7](https://github.com/Exilitys/DSAVisualizer/pull/7) targets `development`
-from the completed `feature/heap-extraction-playback` branch. It is open for
-owner review and has not been merged.
+from the completed `feature/heap-extraction-playback` branch. The owner merged it
+on 13 October 2026 at `3b3fe653291302f47baf4c6345ef41a676f75188` and said
+"Continue next, pr is merged". This records owner acceptance of the feature;
+it does not establish the outstanding learner-understanding check.
 Planning and context updates are bundled with it under the owner's request for
 fewer PRs. Owner review and merging remain separate gates.

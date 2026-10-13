@@ -201,7 +201,8 @@ browser delays execution. Do not claim physical-phone coverage without testing i
 The written specification and implementation plan are accepted; the owner merged
 plan PR #6 and confirmed Native execution through "ontinue and open pr less often".
 Implementation has [technical verification evidence](../reviews/002-heap-extraction-playback.md).
-Owner feature review and the target-learner explanation check remain outstanding.
+The owner merged feature PR #7 on 13 October 2026 and requested the next slice.
+The target-learner explanation check remains outstanding.
 No unanswered scope question remains.
 
 ## Review record

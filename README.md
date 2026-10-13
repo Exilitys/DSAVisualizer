@@ -13,8 +13,9 @@ owner accepted the first-slice implementation plan and Native execution on
 7 October 2026. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
-with synchronized tree and array views. Extraction and shared autoplay are
-implemented on `feature/heap-extraction-playback`, awaiting owner review.
+with synchronized tree and array views. Extraction and shared autoplay were
+merged into `development` in PR #7 on 13 October 2026. The next slice is the
+[graph specification draft](docs/specs/003-graph-traversal.md), awaiting review.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,

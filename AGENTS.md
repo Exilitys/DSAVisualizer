@@ -16,6 +16,7 @@ and decision explanations in their owning documents.
 | First-slice implementation plan | [Heap insertion plan](docs/superpowers/plans/2026-10-05-heap-insertion.md) |
 | Heap extension | [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md) |
 | Heap extension build plan | [Extraction and playback plan](docs/superpowers/plans/2026-10-07-heap-extraction-playback.md) |
+| Next slice draft | [Editable graph, BFS and DFS](docs/specs/003-graph-traversal.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |

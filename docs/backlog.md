@@ -7,20 +7,19 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Owner review of [PR #7](https://github.com/Exilitys/DSAVisualizer/pull/7), implementing the [extraction and autoplay slice](specs/002-heap-extraction-playback.md), with [verification evidence](reviews/002-heap-extraction-playback.md).
-2. Plan the editable graph with both BFS and DFS, exercising the shared player and playback controls. Bundle its accepted spec, plan and implementation in one feature PR.
+1. Review the [editable graph, BFS and DFS specification draft](specs/003-graph-traversal.md), then its Native build plan.
+2. Implement the accepted graph slice through the shared player, playback and scene primitives. Bundle the spec, plan, implementation and evidence in one feature PR.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.
 Slice 002's written specification and build plan were accepted on 7 October 2026.
-Native implementation and technical verification are complete; owner review and
-the target-learner explanation check remain outstanding.
+Native implementation and technical verification are complete; the owner merged
+PR #7 on 13 October 2026. The target-learner explanation check remains outstanding.
 
 ## Required release work after the first slice
 
 | Work | Authority |
 | --- | --- |
-| Accept implemented heap extraction and playback controls | Product PRD FR05/FR07; slice 002 evidence and owner review. |
 | Editable graph, BFS and frame-based DFS | Product PRD FR08 and technical spec data/algorithm contracts. |
 | Authored lessons, three challenges per module, and local evidence | Product PRD FR09/FR11/FR13. |
 | Ollama development tutor and validated context/actions | Technical spec D-006 and tutor contract. |
@@ -42,6 +41,6 @@ is the [development guide](development.md#deferred-tooling).
 
 Use Git history, PR state and artifact status headers. Heap insertion is built
 and merged in [PR #4](https://github.com/Exilitys/DSAVisualizer/pull/4) on
-7 October 2026. Extraction/playback was verified on 13 October 2026 and awaits
-owner review. Keep measured results in verification
+7 October 2026. Extraction/playback was verified and merged in PR #7 on
+13 October 2026. Graph slice 003 is a draft, not implemented. Keep measured results in verification
 reports; do not turn proposed targets into accomplishments.
