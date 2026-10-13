@@ -1,0 +1,18 @@
+{
+  "fixture4": {
+    "comparisons": "2",
+    "inspection": "Follow an identityItem H7Value6LocationActive heapIndex2ParentH3 · 5Left childH6 · 8Right childAbsentHeap orderholds",
+    "ordinal": "4",
+    "selected": "H7",
+    "swaps": "1"
+  },
+  "fixture3": {
+    "comparisons": "2",
+    "inspection": "Follow an identityItem H7Value6LocationActive heapIndex0ParentAbsentLeft childH2 · 7Right childH3 · 5Heap orderrepairing",
+    "ordinal": "3",
+    "selected": "H7",
+    "swaps": "0"
+  },
+  "resultFocusDisabled": true,
+  "activeFocusAndFit": "Native keyboard activation retained ordinal 4 and H7 before result selection"
+}

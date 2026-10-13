@@ -1,0 +1,25 @@
+{
+  "method": "Native control keyboard activation; slider Home/End; reduced motion and semantic mode active",
+  "speedContinuity": {
+    "ordinal": "2",
+    "playing": "true",
+    "speed": "2"
+  },
+  "completed": {
+    "comparisons": "3",
+    "ordinal": "6",
+    "playDisabled": true,
+    "playing": "false",
+    "swaps": "1"
+  },
+  "seekCancelled": "false",
+  "previousCancelled": "false",
+  "restartCancelled": "false",
+  "semanticView": {
+    "canvases": 0,
+    "comparisons": "2",
+    "ordinal": "4",
+    "selected": "H1",
+    "swaps": "1"
+  }
+}

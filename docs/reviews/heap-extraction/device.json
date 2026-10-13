@@ -1,0 +1,11 @@
+{
+  "os": "Microsoft Windows 10 Home Single Language",
+  "version": "10.0.19045",
+  "processor": "AMD Ryzen 9 5900HX with Radeon Graphics        ",
+  "memoryBytes": 33722597376,
+  "graphics": [
+    "AMD Radeon(TM) Graphics",
+    "NVIDIA GeForce RTX 3070 Laptop GPU"
+  ],
+  "node": "v24.15.0"
+}

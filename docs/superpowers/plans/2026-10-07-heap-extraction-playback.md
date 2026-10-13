@@ -2,12 +2,12 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
 
-**Status:** Draft for owner review, 7 October 2026.
+**Status:** Accepted 2026-10-07 by @Exilitys; reviewed at `55c7780` in merged PR #6 and confirmed through "ontinue and open pr less often".
 **Goal:** Extract the minimum, inspect its stable identity, and replay either heap operation with shared cancellable autoplay.
 **Architecture:** Extend the heap engine's immutable state with its result. A browser-only playback controller schedules cursor changes through a generic React binding; pure engine/player contracts remain unchanged. Move shared control markup out of the heap binding so graph can reuse it.
 **Tech Stack:** Existing pinned Next.js 16.3.8, React 19.3.0, R3F 9.8.1, Drei 10.7.9, Three 0.186.1, TypeScript 5.9.3, Node 24.15.0. No new dependencies.
 **Spec:** [Accepted slice 002](../../specs/002-heap-extraction-playback.md), version 1 at `339de4b`, and [technical contracts](../../prd/prd.md).
-**Execution:** Native, preserved from the owner's prior selection. This plan needs review before product code changes.
+**Execution:** Native, preserved from the owner's prior selection. Planning/context updates stay in the implementation branch; open one feature PR after the slice is verified.
 
 ## Global Constraints
 
@@ -60,7 +60,7 @@ targets `development`; the owner merges. Keep the accepted architecture bytes.
 **Produces:** Existing `heapEngine` with the new command/state and version;
 `createPreset()` and pure player signatures remain unchanged.
 
-- [ ] Write the fixture and run `npm test` before extending the engine. Expected: extraction rejection or wrong trace, not an unrelated import error.
+- [x] Write the fixture and run `npm test` before extending the engine. Expected: extraction rejection or wrong trace, not an unrelated import error.
 
 ```typescript
 test('extracts the preset minimum in seven exact snapshots', () => {
@@ -83,14 +83,14 @@ test('extracts the preset minimum in seven exact snapshots', () => {
 });
 ```
 
-- [ ] Extend concrete types; set version `1.1.0`; add `result:null` to initial and insertion snapshot state. In `validateCommand`, accept `{type:'extract'}` after the object check, before insert-value/capacity checks. Keep insert checks unchanged.
+- [x] Extend concrete types; set version `1.1.0`; add `result:null` to initial and insertion snapshot state. In `validateCommand`, accept `{type:'extract'}` after the object check, before insert-value/capacity checks. Keep insert checks unchanged.
 
 ```typescript
 if (!object(raw)) return {ok:false,message:'Choose a valid heap operation.',field:'command'};
 if (raw.type==='extract') return {ok:true,value:{type:'extract'}};
 // Existing insert value, capacity, and ID-exhaustion checks follow.
 ```
-- [ ] Split the existing insertion loop into private `createInsertTrace(input, command)` accepting a validated insert command. Public `createTrace` validates input/command once and dispatches by command.type. Use the existing loop and emitter unchanged except its result field.
+- [x] Split the existing insertion loop into private `createInsertTrace(input, command)` accepting a validated insert command. Public `createTrace` validates input/command once and dispatches by command.type. Use the existing loop and emitter unchanged except its result field.
 
 ```typescript
 const command = validCommand.value;
@@ -99,7 +99,7 @@ return command.type==='insert'
   : createExtractTrace(validInput.value);
 ```
 
-- [ ] Add private `createExtractTrace(input:HeapInput): readonly Snapshot<HeapState>[]`. Its complete emitter and loop are:
+- [x] Add private `createExtractTrace(input:HeapInput): readonly Snapshot<HeapState>[]`. Its complete emitter and loop are:
 
 ```typescript
 const items=input.items.map(item=>({...item}));
@@ -161,7 +161,7 @@ emit('complete',[result.id],[result.value],'return');
 return deepFreeze(steps);
 ```
 
-- [ ] Extend inspect's missing-active-item branch to return the result's value,
+- [x] Extend inspect's missing-active-item branch to return the result's value,
 location `Extracted minimum`, and absent index/parent/children, otherwise null.
 Keep active-item inspection unchanged. Add a `Location: Active heap` field there.
 
@@ -176,7 +176,7 @@ if (index<0) {
   ]};
 }
 ```
-- [ ] Add literal edge assertions before implementing their missing behavior:
+- [x] Add literal edge assertions before implementing their missing behavior:
 
 ```typescript
 const empty=heapEngine.createTrace({items:[],nextId:8},{type:'extract'});
@@ -202,7 +202,7 @@ next counter. With the real player, select H1 as result, Restart restores H1 at
 index 0; a new extract after completion clears that selection/result. Preserve
 the existing incomplete-trace regression and insertion expectations.
 
-- [ ] Run `npm test`, `npm run typecheck`, `npm run build`; expected: all green, existing insertion usable. Commit `feat: add deterministic heap extraction and result inspection`.
+- [x] Run `npm test`, `npm run typecheck`, `npm run build`; expected: all green, existing insertion usable. Commit `feat: add deterministic heap extraction and result inspection`.
 
 ### Task 2: shared cancellable playback controller
 
@@ -210,7 +210,7 @@ the existing incomplete-trace regression and insertion expectations.
 **Consumes:** A current run identity/cursor, an ordinal publisher, injected scheduling.
 **Produces:** `PlaybackSpeed`, `PlaybackStatus`, `PlaybackCursor`, `Schedule`, and `createPlayback(options)` below. No React, DOM, engine, or clock imports in this file.
 
-- [ ] Write real-player/fake-scheduling tests first. A controllable schedule records callback and requested delay; firing a cancelled callback deliberately reproduces late delivery. Assert cursor/run effects rather than mock-call counts.
+- [x] Write real-player/fake-scheduling tests first. A controllable schedule records callback and requested delay; firing a cancelled callback deliberately reproduces late delivery. Assert cursor/run effects rather than mock-call counts.
 
 ```typescript
 import test from 'node:test';
@@ -260,7 +260,7 @@ declared types and no-op methods returning `{playing:false,speed:1}` from status
 Run again; expected assertion RED on playing status. An import error does not
 count as the behavioral RED gate.
 
-- [ ] Implement the controller. The cancellation generation and captured run/cursor
+- [x] Implement the controller. The cancellation generation and captured run/cursor
 protect even a callback that the browser has already queued:
 
 ```typescript
@@ -316,7 +316,7 @@ It is cancellation, not a permanent poison flag: Strict Mode cleanup/setup can
 reuse the controller. A later `play()` captures a new generation. Do not use an
 elapsed-time catch-up loop or setInterval with accumulating callbacks.
 
-- [ ] Run `npm test` and `npm run typecheck`; expected all tests green. Commit `feat: add shared cancellable lesson playback`.
+- [x] Run `npm test` and `npm run typecheck`; expected all tests green. Commit `feat: add shared cancellable lesson playback`.
 
 ### Task 3: generic browser binding and heap operation UI
 
@@ -324,7 +324,7 @@ elapsed-time catch-up loop or setInterval with accumulating callbacks.
 **Consumes:** Task 1 engine/result, Task 2 controller, pure `createPlayer/currentSnapshot/seek/startCommand/selectEntity`.
 **Produces:** `useLessonPlayer<I,C,S>(engine:LessonEngine<I,C,S>, initial:unknown)` returning `player`, `playback`, `go`, `start`, `select`, `play`, `pause`, `setSpeed`; shared `PlaybackControls` and `InspectionPanel` exports.
 
-- [ ] Before wiring UI, add content assertions: extraction child-choice text names 7/5 and H3; swap explanation names 6 moving down because 5 is smaller; empty completion invents no result; compare code IDs select the two distinct extraction lines. Run `npm test`; expected RED until authored content exists.
+- [x] Before wiring UI, add content assertions: extraction child-choice text names 7/5 and H3; swap explanation names 6 moving down because 5 is smaller; empty completion invents no result; compare code IDs select the two distinct extraction lines. Run `npm test`; expected RED until authored content exists.
 
 ```typescript
 test('extraction content follows the chosen snapshot',()=>{
@@ -338,7 +338,7 @@ test('extraction content follows the chosen snapshot',()=>{
   assert.match(explainStep(empty[1]),/no minimum/i);
 });
 ```
-- [ ] Add `getPseudocode(snapshot)` alongside existing `pseudocode` and `explainStep`. Extraction code lines:
+- [x] Add `getPseudocode(snapshot)` alongside existing `pseudocode` and `explainStep`. Extraction code lines:
 
 ```typescript
 const extractionCode=[
@@ -361,7 +361,7 @@ uses parent/child values; `swap` uses operands [oldIndex,newIndex,parentValue,ch
 in that order. `empty` says no minimum exists; `complete` names the result and
 ordered remainder. All explanations consume only the selected snapshot.
 
-- [ ] Implement this generic hook. All logical transitions publish one immutable
+- [x] Implement this generic hook. All logical transitions publish one immutable
 PlayerState object to the latest-state ref and React state. No setter escapes the
 hook, so a pending render cannot make a tick read a stale command/cursor.
 
@@ -411,7 +411,7 @@ construction does not call document/window; only browser actions/effects do.
 Visibility is checked at callback read as well as the event listener. Cleanup
 does not emit setState; setup publishes the reusable controller's current status.
 
-- [ ] Move existing InspectionPanel markup unchanged to LessonControls.tsx. Move
+- [x] Move existing InspectionPanel markup unchanged to LessonControls.tsx. Move
 PlaybackControls there and extend its props with `playback:PlaybackStatus`,
 `play():void`, `pause():void`, `setSpeed(speed:PlaybackSpeed):void`. Add:
 
@@ -429,7 +429,7 @@ Previous/Next/Restart/range callbacks use hook.go, which pauses synchronously.
 Neither shared control file nor hook imports heap modules. Keep native labels,
 44 px targets, current aria-valuetext, and one semantic selection identity.
 
-- [ ] Replace the playground's local player setter/actions with the hook, while
+- [x] Replace the playground's local player setter/actions with the hook, while
 keeping presentation flags/camera independent:
 
 ```tsx
@@ -447,7 +447,7 @@ Value to insert and error alert. Pass playback/actions into shared controls.
 Use `getPseudocode(snapshot)` and extraction title `Sift down`; insert title stays
 `Sift upward`. Add `data-playing` to main for verification.
 
-- [ ] Render the selectable result card after the view controls and before the
+- [x] Render the selectable result card after the view controls and before the
 execution panel, outside Canvas, retaining inspection in
 semantic mode. If result is nonnull, its button calls select(result.id), exposes
 aria-pressed, and labels `Select extracted H1, value 3`. The empty extraction
@@ -456,7 +456,7 @@ snapshots display no extracted-result claim. Focus requires focusable as well as
 3D availability. A selected result has no matching tree mesh, so do not send a
 focus request. The semantic heap still renders only active items.
 
-- [ ] Add only result-card/native-select styles to globals.css; reuse existing
+- [x] Add only result-card/native-select styles to globals.css; reuse existing
 tokens, pressed styles, and focus outline. Run logic/type/build checks and browser
 extraction/result/rewind plus actual Play/Pause/speed/Strict Mode remount checks.
 Expected: exact counters and no dead Play button after effect cleanup. Commit
@@ -469,31 +469,31 @@ backlog/context pointers and only source files with observed defects.
 **Consumes:** Completed extraction, controller, generic hook, UI.
 **Produces:** Actual test/browser evidence and owner-review PR to development.
 
-- [ ] Run `npm test`, `npm run typecheck`, `npm run build`, context guard, and
+- [x] Run `npm test`, `npm run typecheck`, `npm run build`, context guard, and
 `git diff --check`. Expected all green; report actual counts and command outputs.
-- [ ] Browser: extract preset; select H1 result; inspect absent index; seek 4,
+- [x] Browser: extract preset; select H1 result; inspect absent index; seek 4,
 select H7/index2 and counts2/1; Previous selects 3/counts2/0; Restart restores
 seven original items and H1/index0. Verify insertion's step3/index3/counts1/1.
-- [ ] Play at 1×, Pause, resume at 2×, finish, and confirm disabled Play at complete.
+- [x] Play at 1×, Pause, resume at 2×, finish, and confirm disabled Play at complete.
 At 0.5× measure the 2000 ms cadence; teaching delay is not algorithm runtime.
 While playing, seek/restart/submit an invalid value and confirm immediate pause.
 Start another operation at 0/completion and verify old callbacks cannot move it.
-- [ ] Repeat by keyboard, reduced motion, and semantic mode. At 360/1280 verify
+- [x] Repeat by keyboard, reduced motion, and semantic mode. At 360/1280 verify
 result card, controls, pseudocode, and projected labels with screenshots and
 rectangle checks. No separate 3D result object is created.
-- [ ] Hide the test document and verify pause with no auto resume; test listener
+- [x] Hide the test document and verify pause with no auto resume; test listener
 cleanup/remount. Keep schedules scoped to the controller and remove temporary
 fault/visibility probes from public before committing.
-- [ ] Exercise WebGL loss/creation failure; controls and result remain usable.
+- [x] Exercise WebGL loss/creation failure; controls and result remain usable.
 Extract until empty; then extract once more (no invented result), insert a new
 value (retained ID counter), and test duplicate equality and max-size rejection.
-- [ ] Record device/browser, actual feedback samples, untested physical-phone and
+- [x] Record device/browser, actual feedback samples, untested physical-phone and
 screen-reader coverage, and whether a target learner explained a fresh child
 choice. Do not claim educational efficacy from the engine test alone.
-- [ ] Add actual `src/components/playback.ts` to both existing contract mirrors
+- [x] Add actual `src/components/playback.ts` to both existing contract mirrors
 once it exists. Preserve diagram bytes and curated prose. Reconcile source
 commands and guide pointers; no hooks/registry install.
-- [ ] Request the one fresh whole-branch review required by Native execution;
+- [x] Request the one fresh whole-branch review required by Native execution;
 fix Critical/Important findings once with failing regression checks, then rerun
 the full suite. Record minor deferrals. Push `feature/heap-extraction-playback`,
 open/attach PR targeting development, and retain the worktree for owner feedback.
@@ -512,5 +512,7 @@ engine/player/control signatures. The equal-parent fixture was corrected to
 scan, accepted-spec checker, context guard, and whitespace check passed. Product
 test/build commands above remain execution steps, not results claimed by this plan.
 
-Please review this written plan before implementation. Native execution is
-already selected and will be preserved; the next approval is for this plan.
+Native implementation followed the accepted plan. Actual commands, runtime
+coverage and the fresh branch review are recorded in the
+[verification report](../../reviews/002-heap-extraction-playback.md).
+The next owner gate is the completed feature PR to `development`.

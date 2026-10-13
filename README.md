@@ -13,7 +13,8 @@ owner accepted the first-slice implementation plan and Native execution on
 7 October 2026. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
-with synchronized tree and array views.
+with synchronized tree and array views. Extraction and shared autoplay are
+implemented on `feature/heap-extraction-playback`, awaiting owner review.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
@@ -27,6 +28,8 @@ snapshots for replay. The accepted technical specification owns the contracts.
 - [Technical specification](docs/prd/prd.md)
 - [First slice: heap insertion](docs/specs/001-heap-insertion.md)
 - [Heap insertion implementation plan](docs/superpowers/plans/2026-10-05-heap-insertion.md)
+- [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md)
+- [Extraction and playback verification](docs/reviews/002-heap-extraction-playback.md)
 - [Architecture and state flow](docs/architecture/system.md)
 
 Groundwork establishes the accepted project context, development lanes, and
@@ -45,7 +48,10 @@ npm run dev
 
 Open [the local playground](http://127.0.0.1:3000). Insert 1, select H8,
 then seek to step 3 to inspect index 3 and one comparison and swap.
-Next, Previous, Restart, and the timeline share one immutable snapshot.
+Restart, then extract the minimum. Select H1 in the result card to inspect the
+removed value; at step 4, H7 is at index 2 with two comparisons and one swap.
+Play/Pause and 0.5×/1×/2× speed controls replay either operation. Next, Previous,
+Restart, and the timeline share one immutable snapshot and pause autoplay.
 Fit scene recovers the camera. Reduce motion and Semantic view only are
 available beside the scene.
 
@@ -57,8 +63,9 @@ python scripts/check-context.py
 git diff --check
 ```
 
-The tests use Node's built in runner. Type checking generates Next's route
-types before checking TypeScript. No AI service is needed for this slice.
+The engine/player and playback tests use Node's built in runner. Type checking
+generates Next's route types before checking TypeScript. No AI service is needed
+for this slice.
 
 ## Project context
 
@@ -87,6 +94,8 @@ are separate commands in the package manifest.
 
 PR #1 established the brief and was merged into `development` on 5 October
 2026. PR #2 accepted the technical specification and context. Heap insertion
-is on `feature/heap-insertion`, with its PR targeting `development`.
+was merged in PR #4; extraction/autoplay uses `feature/heap-extraction-playback`.
+The owner requested fewer PRs: bundle planning and context updates with each
+feature, record their acceptance in chat, then open one completed PR to `development`.
 User acceptance is required before merging a
 feature PR; publication of a draft does not mark its specification accepted.

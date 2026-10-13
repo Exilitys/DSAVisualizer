@@ -3,8 +3,8 @@ import type { LessonEngine, Snapshot, Validation } from '../../core/lesson.ts';
 
 export type HeapItem = { id: string; value: number };
 export type HeapInput = { items: readonly HeapItem[]; nextId: number };
-export type HeapState = HeapInput;
-export type HeapCommand = { type: 'insert'; value: number };
+export type HeapState = HeapInput & { result: HeapItem | null };
+export type HeapCommand = { type: 'insert'; value: number } | { type: 'extract' };
 export function createPreset(): HeapInput {
   return {items:[3,7,5,12,9,8,6].map((value,i)=>({id:`H${i+1}`,value})),nextId:8};
 }
@@ -37,7 +37,9 @@ function validateInput(raw: unknown): Validation<HeapInput> {
 }
 
 function validateCommand(raw: unknown, input: HeapInput): Validation<HeapCommand> {
-  if (!object(raw) || raw.type !== 'insert' || !validValue(raw.value))
+  if (!object(raw)) return {ok:false,message:'Choose a valid heap operation.',field:'command'};
+  if (raw.type==='extract') return {ok:true,value:{type:'extract'}};
+  if (raw.type !== 'insert' || !validValue(raw.value))
     return {ok:false,message:'Enter a whole number from 0 to 99.',field:'value'};
   if (input.items.length >= 15) return {ok:false,message:'This heap is full (15 items). Restart to try a different value.',field:'value'};
   if (input.nextId >= Number.MAX_SAFE_INTEGER) return {ok:false,message:'The item ID counter is exhausted.',field:'value'};
@@ -48,7 +50,7 @@ function createInitialSnapshot(raw: HeapInput): Snapshot<HeapState> {
   const input = validateInput(raw);
   if (!input.ok) throw new Error(input.message);
   return deepFreeze({
-    id:'s0',ordinal:0,state:input.value,
+    id:'s0',ordinal:0,state:{...input.value,result:null},
     event:{type:'initial',affectedIds:[],operands:[],codeLineId:null,explanationKey:'heap.insert.initial'},
     variables:{index:null,parentIndex:null,insertedId:null},
     counters:{comparisons:0,swaps:0},
@@ -63,6 +65,10 @@ function createTrace(rawInput: HeapInput, rawCommand: HeapCommand): readonly Sna
   const validCommand = validateCommand(rawCommand,input);
   if (!validCommand.ok) throw new Error(validCommand.message);
   const command = validCommand.value;
+  return command.type==='insert' ? createInsertTrace(input,command) : createExtractTrace(input);
+}
+
+function createInsertTrace(input:HeapInput,command:{type:'insert';value:number}): readonly Snapshot<HeapState>[] {
   const items = input.items.map(item => ({...item}));
   const nextId = input.nextId + 1;
   const insertedId = `H${input.nextId}`;
@@ -74,7 +80,7 @@ function createTrace(rawInput: HeapInput, rawCommand: HeapCommand): readonly Sna
     const ordinal = steps.length;
     steps.push(deepFreeze<Snapshot<HeapState>>({
       id:`s${ordinal}`,ordinal,
-      state:{items:items.map(item=>({...item})),nextId},
+      state:{items:items.map(item=>({...item})),nextId,result:null},
       event:{type,affectedIds,operands,codeLineId:type === 'complete' ? 'return' : type,explanationKey:`heap.insert.${type}`},
       variables:{insertedId,index,parentIndex:index > 0 ? Math.floor((index-1)/2) : null},
       counters:{comparisons,swaps},
@@ -100,12 +106,79 @@ function createTrace(rawInput: HeapInput, rawCommand: HeapCommand): readonly Sna
   return deepFreeze(steps);
 }
 
+function createExtractTrace(input:HeapInput): readonly Snapshot<HeapState>[] {
+  const items=input.items.map(item=>({...item}));
+  let result:HeapItem|null=null;
+  let index:number|null=null;
+  let chosenChildId:string|null=null;
+  let comparisons=0, swaps=0;
+  const initial=createInitialSnapshot(input);
+  const steps:Snapshot<HeapState>[]=[deepFreeze({...initial,
+    event:{...initial.event,explanationKey:'heap.extract.initial'}})];
+  const emit=(type:string,ids:string[],operands:(string|number)[],code:string,
+    key=`heap.extract.${type}`)=>{
+    const ordinal=steps.length;
+    steps.push(deepFreeze<Snapshot<HeapState>>({
+      id:`s${ordinal}`,ordinal,
+      state:{items:items.map(item=>({...item})),nextId:input.nextId,result:result ? {...result} : null},
+      event:{type,affectedIds:ids,operands,codeLineId:code,explanationKey:key},
+      variables:{index,removedId:result?.id??null,
+        replacementId:index===null ? null : items[index].id,chosenChildId},
+      counters:{comparisons,swaps},
+      invariants:[{id:'heap-shape',status:'holds'},
+        {id:'heap-order',status:ordered(items)?'holds':'repairing'}],
+    }));
+  };
+  if (!items.length) {
+    emit('complete',[],[],'return','heap.extract.empty');
+    return deepFreeze(steps);
+  }
+  result={...items[0]};
+  const last=items.pop()!;
+  if(items.length) items[0]=last;
+  index=items.length ? 0 : null;
+  emit('replace',items.length ? [result.id,last.id] : [result.id],
+    items.length ? [result.value,last.value] : [result.value],'replace');
+  while(index!==null && 2*index+1<items.length) {
+    const left:number=2*index+1, right:number=left+1;
+    let chosen:number=left;
+    if(right<items.length) {
+      chosen=items[left].value<=items[right].value ? left : right;
+      chosenChildId=items[chosen].id;
+      comparisons++;
+      emit('compare',[items[left].id,items[right].id],[items[left].value,items[right].value],
+        'choose-child','heap.extract.choose-child');
+    } else chosenChildId=items[left].id;
+    const parent=items[index], child=items[chosen];
+    comparisons++;
+    emit('compare',[parent.id,child.id],[parent.value,child.value],
+      'compare-child','heap.extract.compare-child');
+    if(child.value>=parent.value) break;
+    const before:number=index;
+    [items[index],items[chosen]]=[child,parent];
+    swaps++;
+    index=chosen;
+    emit('swap',[parent.id,child.id],[before,index,parent.value,child.value],'swap');
+    chosenChildId=null;
+  }
+  emit('complete',[result.id],[result.value],'return');
+  return deepFreeze(steps);
+}
+
 export const heapEngine: LessonEngine<HeapInput,HeapCommand,HeapState> = {
-  id:'heap',version:'1.0.0',commandStart:'run-boundary',
+  id:'heap',version:'1.1.0',commandStart:'run-boundary',
   validateInput,validateCommand,createInitialSnapshot,createTrace,
   inspect(snapshot,id) {
     const index = snapshot.state.items.findIndex(item => item.id === id);
-    if (index < 0) return null;
+    if (index < 0) {
+      const result=snapshot.state.result;
+      if(!result || result.id!==id) return null;
+      return {id,label:`Item ${id}`,fields:[
+        {label:'Value',value:String(result.value)},
+        {label:'Location',value:'Extracted minimum'},
+        ...['Index','Parent','Left child','Right child'].map(label=>({label,value:'Absent'})),
+      ]};
+    }
     const item = snapshot.state.items[index];
     const relation = (i: number) => {
       const other = snapshot.state.items[i];
@@ -113,6 +186,7 @@ export const heapEngine: LessonEngine<HeapInput,HeapCommand,HeapState> = {
     };
     return {id,label:`Item ${id}`,fields:[
       {label:'Value',value:String(item.value)},
+      {label:'Location',value:'Active heap'},
       {label:'Index',value:String(index)},
       {label:'Parent',value:index > 0 ? relation(Math.floor((index-1)/2)) : 'Absent'},
       {label:'Left child',value:relation(2*index+1)},

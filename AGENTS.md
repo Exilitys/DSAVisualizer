@@ -14,8 +14,8 @@ and decision explanations in their owning documents.
 | Development contracts and decision provenance | [Technical specification](docs/prd/prd.md) |
 | First slice | [Heap insertion](docs/specs/001-heap-insertion.md) |
 | First-slice implementation plan | [Heap insertion plan](docs/superpowers/plans/2026-10-05-heap-insertion.md) |
-| Next slice | [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md) |
-| Next build plan | [Extraction and playback plan](docs/superpowers/plans/2026-10-07-heap-extraction-playback.md) |
+| Heap extension | [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md) |
+| Heap extension build plan | [Extraction and playback plan](docs/superpowers/plans/2026-10-07-heap-extraction-playback.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |
@@ -36,6 +36,9 @@ The accepted slice is a specification, not an implementation plan. Application
 scaffolding and implementation follow review of the written build plan.
 Follow the [branch workflow](README.md#branch-workflow). The owner reviews and
 accepts feature PRs; merging needs the owner's instruction.
+The owner requested fewer PRs on 7 October 2026. Keep planning and context
+updates in the feature branch and open one completed feature PR per slice;
+record spec and plan acceptance in chat before implementation.
 
 ## Contract paths
 
@@ -49,6 +52,7 @@ docs/specs/
 docs/architecture/
 src/core/lesson.ts
 src/core/player.ts
+src/components/playback.ts
 src/lessons/heap/engine.ts
 src/app/globals.css
 ```

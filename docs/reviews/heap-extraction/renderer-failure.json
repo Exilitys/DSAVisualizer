@@ -1,0 +1,18 @@
+{
+  "lost": {
+    "case": "actual WebGL context loss during playback",
+    "ordinal": "6",
+    "selection": "H1",
+    "canvas": 0,
+    "comparisons": "3",
+    "swaps": "1"
+  },
+  "creation": {
+    "case": "WebGL creation disabled before boot",
+    "ordinal": "6",
+    "selection": "H1",
+    "canvas": 0,
+    "comparisons": "3",
+    "swaps": "1"
+  }
+}
