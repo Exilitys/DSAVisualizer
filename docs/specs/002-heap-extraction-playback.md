@@ -198,9 +198,11 @@ browser delays execution. Do not claim physical-phone coverage without testing i
 
 ## 13. Open questions and review gate
 
-The written specification is accepted. The written implementation plan still
-requires review before implementation; Native execution remains the selected
-workflow. No unanswered scope question remains.
+The written specification and implementation plan are accepted; the owner merged
+plan PR #6 and confirmed Native execution through "ontinue and open pr less often".
+Implementation has [technical verification evidence](../reviews/002-heap-extraction-playback.md).
+Owner feature review and the target-learner explanation check remain outstanding.
+No unanswered scope question remains.
 
 ## Review record
 

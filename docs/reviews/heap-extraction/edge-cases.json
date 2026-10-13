@@ -1,0 +1,16 @@
+{
+  "empty": {
+    "items": 0,
+    "resultCards": 0,
+    "message": 1
+  },
+  "firstInserted": "Select H8, value 1, index 0",
+  "equality": {
+    "comparisons": "1",
+    "swaps": "0"
+  },
+  "capacity": {
+    "items": 15,
+    "error": "This heap is full (15 items). Restart to try a different value."
+  }
+}

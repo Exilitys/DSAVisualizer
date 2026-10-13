@@ -1,0 +1,8 @@
+{
+  "resultView": "FOLLOW AN IDENTITY\n\nItem H1\nValue\n3\nLocation\nExtracted minimum\nIndex\nAbsent\nParent\nAbsent\nLeft child\nAbsent\nRight child\nAbsent",
+  "restartView": {
+    "resultCards": 0,
+    "items": 7,
+    "inspection": "FOLLOW AN IDENTITY\n\nItem H1\nValue\n3\nLocation\nActive heap\nIndex\n0\nParent\nAbsent\nLeft child\nH2 · 7\nRight child\nH3 · 5\nHeap order\nholds"
+  }
+}

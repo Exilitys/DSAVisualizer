@@ -1,0 +1,28 @@
+[
+  {
+    "case": "simulated hidden document",
+    "ordinal": "3",
+    "playing": "false"
+  },
+  {
+    "case": "visible again",
+    "ordinal": "3",
+    "playing": "false"
+  },
+  {
+    "case": "manual next while playing",
+    "ordinal": "1",
+    "playing": "false"
+  },
+  {
+    "case": "replacement operation",
+    "ordinal": "1",
+    "playing": "false"
+  },
+  {
+    "case": "invalid command while playing",
+    "ordinal": "0",
+    "playing": "false",
+    "error": "Enter a whole number from 0 to 99."
+  }
+]

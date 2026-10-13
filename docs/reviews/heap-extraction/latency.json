@@ -1,0 +1,289 @@
+{
+  "method": "trusted click capture to second animation frame",
+  "count": 40,
+  "p95": 7.2000000001862645,
+  "max": 7.800000000046566,
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "samples": [
+    {
+      "milliseconds": 7.199999999953434,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.099999999860302,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.2000000001862645,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.5,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.800000000046566,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.199999999953434,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.100000000093132,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.800000000046566,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.899999999906868,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.099999999860302,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.100000000093132,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.399999999906868,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.800000000046566,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.5,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.399999999906868,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.599999999860302,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7.100000000093132,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.5,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.100000000093132,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.199999999953434,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.5,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.100000000093132,
+      "action": "Next →",
+      "ordinal": "4",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.100000000093132,
+      "action": "← Previous",
+      "ordinal": "3",
+      "selected": "",
+      "reflected": true
+    },
+    {
+      "milliseconds": 5.900000000139698,
+      "action": "H13",
+      "ordinal": "3",
+      "selected": "H1",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.600000000093132,
+      "action": "H76[0]",
+      "ordinal": "3",
+      "selected": "H7",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.2000000001862645,
+      "action": "H13",
+      "ordinal": "3",
+      "selected": "H1",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.7999999998137355,
+      "action": "H76[0]",
+      "ordinal": "3",
+      "selected": "H7",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.699999999953434,
+      "action": "H13",
+      "ordinal": "3",
+      "selected": "H1",
+      "reflected": true
+    },
+    {
+      "milliseconds": 5.5,
+      "action": "H76[0]",
+      "ordinal": "3",
+      "selected": "H7",
+      "reflected": true
+    },
+    {
+      "milliseconds": 6.7000000001862645,
+      "action": "H13",
+      "ordinal": "3",
+      "selected": "H1",
+      "reflected": true
+    },
+    {
+      "milliseconds": 5.599999999860302,
+      "action": "H76[0]",
+      "ordinal": "3",
+      "selected": "H7",
+      "reflected": true
+    },
+    {
+      "milliseconds": 7,
+      "action": "H13",
+      "ordinal": "3",
+      "selected": "H1",
+      "reflected": true
+    },
+    {
+      "milliseconds": 5.399999999906868,
+      "action": "H76[0]",
+      "ordinal": "3",
+      "selected": "H7",
+      "reflected": true
+    }
+  ]
+}

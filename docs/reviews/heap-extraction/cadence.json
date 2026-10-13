@@ -1,0 +1,17 @@
+{
+  "method": "trusted Play click to ordinal mutation",
+  "half": [
+    {
+      "milliseconds": 2008.3000000000466,
+      "ordinal": "2",
+      "playing": "true"
+    }
+  ],
+  "double": [
+    {
+      "milliseconds": 505.10000000009313,
+      "ordinal": "3",
+      "playing": "true"
+    }
+  ]
+}

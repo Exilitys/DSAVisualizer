@@ -47,8 +47,9 @@ real document pointers, the contract-list mirror, human acceptance records,
 and diagram evidence binding. It does not validate application identifiers,
 types, algorithm behavior, or AI inference.
 
-Use `npm test` for the Node 24 engine/player checks, `npm run typecheck` for
-Next route generation and TypeScript, and `npm run build` for production.
+Use `npm test` for the Node 24 engine/player and injected playback-scheduler
+checks, `npm run typecheck` for Next route generation and TypeScript, and
+`npm run build` for production.
 The pure engine tests run without React or renderer imports and check nested
 immutability and the accepted fixture. Avoid tests of private implementation details.
 UI verification includes the actual keyboard, pointer, reduced-motion, and
