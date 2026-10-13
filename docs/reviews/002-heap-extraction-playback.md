@@ -92,6 +92,8 @@ was added. The architecture HTML and its bound evidence were preserved.
 
 ## Feature review
 
-The completed `feature/heap-extraction-playback` branch targets `development`.
+[PR #7](https://github.com/Exilitys/DSAVisualizer/pull/7) targets `development`
+from the completed `feature/heap-extraction-playback` branch. It is open for
+owner review and has not been merged.
 Planning and context updates are bundled with it under the owner's request for
 fewer PRs. Owner review and merging remain separate gates.

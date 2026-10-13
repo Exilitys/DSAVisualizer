@@ -493,7 +493,7 @@ choice. Do not claim educational efficacy from the engine test alone.
 - [x] Add actual `src/components/playback.ts` to both existing contract mirrors
 once it exists. Preserve diagram bytes and curated prose. Reconcile source
 commands and guide pointers; no hooks/registry install.
-- [ ] Request the one fresh whole-branch review required by Native execution;
+- [x] Request the one fresh whole-branch review required by Native execution;
 fix Critical/Important findings once with failing regression checks, then rerun
 the full suite. Record minor deferrals. Push `feature/heap-extraction-playback`,
 open/attach PR targeting development, and retain the worktree for owner feedback.

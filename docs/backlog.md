@@ -7,7 +7,7 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Owner review of the implemented [extraction and autoplay slice](specs/002-heap-extraction-playback.md), with [verification evidence](reviews/002-heap-extraction-playback.md).
+1. Owner review of [PR #7](https://github.com/Exilitys/DSAVisualizer/pull/7), implementing the [extraction and autoplay slice](specs/002-heap-extraction-playback.md), with [verification evidence](reviews/002-heap-extraction-playback.md).
 2. Plan the editable graph with both BFS and DFS, exercising the shared player and playback controls. Bundle its accepted spec, plan and implementation in one feature PR.
 
 The first slice's acceptance is defined by its insertion fixture and user
