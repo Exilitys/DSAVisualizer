@@ -1,6 +1,7 @@
 # Slice 003: editable graph, BFS and frame-based DFS
 
 **Status.** Accepted 2026-10-15 by @Exilitys.
+**Build plan receipt.** Accepted at `306f75fcca917f04acad554ecf6421b20f25d197` through “Continue” on 2026-10-15. Native implementation and technical checks are recorded in [verification](../reviews/003-graph-traversal.md); owner feature review and target learner evidence are pending. Plan review language below records the original version's handoff.
 **Reviewed.** Version 1 at `177d52f403a8e457e1b02a0be2c1172bf20696a4`;
 accepted through "Continue" after the written-spec review request.
 **Owner.** Jonathan Carlo (@Exilitys).

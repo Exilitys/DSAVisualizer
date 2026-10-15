@@ -1,0 +1,236 @@
+[
+  {
+    "label": "max-DFS-complete",
+    "backtracking": [
+      "E",
+      "D",
+      "C",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "B",
+      "A"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateProcessedNeighbors (creation order)A, BPredecessorBDFS tree depth (edges)2Frontier positionAbsentDiscovery position10DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "141",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "visibility-hidden-paused",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "visibility-shown-stays-paused",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "manual-next-pauses",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "1",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "2",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "manual-previous-pauses",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "actual-context-loss-complete",
+    "backtracking": [
+      "E",
+      "D",
+      "C",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "B",
+      "A"
+    ],
+    "canvas": 0,
+    "caption": "DFS from ASelected C",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, B, D, EPredecessorBDFS tree depth (edges)2Frontier positionAbsentDiscovery position3DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "141",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "edit-after-context-loss",
+    "backtracking": [],
+    "canvas": 0,
+    "caption": "DFS from ASelect a node or edge",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 39,
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": ""
+  }
+]

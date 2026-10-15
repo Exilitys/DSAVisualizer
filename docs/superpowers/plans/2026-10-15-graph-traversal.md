@@ -1,6 +1,6 @@
 # Editable Graph, BFS and DFS Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [x]`) syntax.
 
 **Status:** Accepted 2026-10-15 by @Exilitys through “Continue”; reviewed at `306f75fcca917f04acad554ecf6421b20f25d197`. Native implementation in progress.
 **Goal:** Edit a bounded graph and compare FIFO BFS with frame-based DFS through the shared player, inspection and 3D primitives.
@@ -61,7 +61,7 @@ export function getGraphPseudocode(snapshot:Snapshot<GraphState>):readonly {id:s
 export function explainGraphStep(snapshot:Snapshot<GraphState>):string;
 ```
 
-- [ ] Add the new test path to the existing package script. Import the engine and add the literal fixture before implementing behavior. A missing module is setup feedback; the behavioral RED gate is a wrong/rejected trace after exports exist.
+- [x] Add the new test path to the existing package script. Import the engine and add the literal fixture before implementing behavior. A missing module is setup feedback; the behavioral RED gate is a wrong/rejected trace after exports exist.
 
 ```json
 "test": "node --test tests/heap-slice.test.ts tests/playback.test.ts tests/graph-slice.test.ts"
@@ -114,7 +114,7 @@ test('DFS resumes frames and returns from C before discovering E',()=>{
 });
 ```
 
-- [ ] Implement the public types exactly as spec section 6. Set `id:'graph'`, `version:'1.0.0'`, `commandStart:'any-step'`. `createGraphPreset` returns A–F (orders 1–6), E1 A–B, E2 A–C, E3 B–D, E4 C–D, E5 D–E, counters 7/6. Resting state has null algorithm/start/current/edge, empty traversal arrays/maps, zero counters, three holding invariants, initial event and no code line.
+- [x] Implement the public types exactly as spec section 6. Set `id:'graph'`, `version:'1.0.0'`, `commandStart:'any-step'`. `createGraphPreset` returns A–F (orders 1–6), E1 A–B, E2 A–C, E3 B–D, E4 C–D, E5 D–E, counters 7/6. Resting state has null algorithm/start/current/edge, empty traversal arrays/maps, zero counters, three holding invariants, initial event and no code line.
 
 Use these bounded primitives in engine.ts; keep them lesson-local:
 
@@ -169,7 +169,7 @@ export function orderedNeighbors(input:GraphInput,id:string) {
 }
 ```
 
-- [ ] Implement editGraph by validating input and raw edit, constructing only the changed arrays, then validating the candidate. Use this operation table, preserving counters unless explicitly incremented:
+- [x] Implement editGraph by validating input and raw edit, constructing only the changed arrays, then validating the candidate. Use this operation table, preserving counters unless explicitly incremented:
 
 | Edit | Candidate change |
 | --- | --- |
@@ -180,7 +180,7 @@ export function orderedNeighbors(input:GraphInput,id:string) {
 
 Missing deletion says `Choose an existing node.`/`Choose an existing edge.`; exhausted counters say `The node ID counter is exhausted.`/`The edge ID counter is exhausted.` Unsupported edits say `Choose a valid graph edit.` Rejected edits return Validation failure without touching the argument.
 
-- [ ] Implement both traversal loops using private mutable frontier/evidence arrays; build immutable snapshots only in emit. The emitter clones the entire candidate with structuredClone before deepFreeze, so it never freezes a working frame/map. Clone input arrays too. Every snapshot has local ID `s${ordinal}`, contiguous ordinal, codeLineId `${command.type}.${event}` except initial=null, explanationKey `graph.${command.type}.${event}`, and the three spec invariants holding. Throw before snapshot 513.
+- [x] Implement both traversal loops using private mutable frontier/evidence arrays; build immutable snapshots only in emit. The emitter clones the entire candidate with structuredClone before deepFreeze, so it never freezes a working frame/map. Clone input arrays too. Every snapshot has local ID `s${ordinal}`, contiguous ordinal, codeLineId `${command.type}.${event}` except initial=null, explanationKey `graph.${command.type}.${event}`, and the three spec invariants holding. Throw before snapshot 513.
 
 The initial trace state matches the resting state; its variables may carry the chosen algorithm/start for pseudocode. Set working algorithm/start immediately before discovery. Emit variables `{algorithm,startId,currentId,neighborId,edgeId,frameIndex,alreadyDiscovered}` with null for inapplicable values, using the command for initial algorithm/start. Affected IDs include only existing nodes/edges.
 
@@ -271,7 +271,7 @@ emit('complete',discoveryOrder.slice(),[discoveryOrder.length,input.nodes.length
 return deepFreeze(steps);
 ```
 
-- [ ] Add node/edge inspection and authored content. Status precedence is Current, Processed, Frontier (queue/frames), Discovered, Undiscovered. Node fields: State, ordered Neighbors, Predecessor, Shortest distance (edges) for BFS or DFS tree depth (edges), frontier position, discovery position and DFS next-neighbor progress. Node and edge inspectors also show snapshot Current node and Examined edge, or Absent. Edge fields show Endpoints, Examined now/Present and endpoint states. Unknown IDs return null.
+- [x] Add node/edge inspection and authored content. Status precedence is Current, Processed, Frontier (queue/frames), Discovered, Undiscovered. Node fields: State, ordered Neighbors, Predecessor, Shortest distance (edges) for BFS or DFS tree depth (edges), frontier position, discovery position and DFS next-neighbor progress. Node and edge inspectors also show snapshot Current node and Examined edge, or Absent. Edge fields show Endpoints, Examined now/Present and endpoint states. Unknown IDs return null.
 
 Use these exact pseudocode lines and event mapping; initial has no current line:
 
@@ -305,7 +305,7 @@ test('authored content follows the selected snapshot',()=>{
 });
 ```
 
-- [ ] Before closing the task, add independent edge-case assertions using the following literal setups and outputs. Use assertions on public outputs rather than tests of private helpers:
+- [x] Before closing the task, add independent edge-case assertions using the following literal setups and outputs. Use assertions on public outputs rather than tests of private helpers:
 
 | Case | Assertion |
 | --- | --- |
@@ -333,7 +333,7 @@ git commit -m "feat: add deterministic BFS and frame-based DFS"
 **Consumes:** Existing player and graphEngine/editGraph from Task 1.
 **Produces:** `replaceInput<I,C,S>(state,engine,rawInput,selectedCommand):PlayerState<I,S>` and hook `replaceInput(rawInput,command)` returning the published state. Also make existing hook start return its published state so graph controls can record only successful commands. Heap callers can ignore that return.
 
-- [ ] Write the transition tests before exporting implementation; run them to establish the behavioral RED:
+- [x] Write the transition tests before exporting implementation; run them to establish the behavioral RED:
 
 ```typescript
 import test from 'node:test';
@@ -378,7 +378,7 @@ test('replacement cannot bypass the heap command boundary',()=>{
 });
 ```
 
-- [ ] Add replaceInput after startCommand, reusing that function's trace-envelope validation rather than inventing a second guard:
+- [x] Add replaceInput after startCommand, reusing that function's trace-envelope validation rather than inventing a second guard:
 
 ```typescript
 export function replaceInput<I,C,S>(state:PlayerState<I,S>,engine:LessonEngine<I,C,S>,
@@ -417,8 +417,8 @@ replaceInput:(rawInput:unknown,command:unknown|null)=>{
 },
 ```
 
-- [ ] Add tests for null-command resting input, deleting all nodes, retained/removed selected edge, and an initial-snapshot exception. For broken traces test empty, noncontiguous and missing-complete variants, plus the 513-snapshot guard, using the existing player regression pattern. Valid graph edits must not change any heap policy.
-- [ ] In graph-player.test.ts use the existing createPlayback injection seam with a local player variable and captured callback. Start BFS, play, pause, replaceInput with edited input, deliberately fire the old callback, and assert new trace identity and ordinal1 remain. Repeat for resting-after-start-deletion and disposal. No real waits or heap-specific scheduler changes.
+- [x] Add tests for null-command resting input, deleting all nodes, retained/removed selected edge, and an initial-snapshot exception. For broken traces test empty, noncontiguous and missing-complete variants, plus the 513-snapshot guard, using the existing player regression pattern. Valid graph edits must not change any heap policy.
+- [x] In graph-player.test.ts use the existing createPlayback injection seam with a local player variable and captured callback. Start BFS, play, pause, replaceInput with edited input, deliberately fire the old callback, and assert new trace identity and ordinal1 remain. Repeat for resting-after-start-deletion and disposal. No real waits or heap-specific scheduler changes.
 
 Run `npm test` and typecheck; commit `feat: support atomic lesson input replacement` after reading results.
 
@@ -440,7 +440,7 @@ export function reconcileGraphPositions(nodes:readonly GraphNode[],previous:Grap
 export function parseGraphPosition(x:string,y:string):Validation<GraphPosition>;
 ```
 
-- [ ] Add graph-layout.test.ts to npm test and establish RED for placement/validation before implementing layout.ts:
+- [x] Add graph-layout.test.ts to npm test and establish RED for placement/validation before implementing layout.ts:
 
 ```typescript
 import test from 'node:test';
@@ -471,7 +471,7 @@ test('twenty default positions are distinct finite slots',()=>{
 });
 ```
 
-- [ ] Implement layout.ts using a centered grid and the authored preset below. Preserve positions only for surviving IDs, fill missing IDs in creation order, and choose an unoccupied exact slot. A valid ≤20-node input always has a slot; fail explicitly if an invalid caller exhausts it. Copy tuples on output; never write into previous or engine input.
+- [x] Implement layout.ts using a centered grid and the authored preset below. Preserve positions only for surviving IDs, fill missing IDs in creation order, and choose an unoccupied exact slot. A valid ≤20-node input always has a slot; fail explicitly if an invalid caller exhausts it. Copy tuples on output; never write into previous or engine input.
 
 ```typescript
 const grid:GraphPosition[]=Array.from({length:20},(_,index)=>
@@ -505,7 +505,7 @@ export function parseGraphPosition(x:string,y:string):Validation<GraphPosition> 
 }
 ```
 
-- [ ] Extract the existing ValueNode implementation into ScenePrimitives.tsx as SceneNode. Its public props replace heap item/index assumptions with a label and shape; retain the existing geometries, material parameters, click propagation and Html portal behavior:
+- [x] Extract the existing ValueNode implementation into ScenePrimitives.tsx as SceneNode. Its public props replace heap item/index assumptions with a label and shape; retain the existing geometries, material parameters, click propagation and Html portal behavior:
 
 ```typescript
 export type SceneNodeProps={
@@ -528,7 +528,7 @@ export function SceneNode(props:SceneNodeProps) {
 
 Keep ReactNode/RefObject and Mesh imports type-only; this module has no lesson-engine import.
 
-- [ ] Move CameraActions, ContextLoss, SceneBoundary and fallbackText from HeapScene into that same shared module with their existing bodies. Build SceneFrame by moving the existing Canvas/Bounds/lighting/OrbitControls/portal wrapper unchanged except for children, refs, selectedId and floorY props:
+- [x] Move CameraActions, ContextLoss, SceneBoundary and fallbackText from HeapScene into that same shared module with their existing bodies. Build SceneFrame by moving the existing Canvas/Bounds/lighting/OrbitControls/portal wrapper unchanged except for children, refs, selectedId and floorY props:
 
 ```typescript
 export type SceneFrameProps={
@@ -542,7 +542,7 @@ Inside Bounds render props.children, then CameraActions with the supplied refs/s
 
 Update both existing heap node call sites to SceneNode. Tree uses sphere, label ID/value, and the same registered mesh. Array uses box, label ID/value/index and labelClassName `array-label`. HeapScene retains its two refs and wraps HeapStructures with SceneFrame, floorY −3.65. Retain exact heap positions, links, colors and keys. Run the heap suite and a real Insert1→step3→H8/Focus/Fit check before proceeding.
 
-- [ ] Create GraphScene with SceneAdapterProps<GraphState> plus GraphPositions and the existing fitRequest/focusRequest/unavailable callbacks. It owns the same mesh-map and label-portal refs, and uses SceneFrame with floorY −10.65 so every allowed graph Y coordinate remains above the floor. Node positions come only from props.positions. Register node meshes for Focus; do not register an invented mesh for edges.
+- [x] Create GraphScene with SceneAdapterProps<GraphState> plus GraphPositions and the existing fitRequest/focusRequest/unavailable callbacks. It owns the same mesh-map and label-portal refs, and uses SceneFrame with floorY −10.65 so every allowed graph Y coordinate remains above the floor. Node positions come only from props.positions. Register node meshes for Focus; do not register an invented mesh for edges.
 
 Graph edges use existing Drei Line between endpoint positions, key=edge.id, color selected indigo/examined amber/ordinary neutral, width3/3/1.5. onClick stops propagation and selects edge.id. Graph nodes use SceneNode sphere, label ID plus nodeStatus, current/event-affected flags and a status base color. Colors: undiscovered `#dbe5f5`, discovered `#d1d5f9`, frontier `#b9c8fa`, processed `#c7e2cf`; the shared selected/current overrides stay visible. Include state text in labels as well as color.
 
@@ -569,7 +569,7 @@ git commit -m "refactor: share scene primitives for heap and graph"
 **Consumes:** Task 1 engine/content, Task 2 hook returns, Task 3 layout/scene. Use current core.currentSnapshot and shared PlaybackControls/InspectionPanel.
 **Produces:** Working /graph and heap navigation; native editor, staged input replacement, stable selection and graph-specific semantic/code views.
 
-- [ ] Record browser RED that /graph is unavailable before adding the route. Then use the project's existing page/layout tokens and component patterns. Keep GraphScene dynamically imported with ssr:false as HeapScene is; semantic markup is the always-available accessible representation.
+- [x] Record browser RED that /graph is unavailable before adding the route. Then use the project's existing page/layout tokens and component patterns. Keep GraphScene dynamically imported with ssr:false as HeapScene is; semantic markup is the always-available accessible representation.
 
 ```tsx
 // src/app/graph/page.tsx
@@ -597,7 +597,7 @@ export function LessonNavigation({active}:{active:'heap'|'graph'}) {
 
 Mount navigation in both lesson mastheads; retain the existing brand/home link. Native links mount separate lesson components and reset transient state. Browser history can restore a live document, so the pageshow guard reloads only persisted restores to honor that accepted reset policy. Cost: Back/Forward starts a fresh lesson rather than instantly restoring its previous scene. This uses the [documented bfcache/pageshow lifecycle](https://web.dev/articles/bfcache); no cache-disabling headers or unload listener. Do not add a registry/router abstraction. Change InspectionPanel's empty text to `Select an item to inspect its state and relationships at this step.`
 
-- [ ] In GraphViews.tsx export `GraphSemanticViews({snapshot,selectedId,select})` with those exact typed props using Snapshot<GraphState>. One local node-button renderer sets aria-pressed, data-entity-id, data-view and label `Select node ${id}, ${nodeStatus(...)}`. Render these labeled sections from the selected snapshot:
+- [x] In GraphViews.tsx export `GraphSemanticViews({snapshot,selectedId,select})` with those exact typed props using Snapshot<GraphState>. One local node-button renderer sets aria-pressed, data-entity-id, data-view and label `Select node ${id}, ${nodeStatus(...)}`. Render these labeled sections from the selected snapshot:
 
 | Accessible section | Content |
 | --- | --- |
@@ -623,7 +623,7 @@ Only show the active algorithm's queue/stack, deriving the algorithm from state.
 })}
 ```
 
-- [ ] Build GraphPlayground state and handlers. Initialize useLessonPlayer(graphEngine,createGraphPreset()), GraphPositions via reconcileGraphPositions, algorithmDraft bfs, startDraft empty, endpoint drafts empty, X/Y drafts empty, activeCommand GraphCommand|null, pending action, localError, dialog ref, and the existing heap pattern's view/motion/camera state. Copy its media listener and cleanup; useCallback for unavailable. A form draft never replaces activeCommand until a start succeeds.
+- [x] Build GraphPlayground state and handlers. Initialize useLessonPlayer(graphEngine,createGraphPreset()), GraphPositions via reconcileGraphPositions, algorithmDraft bfs, startDraft empty, endpoint drafts empty, X/Y drafts empty, activeCommand GraphCommand|null, pending action, localError, dialog ref, and the existing heap pattern's view/motion/camera state. Copy its media listener and cleanup; useCallback for unavailable. A form draft never replaces activeCommand until a start succeeds.
 
 ```typescript
 type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput};
@@ -675,7 +675,7 @@ Use the native dialog unconditionally in the component tree; Keep receives initi
 </dialog>
 ```
 
-- [ ] Add native operation forms with noValidate so every submission reaches the engine/parser and cancellation handlers rather than relying only on browser constraints. Endpoint/start selects have an empty `Choose a node` option and options from current nodes. Buttons use type=button unless submitting their own form; forms are siblings, never nested.
+- [x] Add native operation forms with noValidate so every submission reaches the engine/parser and cancellation handlers rather than relying only on browser constraints. Endpoint/start selects have an empty `Choose a node` option and options from current nodes. Buttons use type=button unless submitting their own form; forms are siblings, never nested.
 
 | Control/name | Handler |
 | --- | --- |
@@ -698,7 +698,7 @@ const moveSelected=()=>{
 };
 ```
 
-- [ ] Assemble the established panel layout: intro `Follow the frontier.`, editor, scene/view controls, shared execution controls/counters/explanation, GraphSemanticViews, InspectionPanel and authored pseudocode. Main exposes data-ordinal/data-playing/data-selected-id as the heap does. Derive every execution field from currentSnapshot(player). A current-run caption comes from snapshot variables, not algorithm/start form drafts. Highlight the current code line with aria-current=step. Explain near code: `BFS distances are shortest in an unweighted graph. DFS tree depth describes the discovered path, which can be longer.` Do not infer a C-path comparison after changing the preset/start.
+- [x] Assemble the established panel layout: intro `Follow the frontier.`, editor, scene/view controls, shared execution controls/counters/explanation, GraphSemanticViews, InspectionPanel and authored pseudocode. Main exposes data-ordinal/data-playing/data-selected-id as the heap does. Derive every execution field from currentSnapshot(player). A current-run caption comes from snapshot variables, not algorithm/start form drafts. Highlight the current code line with aria-current=step. Explain near code: `BFS distances are shortest in an unweighted graph. DFS tree depth describes the discovered path, which can be longer.` Do not infer a C-path comparison after changing the preset/start.
 
 Render a role=alert for localError or player.error; local errors take precedence and clear on successful new submission. Changing selected ID after a deletion must not leave a native select displaying a nonexistent endpoint: clear invalid from/to drafts only after a committed input change. Form validation is repeated by the engine at apply time through the shared transition.
 
@@ -724,7 +724,7 @@ dialog::backdrop { background:#17203366; }
 
 Additional status styling must preserve text labels; never encode node state with color alone. Native coordinate/select labels and all buttons remain reachable by keyboard at 360 px.
 
-- [ ] Browser GREEN: start BFS A, select B at5 before enqueue, seek9 for queue B,C, complete31/F unvisited; select C distance1. Start DFS A, seek13/16/18 and inspect frames/C return/E discovery, complete26/C depth3. Rewind and assert exact state/counters/code. During replay request an edit, Keep/Escape and confirm same paused ordinal/future; then Apply and confirm new paused run. Delete A, then all nodes; add G or the next retained ID and choose a new start. Move/reset nodes, choose unsent form values, and verify the active trace/caption do not change.
+- [x] Browser GREEN: start BFS A, select B at5 before enqueue, seek9 for queue B,C, complete31/F unvisited; select C distance1. Start DFS A, seek13/16/18 and inspect frames/C return/E discovery, complete26/C depth3. Rewind and assert exact state/counters/code. During replay request an edit, Keep/Escape and confirm same paused ordinal/future; then Apply and confirm new paused run. Delete A, then all nodes; add G or the next retained ID and choose a new start. Move/reset nodes, choose unsent form values, and verify the active trace/caption do not change.
 
 Run the full Node suite, typecheck and production build; commit `feat: add editable graph traversal playground` after browser feedback and fixes.
 
@@ -798,5 +798,4 @@ Planning receipts on 15 October 2026: the accepted-spec mechanical checker passe
 the five-task/code-fence/unresolved-marker check passed; repository context and
 Git whitespace checks passed. No product source or dependency was changed.
 
-Please review this written plan. Native execution is preserved. After acceptance,
-implement these five tasks and open one completed PR to development.
+Execution receipt, 15 October 2026: Tasks 1–4 are implemented and verified. Task 5 evidence is recorded in [the review report](../../reviews/003-graph-traversal.md); fresh review and owner PR delivery follow before completion.
