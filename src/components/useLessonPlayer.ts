@@ -2,7 +2,7 @@
 
 import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 import type {LessonEngine} from '../core/lesson.ts';
-import {createPlayer,seek,startCommand,selectEntity} from '../core/player.ts';
+import {createPlayer,seek,startCommand,selectEntity,replaceInput as replacePlayerInput} from '../core/player.ts';
 import type {PlayerState} from '../core/player.ts';
 import {createPlayback} from './playback.ts';
 import type {PlaybackStatus} from './playback.ts';
@@ -33,7 +33,12 @@ export function useLessonPlayer<I,C,S>(engine:LessonEngine<I,C,S>,initial:unknow
   return {
     player,playback,
     go:(ordinal:number)=>{controller.pause();publish(seek(current.current,ordinal));},
-    start:(raw:unknown)=>{controller.pause();publish(startCommand(current.current,engine,raw));},
+    start:(raw:unknown)=>{
+      controller.pause();const next=startCommand(current.current,engine,raw);publish(next);return next;
+    },
+    replaceInput:(rawInput:unknown,command:unknown|null)=>{
+      controller.pause();const next=replacePlayerInput(current.current,engine,rawInput,command);publish(next);return next;
+    },
     select:(id:string|null)=>publish(selectEntity(current.current,engine,id)),
     play:controller.play,pause:controller.pause,setSpeed:controller.setSpeed,
   };
