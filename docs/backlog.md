@@ -7,7 +7,7 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Review the [editable graph, BFS and DFS specification draft](specs/003-graph-traversal.md), then its Native build plan.
+1. Review the [Native graph build plan](superpowers/plans/2026-10-15-graph-traversal.md) for the [accepted graph specification](specs/003-graph-traversal.md).
 2. Implement the accepted graph slice through the shared player, playback and scene primitives. Bundle the spec, plan, implementation and evidence in one feature PR.
 
 The first slice's acceptance is defined by its insertion fixture and user
@@ -42,5 +42,6 @@ is the [development guide](development.md#deferred-tooling).
 Use Git history, PR state and artifact status headers. Heap insertion is built
 and merged in [PR #4](https://github.com/Exilitys/DSAVisualizer/pull/4) on
 7 October 2026. Extraction/playback was verified and merged in PR #7 on
-13 October 2026. Graph slice 003 is a draft, not implemented. Keep measured results in verification
+13 October 2026. Graph slice 003 was accepted on 15 October 2026; its build plan
+awaits review and graph code is not implemented. Keep measured results in verification
 reports; do not turn proposed targets into accomplishments.

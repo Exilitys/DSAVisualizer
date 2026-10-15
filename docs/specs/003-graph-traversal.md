@@ -1,6 +1,8 @@
 # Slice 003: editable graph, BFS and frame-based DFS
 
-**Status.** Draft for owner review, 2026-10-13. Not accepted for implementation.
+**Status.** Accepted 2026-10-15 by @Exilitys.
+**Reviewed.** Version 1 at `177d52f403a8e457e1b02a0be2c1172bf20696a4`;
+accepted through "Continue" after the written-spec review request.
 **Owner.** Jonathan Carlo (@Exilitys).
 **Version.** 1.
 **Source.** [Accepted technical contracts](../prd/prd.md), sections 6–7;
@@ -30,8 +32,8 @@ It remains an assumption until a target learner explains a fresh example.
 Already accepted: both traversals are required; undirected/unweighted graphs;
 20 nodes/40 edges; creation-order neighbors; immutable snapshots; reachable
 component only; separate graph layout; input edits invalidate the old future.
-The concrete shapes, event boundaries and editor below are proposals implementing
-those requirements. This document does not record its own acceptance.
+The concrete shapes, event boundaries and editor below implement those requirements
+and were accepted with the written specification on 15 October 2026.
 
 **In this slice:** graph editing, node positioning, BFS and DFS, selection and
 inspection, linked graph/adjacency/frontier views, authored explanations and
@@ -43,46 +45,45 @@ the authored Browse relationships, and full release verification. Each module
 still needs its required lessons and three challenges. Dijkstra, arbitrary lesson
 authoring and a universal scene-description language remain outside this slice.
 
-## 5. Decisions proposed for review
+## 5. Decisions
 
-In these draft records, Chosen means the proposed choice and Rejected names the
-proposed alternatives. Neither field records an owner decision until acceptance.
+The owner accepted these choices with version 1 at `177d52f` on 15 October 2026.
 
 ### D-301: explicit graph editing controls
 
-- **Chosen.** Proposed: native controls add/delete nodes, connect/disconnect edges,
+- **Chosen.** Native controls add/delete nodes, connect/disconnect edges,
   choose traversal/start, and set the selected node's X/Y coordinates. Canvas
   dragging continues to orbit the camera; clicking nodes/edges selects them.
-- **Rejected.** Proposed alternative: direct drag-to-move and two-node connection gestures in a
+- **Rejected.** Direct drag-to-move and two-node connection gestures in a
   separate edit mode, with keyboard equivalents.
 - **Because.** Compact controls reuse the current accessible interaction pattern
   and keep editing distinct from camera navigation without a new gesture system.
 - **Revisit when.** The owner prefers direct manipulation or learner feedback
   shows coordinate controls impede exploration after the graph journey works.
-- **Provenance.** Proposed 2026-10-13 by Codex; awaiting a decision with @Exilitys.
+- **Provenance.** Decided 2026-10-15 with @Exilitys through written-spec acceptance.
 
 ### D-302: small shared input-replacement seam
 
-- **Chosen.** Proposed: add one pure player transition and hook action for validated
+- **Chosen.** Add one pure player transition and hook action for validated
   input replacement. Graph controls retain the last successfully started command.
   Engine and Snapshot interfaces, playback controller and controls stay generic.
-- **Rejected.** Proposed alternatives: store command/edit policy in a new registry or widen PlayerState
+- **Rejected.** Store command/edit policy in a new registry or widen PlayerState
   to own all lesson editing behavior.
 - **Because.** The current interfaces already support traversals; only replacing
   logical input and rebuilding its run is missing. Graph editing belongs to graph.
 - **Revisit when.** Another lesson needs the same command ownership or editing model.
-- **Provenance.** Proposed 2026-10-13 by Codex; awaiting a decision with @Exilitys.
+- **Provenance.** Decided 2026-10-15 with @Exilitys through written-spec acceptance.
 
 ### D-303: reuse existing scene primitives
 
-- **Chosen.** Proposed: extract the existing node, camera/Canvas and fallback code
+- **Chosen.** Extract the existing node, camera/Canvas and fallback code
   into shared components used by both scene adapters. Graph supplies node positions
   and edge lines; its queue/stack remains a selectable semantic auxiliary view.
-- **Rejected.** Proposed alternatives: duplicate the heap scene shell or introduce a universal renderer.
+- **Rejected.** Duplicate the heap scene shell or introduce a universal renderer.
 - **Because.** Both lessons need the same picking, labels, Fit/Focus, motion and
   WebGL recovery. Reuse makes the accepted shared-primitives choice concrete.
 - **Revisit when.** A demonstrated scene requirement no longer fits these primitives.
-- **Provenance.** Proposed 2026-10-13 by Codex; awaiting a decision with @Exilitys
+- **Provenance.** Decided 2026-10-15 with @Exilitys through written-spec acceptance,
   within accepted D-004. No new dependency.
 
 ## 6. Data and engine surface
@@ -212,7 +213,7 @@ Selecting C shows BFS distance 1 versus DFS tree depth 3, a concrete path counte
 
 ## 9. Input replacement and run lifecycle
 
-Proposed shared API:
+Accepted shared API:
 
 ```typescript
 replaceInput<I,C,S>(
@@ -336,10 +337,9 @@ counterexample on a fresh graph. Report missing learner evidence explicitly.
 
 ## 15. Open questions and acceptance
 
-There is no missing product-scope answer. The proposed choices and concrete
-contracts above await owner review; draft status does not authorize implementation.
-On acceptance, record the owner/date/reviewed commit, then write and present the
-Native build plan on the same feature branch. No planning-only PR is needed.
+There is no missing product-scope answer. The written specification is accepted;
+the written Native build plan requires review before implementation. Keep it on
+the same feature branch. No planning-only PR is needed.
 
 Self-review: compared with accepted graph data/edit/replay contracts and the real
 player/hook/controls. Hand-checked the 32-step BFS and 27-step DFS fixture, including

@@ -14,8 +14,10 @@ owner accepted the first-slice implementation plan and Native execution on
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
 with synchronized tree and array views. Extraction and shared autoplay were
-merged into `development` in PR #7 on 13 October 2026. The next slice is the
-[graph specification draft](docs/specs/003-graph-traversal.md), awaiting review.
+merged into `development` in PR #7 on 13 October 2026. The next
+[graph specification](docs/specs/003-graph-traversal.md) was accepted on
+15 October 2026; its [Native build plan](docs/superpowers/plans/2026-10-15-graph-traversal.md)
+awaits review before implementation.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
