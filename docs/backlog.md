@@ -7,7 +7,7 @@ This file routes next work; it does not replace that spec or a build plan.
 
 ## Next
 
-1. Owner review of the completed graph feature PR to development, bundling the accepted spec/plan, implementation and [measured evidence](reviews/003-graph-traversal.md).
+1. Owner review of [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) to development, bundling the accepted spec/plan, implementation and [measured evidence](reviews/003-graph-traversal.md).
 2. Complete required authored lessons/challenges and local evidence, then the provider independent tutor with Ollama for development. Prepare an accepted next slice before implementation.
 
 The first slice's acceptance is defined by its insertion fixture and user

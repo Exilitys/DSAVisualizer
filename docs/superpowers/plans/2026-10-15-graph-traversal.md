@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [x]`) syntax.
 
-**Status:** Accepted 2026-10-15 by @Exilitys through “Continue”; reviewed at `306f75fcca917f04acad554ecf6421b20f25d197`. Native implementation, technical verification and fresh source review complete; owner PR delivery follows.
+**Status:** Accepted 2026-10-15 by @Exilitys through “Continue”; reviewed at `306f75fcca917f04acad554ecf6421b20f25d197`. Native implementation, technical verification and fresh source review complete. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) is open to development for owner review.
 **Goal:** Edit a bounded graph and compare FIFO BFS with frame-based DFS through the shared player, inspection and 3D primitives.
 **Architecture:** Graph supplies one pure engine and authored content. One shared input-replacement transition handles edited runs; the existing timer and controls remain generic. Extract the existing scene shell/node primitive for both adapters, then mount the graph at its own route.
 **Tech Stack:** Existing Node 24.15 or newer within Node 24, Next.js 16.3.8, React 19.3.0, R3F 9.8.1, Drei 10.7.9, Three 0.186.1 and TypeScript 5.9.3. No new dependency.
@@ -738,7 +738,7 @@ git commit -m "feat: add editable graph traversal playground"
 **Files:** Create docs/reviews/003-graph-traversal.md and actual JSON/screenshots/probe source under docs/reviews/graph-traversal/. Update README, backlog, AGENTS.md, src/AGENTS.md, docs/architecture/invariants.md and this plan's checkboxes/status metadata.
 **Consumes:** Completed graph/heap routes and all Node checks. **Produces:** Measured evidence, one fresh whole-branch review and one completed feature PR to development.
 
-- [ ] Run the actual package checks and read their output. Record actual counts, dates and commands in the new report; do not forecast them from this plan.
+- [x] Run the actual package checks and read their output. Record actual counts, dates and commands in the new report; do not forecast them from this plan.
 
 ```text
 npm test
@@ -748,7 +748,7 @@ python scripts/check-context.py
 git diff --check
 ```
 
-- [ ] Serve the production build and repeat the following real-browser journeys. Use the installed computer-use surface for UI and DOM reads; no application-store inspection or separate browser driver. Save evidence only after the displayed state matches the assertion.
+- [x] Serve the production build and repeat the following real-browser journeys. Use the installed computer-use surface for UI and DOM reads; no application-store inspection or separate browser driver. Save evidence only after the displayed state matches the assertion.
 
 | Journey | Expected proof |
 | --- | --- |
@@ -764,12 +764,12 @@ git diff --check
 
 Use the graph's own data-ordinal/data-playing/data-selected-id and visible controls for UI assertions. Pure tests establish trace identity/immutability; DOM evidence establishes the visible state, not private React state.
 
-- [ ] At 360×780 and 1280×720, inspect screenshots and DOM rectangles: no page overflow, no intersecting default node labels, every control target at least 44 px, readable frontier/dialog/code and keyboard focus. Cover the preset and supported maximum 20-node/40-edge graph. Record manual user-overlap recovery separately from default layout readability.
-- [ ] Adapt the existing committed heap browser probe as temporary QA instrumentation for /graph. Measure at least 40 trusted selection/Next/Previous actions on the maximum graph, event capture to second animation frame, and confirm each expected DOM response. Record p95/max/device/browser, separating teaching delays from feedback. During active camera orbit, record rendering cadence as an observation against the 60 fps laptop/30 fps phone aims; rAF cadence is a proxy, not proof of GPU/display completion. Do not claim phone coverage without a real phone run. Remove only this task's temporary public probe/fault files before committing; retain probe source in the review evidence directory.
-- [ ] Ask a target learner to explain discovery versus processing and why C's BFS/DFS predecessor path differs on a fresh graph if one is available. Record actual observed understanding or explicitly record that the check did not happen; do not substitute a model for a learner or claim educational efficacy.
-- [ ] Add actual src/lessons/graph/engine.ts to BOTH literal contract mirrors only after that file exists. Keep existing protected paths; preserve architecture artifact/evidence bytes. Route README/source context to both implemented lessons and the measured report, record accepted spec/plan provenance, and reconcile the backlog to required learning/tutor/release work. No speculative contract paths or hook/registry installs.
-- [ ] Perform one fresh whole-branch review under the Native workflow, covering the complete range from development merge-base. Fix Critical/Important findings once with a failing regression followed by GREEN and the full suite. Record unfixed/minor findings and their costs in the durable report. Do not request a second review of the same fix pass. Review includes shared heap effects, edit rollback and cancellation—not just the graph's happy path.
-- [ ] Commit verified source fixes and evidence/context, then push the existing feature branch. Reuse an existing PR for this exact head/base if one exists; otherwise use the GitHub connector to open the following single completed PR. Always attach its URL to the chat; retain the managed worktree for owner feedback. Never merge without the owner.
+- [x] At 360×780 and 1280×720, inspect screenshots and DOM rectangles: no page overflow, no intersecting default node labels, every control target at least 44 px, readable frontier/dialog/code and keyboard focus. Cover the preset and supported maximum 20-node/40-edge graph. Record manual user-overlap recovery separately from default layout readability.
+- [x] Adapt the existing committed heap browser probe as temporary QA instrumentation for /graph. Measure at least 40 trusted selection/Next/Previous actions on the maximum graph, event capture to second animation frame, and confirm each expected DOM response. Record p95/max/device/browser, separating teaching delays from feedback. During active camera orbit, record rendering cadence as an observation against the 60 fps laptop/30 fps phone aims; rAF cadence is a proxy, not proof of GPU/display completion. Do not claim phone coverage without a real phone run. Remove only this task's temporary public probe/fault files before committing; retain probe source in the review evidence directory.
+- [x] Ask a target learner to explain discovery versus processing and why C's BFS/DFS predecessor path differs on a fresh graph if one is available. Record actual observed understanding or explicitly record that the check did not happen; do not substitute a model for a learner or claim educational efficacy.
+- [x] Add actual src/lessons/graph/engine.ts to BOTH literal contract mirrors only after that file exists. Keep existing protected paths; preserve architecture artifact/evidence bytes. Route README/source context to both implemented lessons and the measured report, record accepted spec/plan provenance, and reconcile the backlog to required learning/tutor/release work. No speculative contract paths or hook/registry installs.
+- [x] Perform one fresh whole-branch review under the Native workflow, covering the complete range from development merge-base. Fix Critical/Important findings once with a failing regression followed by GREEN and the full suite. Record unfixed/minor findings and their costs in the durable report. Do not request a second review of the same fix pass. Review includes shared heap effects, edit rollback and cancellation—not just the graph's happy path.
+- [x] Commit verified source fixes and evidence/context, then push the existing feature branch. Reuse an existing PR for this exact head/base if one exists; otherwise use the GitHub connector to open the following single completed PR. Always attach its URL to the chat; retain the managed worktree for owner feedback. Never merge without the owner.
 
 ```json
 {
@@ -798,4 +798,4 @@ Planning receipts on 15 October 2026: the accepted-spec mechanical checker passe
 the five-task/code-fence/unresolved-marker check passed; repository context and
 Git whitespace checks passed. No product source or dependency was changed.
 
-Execution receipt, 15 October 2026: Tasks 1–4 are implemented and verified. Task 5 evidence is recorded in [the review report](../../reviews/003-graph-traversal.md); fresh review and owner PR delivery follow before completion.
+Execution receipt, 15 October 2026: all five tasks are implemented and technically verified. [The review report](../../reviews/003-graph-traversal.md) records the fresh review, measurements, remaining learner/device limits and owner PR. No merge or complete release acceptance is claimed.

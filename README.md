@@ -19,7 +19,7 @@ merged into `development` in PR #7 on 13 October 2026. The next
 15 October 2026; its [Native build plan](docs/superpowers/plans/2026-10-15-graph-traversal.md)
 was accepted through “Continue” that day. Editable graph traversal is implemented
 on `feature/graph-traversal`; [verification evidence](docs/reviews/003-graph-traversal.md)
-records the actual checks and remaining learner/device limits. Owner review is pending.
+records the actual checks and remaining learner/device limits. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) targets `development` for owner review.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,

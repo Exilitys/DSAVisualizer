@@ -1,6 +1,6 @@
 # Editable graph, BFS and DFS verification
 
-**Status:** Native implementation, runtime checks and fresh branch review complete, 15 October 2026. Owner PR delivery follows. Target learner understanding is untested.
+**Status:** Native implementation, runtime checks and fresh branch review complete, 15 October 2026. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) is open to development for owner review. Target learner understanding is untested.
 
 **Scope:** [Accepted graph slice](../specs/003-graph-traversal.md) and [Native plan](../superpowers/plans/2026-10-15-graph-traversal.md). The owner accepted the specification at 177d52f and the build plan at 306f75f through “Continue”. Both traversals are implemented. Tutor, authored lessons/challenges, evidence persistence and release acceptance remain required work.
 
@@ -63,6 +63,8 @@ The executor resolved every behavior the reviewer declined to judge, continuing 
 
 Deferred review minors: none. The owner decides whether to merge the feature PR to development.
 
+[PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8), “Add editable graph traversal with BFS and DFS”, targets `development` from `feature/graph-traversal`. It bundles specification, plan, implementation and evidence under the owner's request for fewer PRs. GitHub reported it open, ready and mergeable; it has not been merged. The worktree is retained for feedback.
+
 ## Coverage limits
 
 No physical phone, screen reader, real browser background transition or operating system motion preference change was exercised. Reduced motion and semantic controls were exercised; visibility and persisted restore include explicitly identified simulations. Direct desktop edge picking passed; narrow mobile line picking was not established. The accessible edge list was checked on mobile.
@@ -73,6 +75,6 @@ The [console record](graph-traversal/console-with-induced-failures.json) include
 
 ## Commands and context
 
-The latest source checks pass all 33 Node tests, typecheck and the production build with `/` and `/graph` prerendered. Context and whitespace checks pass. The actual graph engine is added to both contract mirrors. The architecture HTML and its evidence bytes remain unchanged, with [hash records](graph-traversal/architecture-preserved.json).
+Final local checks on 15 October 2026 pass all 33 Node tests, `npm run typecheck`, `npm run build` with `/` and `/graph` prerendered, `python scripts/check-context.py`, and `git diff --check`. The actual graph engine is added to both contract mirrors. The architecture HTML and its evidence bytes remain unchanged, with [hash records](graph-traversal/architecture-preserved.json).
 
 The temporary public probe and generated WebGL disabled boot fixture are task owned QA files. Their retained probe source belongs in this evidence folder; local public copies were moved into the ignored QA archive. The feature worktree remains available for owner feedback.
