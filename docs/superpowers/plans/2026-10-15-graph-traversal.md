@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD and one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
 
-**Status:** Draft for owner review, 15 October 2026. The specification is accepted; this build plan is not yet accepted.
+**Status:** Accepted 2026-10-15 by @Exilitys through “Continue”; reviewed at `306f75fcca917f04acad554ecf6421b20f25d197`. Native implementation in progress.
 **Goal:** Edit a bounded graph and compare FIFO BFS with frame-based DFS through the shared player, inspection and 3D primitives.
 **Architecture:** Graph supplies one pure engine and authored content. One shared input-replacement transition handles edited runs; the existing timer and controls remain generic. Extract the existing scene shell/node primitive for both adapters, then mount the graph at its own route.
 **Tech Stack:** Existing Node 24.15 or newer within Node 24, Next.js 16.3.8, React 19.3.0, R3F 9.8.1, Drei 10.7.9, Three 0.186.1 and TypeScript 5.9.3. No new dependency.
