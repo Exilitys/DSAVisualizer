@@ -23,7 +23,7 @@ export default function GraphScene({snapshot,selectedIds,select,positions,...vie
         onClick={event=>{event.stopPropagation();select(edge.id);}} />)}
       {snapshot.state.nodes.map(node=><SceneNode key={node.id} id={node.id} shape="sphere" position={positions[node.id]}
         selected={selectedIds.includes(node.id)} active={snapshot.state.currentId===node.id||snapshot.event.affectedIds.includes(node.id)}
-        label={<><strong>{node.id}</strong><span>{nodeStatus(snapshot.state,node.id)}</span></>}
+        labelClassName="graph-label" label={<><strong>{node.id}</strong><span>{nodeStatus(snapshot.state,node.id)}</span></>}
         color={statusColors[nodeStatus(snapshot.state,node.id)]} select={select} labelPortal={labelPortal}
         register={mesh=>{if(mesh)meshRefs.current.set(node.id,mesh);else meshRefs.current.delete(node.id);}}/>)}
     </group>

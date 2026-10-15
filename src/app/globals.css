@@ -146,4 +146,5 @@ dialog::backdrop { background:#17203366; }
 @media(max-width:700px) {
   .masthead { height:auto; min-height:64px; }
   .masthead nav { order:1; flex-basis:100%; }
+  .node-label.graph-label { padding-inline:1px; }
 }
