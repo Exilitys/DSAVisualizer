@@ -46,3 +46,22 @@ export function startCommand<I,C,S>(state: PlayerState<I,S>, engine: LessonEngin
 export function selectEntity<I,C,S>(state: PlayerState<I,S>, engine: LessonEngine<I,C,S>, id: string|null): PlayerState<I,S> {
   return {...state,selectedId:id && engine.inspect(currentSnapshot(state),id) ? id : null};
 }
+export function replaceInput<I,C,S>(state:PlayerState<I,S>,engine:LessonEngine<I,C,S>,rawInput:unknown,selectedCommand:unknown|null):PlayerState<I,S> {
+  const boundary=!state.steps || state.ordinal===0 || state.ordinal===state.steps.length-1;
+  if(engine.commandStart==='run-boundary' && !boundary)
+    return {...state,error:'Finish or restart first.'};
+  try {
+    const input=engine.validateInput(rawInput);
+    if(!input.ok) return {...state,error:input.message};
+    const candidate:PlayerState<I,S>={input:input.value,
+      resting:engine.createInitialSnapshot(input.value),steps:null,ordinal:0,
+      selectedId:state.selectedId,error:null};
+    if(selectedCommand===null) return selectEntity(candidate,engine,state.selectedId);
+    const command=engine.validateCommand(selectedCommand,input.value);
+    if(!command.ok) return {...selectEntity(candidate,engine,state.selectedId),error:command.message};
+    const next=startCommand(candidate,engine,command.value);
+    return next.error?{...state,error:next.error}:next;
+  } catch {
+    return {...state,error:'The operation could not start. Your scene is preserved.'};
+  }
+}

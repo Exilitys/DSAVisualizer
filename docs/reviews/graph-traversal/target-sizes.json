@@ -1,0 +1,277 @@
+[
+  {
+    "h": 44,
+    "name": "DSA Atlas home",
+    "w": 118.1500015258789
+  },
+  {
+    "h": 44,
+    "name": "Heap",
+    "w": 53.275001525878906
+  },
+  {
+    "h": 44,
+    "name": "Graph",
+    "w": 61.91250228881836
+  },
+  {
+    "h": 44,
+    "name": "Add node",
+    "w": 99.375
+  },
+  {
+    "h": 44,
+    "name": "Remove selected node",
+    "w": 189.25
+  },
+  {
+    "h": 44,
+    "name": "Disconnect selected edge",
+    "w": 209.8874969482422
+  },
+  {
+    "h": 44,
+    "name": "Choose a nodeABCDEF",
+    "w": 144
+  },
+  {
+    "h": 44,
+    "name": "Choose a nodeABCDEF",
+    "w": 144
+  },
+  {
+    "h": 44,
+    "name": "Connect nodes",
+    "w": 135.5625
+  },
+  {
+    "h": 44,
+    "name": "BFSDFS",
+    "w": 65.5999984741211
+  },
+  {
+    "h": 44,
+    "name": "Choose a nodeABCDEF",
+    "w": 144
+  },
+  {
+    "h": 44,
+    "name": "Start traversal",
+    "w": 130.5500030517578
+  },
+  {
+    "h": 44,
+    "name": "",
+    "w": 92
+  },
+  {
+    "h": 44,
+    "name": "",
+    "w": 92
+  },
+  {
+    "h": 44,
+    "name": "Move selected node",
+    "w": 172.3625030517578
+  },
+  {
+    "h": 44,
+    "name": "Reset layout",
+    "w": 115.6500015258789
+  },
+  {
+    "h": 44,
+    "name": "Fit scene",
+    "w": 71.86250305175781
+  },
+  {
+    "h": 44,
+    "name": "Focus selection",
+    "w": 103.38750457763672
+  },
+  {
+    "h": 50,
+    "name": "Reduce motion",
+    "w": 99.5500030517578
+  },
+  {
+    "h": 50,
+    "name": "Semantic view only",
+    "w": 118.6875
+  },
+  {
+    "h": 44,
+    "name": "← Previous",
+    "w": 87.98750305175781
+  },
+  {
+    "h": 44,
+    "name": "Next →",
+    "w": 69.1875
+  },
+  {
+    "h": 44,
+    "name": "Play",
+    "w": 51.150001525878906
+  },
+  {
+    "h": 44,
+    "name": "Restart",
+    "w": 66.2125015258789
+  },
+  {
+    "h": 44,
+    "name": "0.5×1×2×",
+    "w": 61.60000228881836
+  },
+  {
+    "h": 44,
+    "name": "step-range",
+    "w": 749.2000122070312
+  },
+  {
+    "h": 44,
+    "name": "Select node A, Frontier",
+    "w": 78.4375
+  },
+  {
+    "h": 44,
+    "name": "Select node B, Frontier",
+    "w": 77.70000457763672
+  },
+  {
+    "h": 44,
+    "name": "Select node C, Processed",
+    "w": 87.5
+  },
+  {
+    "h": 44,
+    "name": "Select node B, Frontier",
+    "w": 77.70000457763672
+  },
+  {
+    "h": 44,
+    "name": "Select node A, Frontier",
+    "w": 78.4375
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 77.5374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select node C, Processed",
+    "w": 87.5
+  },
+  {
+    "h": 44,
+    "name": "Select node A, Frontier",
+    "w": 78.4375
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 77.5374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 77.5374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select node B, Frontier",
+    "w": 77.70000457763672
+  },
+  {
+    "h": 44,
+    "name": "Select node C, Processed",
+    "w": 87.5
+  },
+  {
+    "h": 44,
+    "name": "Select node E, Undiscovered",
+    "w": 102.1750030517578
+  },
+  {
+    "h": 44,
+    "name": "Select node E, Undiscovered",
+    "w": 102.1750030517578
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 77.5374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select node F, Undiscovered",
+    "w": 102.0374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select edge E1, A to B",
+    "w": 82.9000015258789
+  },
+  {
+    "h": 44,
+    "name": "Select edge E2, A to C",
+    "w": 83.45000457763672
+  },
+  {
+    "h": 44,
+    "name": "Select edge E3, B to D",
+    "w": 83.57500457763672
+  },
+  {
+    "h": 44,
+    "name": "Select edge E4, C to D",
+    "w": 84.125
+  },
+  {
+    "h": 44,
+    "name": "Select edge E5, D to E",
+    "w": 82.76250457763672
+  },
+  {
+    "h": 44,
+    "name": "Select node A, Frontier",
+    "w": 180
+  },
+  {
+    "h": 44,
+    "name": "Select node B, Frontier",
+    "w": 180
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 180
+  },
+  {
+    "h": 44,
+    "name": "Select node A, Frontier",
+    "w": 78.4375
+  },
+  {
+    "h": 44,
+    "name": "Select node B, Frontier",
+    "w": 77.70000457763672
+  },
+  {
+    "h": 44,
+    "name": "Select node D, Current",
+    "w": 77.5374984741211
+  },
+  {
+    "h": 44,
+    "name": "Select node C, Processed",
+    "w": 87.5
+  },
+  {
+    "h": 44,
+    "name": "Select node C, Processed",
+    "w": 87.5
+  }
+]
