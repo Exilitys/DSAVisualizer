@@ -1,0 +1,73 @@
+[
+  {
+    "scenario": "malformed",
+    "correctFeedback": true,
+    "notice": true,
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 7
+    }
+  },
+  {
+    "scenario": "oversized",
+    "correctFeedback": true,
+    "notice": true,
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 65537
+    }
+  },
+  {
+    "scenario": "read",
+    "correctFeedback": true,
+    "notice": true,
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 0
+    }
+  },
+  {
+    "scenario": "write",
+    "correctFeedback": true,
+    "notice": true,
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 0
+    }
+  },
+  {
+    "scenario": "getter",
+    "correctFeedback": true,
+    "notice": true,
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 0
+    }
+  },
+  {
+    "scenario": "future",
+    "notice": true,
+    "settings": {
+      "key": "dsa-atlas.settings",
+      "chars": 65,
+      "schemaVersion": 99
+    }
+  },
+  {
+    "scenario": "invalid input",
+    "loadEnabled": false,
+    "notice": true
+  },
+  {
+    "scenario": "partial removal",
+    "text": "Choose how to learn\nExplore\nExplain\nChallenge\n\nExplore your own input, follow a guided lesson, or predict the next change.\n\nRecent practice (latest 100 attempts)\nSave current input\nLoad saved input\nReset saved data\n\nSave and load in Explore. One input per module; loading starts at rest. An unfinished heap must Finish or Restart first.\n\nYour session was cleared, but some saved data could not be removed. Reloading may restore old data.",
+    "evidence": {
+      "key": "dsa-atlas.evidence",
+      "chars": 213,
+      "schemaVersion": 1,
+      "attempts": 1,
+      "guides": 0
+    },
+    "step": "0"
+  }
+]

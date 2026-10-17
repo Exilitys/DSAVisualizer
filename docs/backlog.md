@@ -8,7 +8,7 @@ This file routes next work; it does not replace that spec or a build plan.
 ## Next
 
 1. Owner review of [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) to development, bundling the accepted spec/plan, implementation and [measured evidence](reviews/003-graph-traversal.md).
-2. Execute the accepted [Native learning build plan](superpowers/plans/2026-10-17-learning-challenges.md), accepted on 17 October 2026. Keep the shared learning implementation and evidence in one feature PR to development, then proceed to the provider independent tutor with Ollama.
+2. Owner review of the completed [learning implementation and evidence](reviews/004-learning-challenges.md), built under the [accepted Native plan](superpowers/plans/2026-10-17-learning-challenges.md). Keep one feature PR to development, then proceed to the provider independent tutor with Ollama.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.
@@ -21,7 +21,7 @@ PR #7 on 13 October 2026. The target-learner explanation check remains outstandi
 | Work | Authority |
 | --- | --- |
 | Graph owner acceptance and target learner explanation | Slice 003 implementation is technically verified; owner review and learner evidence remain separate. |
-| Authored lessons, three challenges per module, and local evidence | Product PRD FR09/FR11/FR13. |
+| Learning owner acceptance and target learner evidence | Slice 004 implements guides, six predictions and local continuity; owner and learner acceptance remain separate. |
 | Ollama development tutor and validated context/actions | Technical spec D-006 and tutor contract. |
 | Responsive, keyboard, reduced-motion and fallback journeys | Product PRD FR14 and quality targets. |
 | Release verification and submission material | Product PRD release checklist. |

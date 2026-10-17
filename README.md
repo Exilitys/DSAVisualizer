@@ -21,6 +21,12 @@ was accepted through “Continue” that day. Editable graph traversal is implem
 on `feature/graph-traversal`; [verification evidence](docs/reviews/003-graph-traversal.md)
 records the actual checks and remaining learner/device limits. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) targets `development` for owner review.
 
+Guided lessons, six prediction challenges and bounded local continuity are implemented
+on `feature/learning-challenges` under the accepted [Slice 004](docs/specs/004-learning-challenges.md)
+and [Native plan](docs/superpowers/plans/2026-10-17-learning-challenges.md).
+[Learning verification](docs/reviews/004-learning-challenges.md) records observed behavior,
+measurements and remaining limits. Owner review and merge remain pending.
+
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
 shared visual primitives with a scene adapter per lesson, and immutable
@@ -69,6 +75,13 @@ Inspect C to compare BFS distance 1 with DFS tree depth 3. Add/remove nodes,
 connect/disconnect edges, or move a selected node with X/Y controls. Valid input
 edits rerun the last command; an intermediate run asks Apply or Keep traversal.
 Deleting the start clears the run. Reset layout and Fit recover presentation.
+
+Choose Explain for insertion/extraction or BFS/DFS guides. Choose Challenge for three
+predictions per module. Later steps unlock after one submitted answer or an ungraded
+reveal. Recent practice keeps the latest 100 attempts on this browser. Save current
+input and Load saved input are explicit Explore actions; settings and results survive
+reload, while each route starts paused at its preset. Reset saved data confirms before
+clearing settings, progress and both input slots.
 
 ```text
 npm test
