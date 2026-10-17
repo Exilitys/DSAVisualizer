@@ -11,10 +11,12 @@ import {useLessonPlayer} from './useLessonPlayer';
 import {graphLearning} from '../lessons/graph/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
 import {LessonNavigation} from './LessonNavigation';
+import {LearningPanel} from './LearningPanel';
+import type {ActivityRequest} from '../core/learning.ts';
 import {GraphSemanticViews} from './GraphViews';
 
 const GraphScene=dynamic(()=>import('../lessons/graph/GraphScene'),{ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>});
-type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput};
+type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput}|{kind:'activity';request:ActivityRequest}|{kind:'load'};
 export default function GraphPlayground() {
   const lesson=useLessonPlayer(graphEngine,createGraphPreset(),graphLearning);
   const {player,go,select}=lesson,snapshot=currentSnapshot(player);
@@ -25,7 +27,8 @@ export default function GraphPlayground() {
   const [activeCommand,setActiveCommand]=useState<GraphCommand|null>(null);
   const [pending,setPending]=useState<PendingAction|null>(null),[localError,setLocalError]=useState<string|null>(null);
   const dialogRef=useRef<HTMLDialogElement>(null);
-  const [semanticOnly,setSemanticOnly]=useState(false),[webglAvailable,setWebglAvailable]=useState(true);
+  const semanticOnly=lesson.local.settings.semanticOnly;
+  const [webglAvailable,setWebglAvailable]=useState(true);
   const [reducedMotion,setReducedMotion]=useState(false),[fitRequest,setFitRequest]=useState(0),[focusRequest,setFocusRequest]=useState(0);
   const unavailable=useCallback(()=>setWebglAvailable(false),[]);
   useEffect(()=>{
@@ -43,15 +46,27 @@ export default function GraphPlayground() {
   const inspection=player.selectedId?graphEngine.inspect(snapshot,player.selectedId):null;
   const algorithm=snapshot.state.algorithm??snapshot.variables.algorithm;
 
+  const clearDrafts=()=>{setStartDraft('');setFromDraft('');setToDraft('');setXDraft('');setYDraft('');};
+  const resetData=()=>{
+    lesson.resetSavedData();setActiveCommand(null);setAlgorithmDraft('bfs');clearDrafts();setLocalError(null);
+    setPositions(reconcileGraphPositions(createGraphPreset().nodes,{}));
+  };
   const apply=(action:PendingAction)=>{
-    const next=action.kind==='start'?lesson.start(action.command):lesson.replaceInput(action.input,activeCommand);
-    if(action.kind==='start'&&next.steps!==player.steps&&!next.error) setActiveCommand(action.command);
+    const next=action.kind==='start'?lesson.start(action.command):action.kind==='edit'?lesson.replaceInput(action.input,activeCommand)
+      :action.kind==='activity'?lesson.begin(action.request):lesson.loadSavedInput();
+    if(next.error&&next.input===player.input)return;
+    if(action.kind==='start'&&next.steps!==player.steps)setActiveCommand(action.command);
     if(action.kind==='edit'&&next.input!==player.input) {
       setPositions(previous=>reconcileGraphPositions(next.input.nodes,previous));
-      if(!next.steps) setActiveCommand(null);
-      if(!next.input.nodes.some(node=>node.id===startDraft)) setStartDraft('');
-      if(!next.input.nodes.some(node=>node.id===fromDraft)) setFromDraft('');
-      if(!next.input.nodes.some(node=>node.id===toDraft)) setToDraft('');
+      if(!next.steps)setActiveCommand(null);
+      if(!next.input.nodes.some(node=>node.id===startDraft))setStartDraft('');
+      if(!next.input.nodes.some(node=>node.id===fromDraft))setFromDraft('');
+      if(!next.input.nodes.some(node=>node.id===toDraft))setToDraft('');
+    }
+    if((action.kind==='activity'||action.kind==='load')&&next.input!==player.input) {
+      clearDrafts();setPositions(reconcileGraphPositions(next.input.nodes,{}));
+      const definition=action.kind==='activity'?(action.request.kind==='guide'?graphLearning.guide.segments:graphLearning.challenges).find(d=>d.id===action.request.id):null;
+      const command=definition?.command??null;setActiveCommand(command);setAlgorithmDraft(command?.type??'bfs');setStartDraft(command?.startId??'');
     }
   };
   const request=(action:PendingAction)=>{
@@ -83,7 +98,9 @@ export default function GraphPlayground() {
   return <main className="playground" data-selected-id={player.selectedId??''} data-ordinal={player.ordinal} data-playing={lesson.playback.playing}>
     <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><LessonNavigation active="graph"/><span className="lesson-tag">02 / Graph traversal</span></header>
     <div className="intro"><p className="eyebrow">Learn by following the change</p><h1>Follow the frontier.</h1><p>Edit a graph. Follow a queue or a stack, and see how the discovered path changes.</p></div>
+    <LearningPanel lesson={lesson} content={graphLearning} begin={activity=>request({kind:'activity',request:activity})} loadInput={()=>request({kind:'load'})} resetData={resetData}/>
     <section className="panel graph-editor" aria-label="Graph editor"><div className="section-heading"><h2>Build your graph</h2><span className="muted">Undirected · unweighted</span></div>
+      <fieldset className="graph-logical" disabled={lesson.session.mode!=='explore'} aria-label="Logical graph operations">
       <div className="graph-actions"><button type="button" onClick={()=>submitEdit({type:'add-node'})}>Add node</button>
         <button type="button" disabled={!selectedNode} onClick={()=>submitEdit({type:'remove-node',id:player.selectedId})}>Remove selected node</button>
         <button type="button" disabled={!selectedEdge} onClick={()=>submitEdit({type:'disconnect',edgeId:player.selectedId})}>Disconnect selected edge</button></div>
@@ -97,6 +114,8 @@ export default function GraphPlayground() {
         <div className="graph-field"><label htmlFor="graph-start">Start node</label><select id="graph-start" value={startDraft} onChange={event=>setStartDraft(event.target.value)}>{nodeOptions}</select></div>
         <button type="submit" className="primary" disabled={!snapshot.state.nodes.length}>Start traversal</button>
       </form>
+      </fieldset>
+      {lesson.session.mode!=='explore'&&<p className="muted">Return to Explore to edit the graph or start your own traversal. Layout and inspection stay available.</p>}
       <form noValidate onSubmit={event=>{event.preventDefault();moveSelected();}}>
         <label>Node X<input type="number" min={-10} max={10} step={.5} value={xDraft} disabled={!selectedNode} onChange={event=>setXDraft(event.target.value)}/></label>
         <label>Node Y<input type="number" min={-10} max={10} step={.5} value={yDraft} disabled={!selectedNode} onChange={event=>setYDraft(event.target.value)}/></label>
@@ -117,10 +136,10 @@ export default function GraphPlayground() {
         <button disabled={!snapshot.state.nodes.length||semanticOnly||!webglAvailable} onClick={()=>setFitRequest(n=>n+1)}>Fit scene</button>
         <button disabled={!selectedNode||semanticOnly||!webglAvailable} onClick={()=>setFocusRequest(n=>n+1)}>Focus selection</button>
         <label><input type="checkbox" checked={reducedMotion} onChange={event=>setReducedMotion(event.target.checked)}/>Reduce motion</label>
-        <label><input type="checkbox" checked={semanticOnly} onChange={event=>setSemanticOnly(event.target.checked)}/>Semantic view only</label>
+        <label><input type="checkbox" checked={semanticOnly} onChange={event=>lesson.setSemanticOnly(event.target.checked)}/>Semantic view only</label>
       </div>
       <section className="panel execution" aria-label="Execution controls"><div className="section-heading"><h2>One step at a time</h2><span className="invariant">Graph invariants hold</span></div>
-        <PlaybackControls ordinal={player.ordinal} lastOrdinal={lastOrdinal} hasRun={Boolean(player.steps)} go={go} playback={lesson.playback} play={lesson.play} pause={lesson.pause} setSpeed={lesson.setSpeed}/>
+        <PlaybackControls ordinal={player.ordinal} lastOrdinal={lesson.limit} hasRun={Boolean(player.steps)} go={go} playback={lesson.playback} play={lesson.play} pause={lesson.pause} setSpeed={lesson.setSpeed}/>
         <div className="explanation" role="status" aria-live="polite"><span className="event-name">{snapshot.event.type}</span><p>{explainGraphStep(snapshot)}</p></div>
         <div className="counters graph-counters">{Object.entries(snapshot.counters).map(([key,value])=><div key={key}><span className="muted">{({discoveries:'Discoveries',edgeExaminations:'Edge examinations',frontierAdds:'Frontier adds',frontierRemovals:'Frontier removals'})[key]}</span><strong data-testid={key}>{value}</strong></div>)}</div>
       </section>
@@ -132,7 +151,7 @@ export default function GraphPlayground() {
       </section><p className="learning-note">When is a node discovered? When is it finished? Follow the frontier to explain the difference.</p>
     </aside></div>
     <dialog ref={dialogRef} aria-labelledby="replace-title" onCancel={event=>{event.preventDefault();keepTraversal();}}>
-      <h2 id="replace-title">Replace this traversal?</h2><p>This starts a new traversal. Keep traversal retains the paused steps.</p>
+      <h2 id="replace-title">Replace this traversal?</h2><p>Apply replaces the current run with the requested traversal, activity or resting saved input. Keep traversal retains your paused steps and learning checkpoint.</p>
       <div className="graph-actions"><button autoFocus onClick={keepTraversal}>Keep traversal</button><button className="primary" onClick={applyPending}>Apply</button></div>
     </dialog>
     <footer>DSA Atlas <span>See the structure. Explain the change.</span></footer>

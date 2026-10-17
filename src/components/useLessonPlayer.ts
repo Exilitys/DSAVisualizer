@@ -40,12 +40,13 @@ export function useLessonPlayer<I,C,S>(engine:LessonEngine<I,C,S>,initial:unknow
     controller.pause();const update=transitionLearning(current.current,engine,content,action);publish(update);return update.session.player;
   };
   return {
+    canSaveInput:session.mode==='explore'&&(engine.commandStart!=='run-boundary'||isRunBoundary(session.player)),
     player:session.player,session,local,limit:playbackLimit(session),playback,
     go:(ordinal:number)=>{act({type:'seek',ordinal});},
     start:(command:unknown)=>act({type:'start',command}),
     replaceInput:(rawInput:unknown,command:unknown|null)=>act({type:'replace',rawInput,command}),
     select:(id:string|null)=>publish(transitionLearning(current.current,engine,content,{type:'select',id})),
-    setMode:(mode:LearningMode)=>{act({type:'mode',mode});},
+    setMode:(mode:LearningMode)=>{if(current.current.mode!==mode)act({type:'mode',mode});},
     begin:(request:ActivityRequest)=>act({type:'begin',request,attemptId:crypto.randomUUID()}),
     submit:(attemptId:string,optionId:string)=>{act({type:'submit',attemptId,optionId,now:Date.now()});},
     reveal:(attemptId:string)=>{act({type:'reveal',attemptId});},
