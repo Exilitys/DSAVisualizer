@@ -1,6 +1,6 @@
 # Guided lessons and prediction challenges verification
 
-**Status:** Native implementation and runtime verification complete, 17 October 2026. Fresh branch review is pending. Owner review and merge remain separate.
+**Status:** Native implementation, runtime verification and fresh branch review complete, 17 October 2026. Owner review and merge remain separate.
 
 **Scope:** [Accepted Slice 004](../specs/004-learning-challenges.md) and [accepted Native plan](../superpowers/plans/2026-10-17-learning-challenges.md). The owner accepted specification version 1 at `0ff8f4a` and the plan at `354259f`. Both modules now provide Explore, Explain and Challenge through one learning lifecycle and panel. This report records technical observations, not learner acceptance.
 
@@ -57,7 +57,17 @@ The accepted diagram source SHA256 remains `1136d067b1ea94879a54ed8a8f1ad920260a
 
 ## Review and delivery
 
-Fresh review is pending. No implementation subagents or per task reviewers were used.
+One fresh GPT-6 Astra reviewer inspected `6e211a65198b377c79814a8a211bf7b02aa48125..ee66a0e38096f7fdfb86b830ed9e2e188dc10587`, including the accepted specification/plan, application source, tests, rulings and runtime evidence. Verdict: ready for owner review, with **0 Critical, 0 Important and 0 Minor findings**. No implementation subagents or per task reviewers were used.
+
+The reviewer independently passed all 52 tests, TypeScript with incremental writes disabled, the context guard and range whitespace checks. It recalculated all timing statistics and inspected representative screenshots. It used the executor's recorded production build and browser journeys rather than repeating them. No fix pass was needed; later changes concern delivery metadata only.
+
+The executor resolved each excluded behavior explicitly, continuing the decision record above:
+
+5. Keep Tutor/Ollama, Browse, adaptive diagnosis, cloud history, cross tab merging and run/camera restoration under their accepted deferrals. Cost: required release work remains unfinished, and optional expansion remains outside this slice.
+6. Keep physical phone, screen reader, real OS/background transitions and learning effectiveness unverified. Cost: device, accessibility and teaching assumptions remain uncertain.
+7. Rely on the prior graph review for inherited implementation while retaining this review of its learning integration and all existing graph regressions. Cost if wrong: an inherited graph defect may remain; PR #8 still needs owner acceptance.
+
+Deferred review minors: none.
 
 GitHub still reports [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) open and unmerged on 17 October 2026. Development is `3b3fe653291302f47baf4c6345ef41a676f75188`. This branch descends from graph head `6e211a65198b377c79814a8a211bf7b02aa48125`, so the learning PR includes inherited graph changes until #8 lands. The owner decides integration; nothing was merged or force pushed.
 
