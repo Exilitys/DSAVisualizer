@@ -8,7 +8,10 @@ import { heapEngine, createPreset } from '../lessons/heap/engine.ts';
 import type { HeapState } from '../lessons/heap/engine.ts';
 import { getPseudocode, explainStep } from '../lessons/heap/content.ts';
 import {useLessonPlayer} from './useLessonPlayer';
+import {heapLearning} from '../lessons/heap/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
+import {LessonNavigation} from './LessonNavigation';
+import {LearningPanel} from './LearningPanel';
 
 const HeapScene = dynamic(()=>import('../lessons/heap/HeapScene'),{
   ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>,
@@ -46,10 +49,10 @@ function SemanticHeap({snapshot,selectedId,select}: {
 }
 
 export default function LessonPlayground() {
-  const lesson=useLessonPlayer(heapEngine,createPreset());
+  const lesson=useLessonPlayer(heapEngine,createPreset(),heapLearning);
   const {player,go,select}=lesson;
   const [draft,setDraft] = useState('1');
-  const [semanticOnly,setSemanticOnly] = useState(false);
+  const semanticOnly=lesson.local.settings.semanticOnly;
   const [webglAvailable,setWebglAvailable] = useState(true);
   const [reducedMotion,setReducedMotion] = useState(false);
   const [fitRequest,setFitRequest] = useState(0);
@@ -64,7 +67,7 @@ export default function LessonPlayground() {
   },[]);
   const snapshot = currentSnapshot(player);
   const lastOrdinal = player.steps ? player.steps.length-1 : 0;
-  const canStart = !player.steps || player.ordinal===0 || player.ordinal===lastOrdinal;
+  const canStart = lesson.session.mode==='explore'&&(!player.steps || player.ordinal===0 || player.ordinal===lastOrdinal);
   const insert=()=>lesson.start({type:'insert',value:draft.trim()==='' ? NaN : Number(draft)});
   const extract=()=>lesson.start({type:'extract'});
   const inspection = player.selectedId ? heapEngine.inspect(snapshot,player.selectedId) : null;
@@ -73,17 +76,18 @@ export default function LessonPlayground() {
   const repairing = snapshot.invariants.some(x=>x.status==='repairing');
 
   return <main className="playground" data-selected-id={player.selectedId ?? ''} data-ordinal={player.ordinal} data-playing={lesson.playback.playing}>
-    <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><span className="lesson-tag">01 / Min heap</span></header>
+    <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><LessonNavigation active="heap"/><span className="lesson-tag">01 / Min heap</span></header>
     <div className="intro"><p className="eyebrow">Learn by following the change</p><h1>Follow the smallest value.</h1>
       <p>Insert an item or remove the minimum. See why the heap changes.</p></div>
+    <LearningPanel lesson={lesson} content={heapLearning} begin={lesson.begin} loadInput={lesson.loadSavedInput} resetData={lesson.resetSavedData}/>
     <section className="panel operation" aria-label="Heap operations">
       <div><h2>Try a heap operation</h2><p className="muted">Insert 1 to follow H8 upward, or extract the minimum to watch the repair.</p></div>
       <div className="operation-controls"><label htmlFor="insert-value">Value to insert</label>
-        <input id="insert-value" type="number" min={0} max={99} step={1} value={draft}
+        <input id="insert-value" type="number" min={0} max={99} step={1} disabled={lesson.session.mode!=='explore'} value={draft}
           aria-describedby="operation-help" aria-invalid={Boolean(player.error)} onChange={event=>setDraft(event.target.value)} />
         <button className="primary" disabled={!canStart} onClick={insert}>Insert</button>
         <button disabled={!canStart} onClick={extract}>Extract minimum</button></div>
-      <p id="operation-help" className="operation-help muted">{canStart ? 'Whole numbers 0–99. Equal values are welcome.' : 'Finish or restart first to start another operation.'}</p>
+      <p id="operation-help" className="operation-help muted">{lesson.session.mode!=='explore'?'Return to Explore to try your own operation.':canStart ? 'Whole numbers 0–99. Equal values are welcome.' : 'Finish or restart first to start another operation.'}</p>
       {player.error && <p className="error" role="alert">{player.error}</p>}
     </section>
     <div className="workspace">
@@ -100,7 +104,7 @@ export default function LessonPlayground() {
           <button disabled={semanticOnly || !webglAvailable} onClick={()=>setFitRequest(n=>n+1)}>Fit scene</button>
           <button disabled={!focusable || semanticOnly || !webglAvailable} onClick={()=>setFocusRequest(n=>n+1)}>Focus selection</button>
           <label><input type="checkbox" checked={reducedMotion} onChange={event=>setReducedMotion(event.target.checked)} />Reduce motion</label>
-          <label><input type="checkbox" checked={semanticOnly} onChange={event=>setSemanticOnly(event.target.checked)} />Semantic view only</label>
+          <label><input type="checkbox" checked={semanticOnly} onChange={event=>lesson.setSemanticOnly(event.target.checked)} />Semantic view only</label>
         </div>
         {snapshot.state.result && <section className="panel result-card" aria-label="Extraction result">
           <div><p className="eyebrow">Minimum removed</p><h2>Outside the active heap</h2></div>
@@ -114,7 +118,7 @@ export default function LessonPlayground() {
         {snapshot.event.explanationKey==='heap.extract.empty' && <p className="panel muted">No minimum: the heap is empty.</p>}
         <section className="panel execution" aria-label="Execution controls">
           <div className="section-heading"><h2>One step at a time</h2><span className={`invariant ${repairing ? 'repairing' : ''}`}>{repairing ? 'Repairing heap order' : 'Heap order holds'}</span></div>
-          <PlaybackControls ordinal={player.ordinal} lastOrdinal={lastOrdinal} hasRun={Boolean(player.steps)} go={go}
+          <PlaybackControls ordinal={player.ordinal} lastOrdinal={lesson.limit} hasRun={Boolean(player.steps)} go={go}
             playback={lesson.playback} play={lesson.play} pause={lesson.pause} setSpeed={lesson.setSpeed} />
           <div className="explanation" role="status" aria-live="polite"><span className="event-name">{snapshot.event.type}</span><p>{explainStep(snapshot)}</p></div>
           <div className="counters"><div><span className="muted">Comparisons</span><strong data-testid="comparisons">{snapshot.counters.comparisons}</strong></div><div><span className="muted">Swaps</span><strong data-testid="swaps">{snapshot.counters.swaps}</strong></div></div>

@@ -13,8 +13,20 @@ owner accepted the first-slice implementation plan and Native execution on
 7 October 2026. The confirmed release
 requires a min heap and graph traversal with BFS and DFS, implemented as code
 modules using a shared lesson framework. The first slice is heap insertion
-with synchronized tree and array views. Extraction and shared autoplay are
-implemented on `feature/heap-extraction-playback`, awaiting owner review.
+with synchronized tree and array views. Extraction and shared autoplay were
+merged into `development` in PR #7 on 13 October 2026. The next
+[graph specification](docs/specs/003-graph-traversal.md) was accepted on
+15 October 2026; its [Native build plan](docs/superpowers/plans/2026-10-15-graph-traversal.md)
+was accepted through “Continue” that day. Editable graph traversal is implemented
+on `feature/graph-traversal`; [verification evidence](docs/reviews/003-graph-traversal.md)
+records the actual checks and remaining learner/device limits. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) targets `development` for owner review.
+
+Guided lessons, six prediction challenges and bounded local continuity are implemented
+on `feature/learning-challenges` under the accepted [Slice 004](docs/specs/004-learning-challenges.md)
+and [Native plan](docs/superpowers/plans/2026-10-17-learning-challenges.md).
+[Learning verification](docs/reviews/004-learning-challenges.md) records observed behavior,
+measurements and remaining limits. [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9)
+targets development for owner review and merge.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
@@ -30,6 +42,8 @@ snapshots for replay. The accepted technical specification owns the contracts.
 - [Heap insertion implementation plan](docs/superpowers/plans/2026-10-05-heap-insertion.md)
 - [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md)
 - [Extraction and playback verification](docs/reviews/002-heap-extraction-playback.md)
+- [Editable graph, BFS and DFS](docs/specs/003-graph-traversal.md)
+- [Graph verification](docs/reviews/003-graph-traversal.md)
 - [Architecture and state flow](docs/architecture/system.md)
 
 Groundwork establishes the accepted project context, development lanes, and
@@ -54,6 +68,21 @@ Play/Pause and 0.5×/1×/2× speed controls replay either operation. Next, Previ
 Restart, and the timeline share one immutable snapshot and pause autoplay.
 Fit scene recovers the camera. Reduce motion and Semantic view only are
 available beside the scene.
+
+Open [Graph](http://127.0.0.1:3000/graph), choose BFS and start A. Step 5 discovers
+B before enqueueing it; step 9 has queue B,C. Complete, then run DFS from A:
+step 13 shows four resumable frames and step 16 returns C to D before discovering E.
+Inspect C to compare BFS distance 1 with DFS tree depth 3. Add/remove nodes,
+connect/disconnect edges, or move a selected node with X/Y controls. Valid input
+edits rerun the last command; an intermediate run asks Apply or Keep traversal.
+Deleting the start clears the run. Reset layout and Fit recover presentation.
+
+Choose Explain for insertion/extraction or BFS/DFS guides. Choose Challenge for three
+predictions per module. Later steps unlock after one submitted answer or an ungraded
+reveal. Recent practice keeps the latest 100 attempts on this browser. Save current
+input and Load saved input are explicit Explore actions; settings and results survive
+reload, while each route starts paused at its preset. Reset saved data confirms before
+clearing settings, progress and both input slots.
 
 ```text
 npm test
@@ -94,7 +123,7 @@ are separate commands in the package manifest.
 
 PR #1 established the brief and was merged into `development` on 5 October
 2026. PR #2 accepted the technical specification and context. Heap insertion
-was merged in PR #4; extraction/autoplay uses `feature/heap-extraction-playback`.
+was merged in PR #4; extraction/autoplay was merged in PR #7. Graph traversal uses `feature/graph-traversal`.
 The owner requested fewer PRs: bundle planning and context updates with each
 feature, record their acceptance in chat, then open one completed PR to `development`.
 User acceptance is required before merging a

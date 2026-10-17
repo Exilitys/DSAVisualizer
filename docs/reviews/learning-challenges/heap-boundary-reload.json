@@ -1,0 +1,21 @@
+{
+  "boundary": {
+    "ordinal": "5",
+    "error": [
+      "Finish or restart first.",
+      ""
+    ],
+    "activityError": [
+      "Finish or restart first.",
+      ""
+    ]
+  },
+  "sameLayerNoOp": "true",
+  "manualPauses": "false",
+  "heapReload": {
+    "history": "Recent practice (latest 100 attempts)\n\nCurrent content only. Stored on this browser; this is practice history, not mastery. Concurrent tabs may overwrite local history.\n\nTrack a swap between tree and array\n0 correct · 1 incorrect · Latest: incorrect\nChoose the smaller child\n0 correct · 0 incorrect · Latest: no graded attempt\nDistinguish heap order from sorting\n0 correct · 0 incorrect · Latest: no graded attempt\n\nGuide: Completed (current version)",
+    "ordinal": "0",
+    "playing": "false",
+    "speed": "2"
+  }
+}

@@ -16,6 +16,11 @@ and decision explanations in their owning documents.
 | First-slice implementation plan | [Heap insertion plan](docs/superpowers/plans/2026-10-05-heap-insertion.md) |
 | Heap extension | [Heap extraction and autoplay](docs/specs/002-heap-extraction-playback.md) |
 | Heap extension build plan | [Extraction and playback plan](docs/superpowers/plans/2026-10-07-heap-extraction-playback.md) |
+| Graph slice | [Editable graph, BFS and DFS](docs/specs/003-graph-traversal.md) |
+| Accepted graph build plan | [Graph traversal plan](docs/superpowers/plans/2026-10-15-graph-traversal.md) |
+| Graph verification | [Graph runtime and review evidence](docs/reviews/003-graph-traversal.md) |
+| Accepted learning slice | [Guides, predictions and local continuity](docs/specs/004-learning-challenges.md) |
+| Accepted learning build plan | [Learning implementation plan](docs/superpowers/plans/2026-10-17-learning-challenges.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |
@@ -52,8 +57,11 @@ docs/specs/
 docs/architecture/
 src/core/lesson.ts
 src/core/player.ts
+src/core/learning.ts
+src/core/learning-storage.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
+src/lessons/graph/engine.ts
 src/app/globals.css
 ```
 
@@ -96,6 +104,10 @@ newer within Node 24. Do not claim an unrun app check.
    must not change algorithm state.
 2. Preserve user instructions and curated prose; update only owned context.
 3. Run relevant checks and read their output before reporting success.
+
+## Context files
+
+- [Graph module context](src/lessons/graph/AGENTS.md): engine, content and presentation ownership.
 
 ## graphify
 

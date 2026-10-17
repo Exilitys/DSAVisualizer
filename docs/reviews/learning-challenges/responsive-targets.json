@@ -1,0 +1,30 @@
+[
+  {
+    "route": "/",
+    "count": 33,
+    "scroll": 1265,
+    "short": [],
+    "viewport": 1280
+  },
+  {
+    "route": "/graph",
+    "count": 53,
+    "scroll": 1265,
+    "short": [],
+    "viewport": 1280
+  },
+  {
+    "route": "/",
+    "count": 33,
+    "scroll": 345,
+    "short": [],
+    "viewport": 360
+  },
+  {
+    "route": "/graph",
+    "count": 53,
+    "scroll": 345,
+    "short": [],
+    "viewport": 360
+  }
+]

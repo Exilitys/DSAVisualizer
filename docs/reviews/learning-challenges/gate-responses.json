@@ -1,0 +1,387 @@
+{
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "samples": [
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 24860,
+      "fromOrdinal": "0",
+      "ms": 2.6999999997206032,
+      "toOrdinal": "1",
+      "limit": "1"
+    },
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 25139.799999999814,
+      "fromOrdinal": "1",
+      "ms": 2.1000000000931323,
+      "toOrdinal": "2",
+      "limit": "3"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 25408.899999999907,
+      "fromOrdinal": "2",
+      "ms": 2.2999999998137355,
+      "toOrdinal": "3",
+      "limit": "3"
+    },
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 25450.100000000093,
+      "fromOrdinal": "3",
+      "ms": 3.1999999997206032,
+      "toOrdinal": "4",
+      "limit": "8"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 25714,
+      "fromOrdinal": "4",
+      "ms": 2.3999999999068677,
+      "toOrdinal": "8",
+      "limit": "8"
+    },
+    {
+      "module": "heap",
+      "event": "Finish segment",
+      "started": 25753.899999999907,
+      "fromOrdinal": "8",
+      "ms": 3.3999999999068677,
+      "toOrdinal": "8",
+      "limit": "8"
+    },
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 26294.399999999907,
+      "fromOrdinal": "0",
+      "ms": 2.7000000001862645,
+      "toOrdinal": "1",
+      "limit": "1"
+    },
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 26558.100000000093,
+      "fromOrdinal": "1",
+      "ms": 1.7999999998137355,
+      "toOrdinal": "2",
+      "limit": "4"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 26820.5,
+      "fromOrdinal": "2",
+      "ms": 2.6999999997206032,
+      "toOrdinal": "4",
+      "limit": "4"
+    },
+    {
+      "module": "heap",
+      "event": "Continue guide",
+      "started": 26855.69999999972,
+      "fromOrdinal": "4",
+      "ms": 1.8000000002793968,
+      "toOrdinal": "5",
+      "limit": "6"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 27113.19999999972,
+      "fromOrdinal": "5",
+      "ms": 2.6000000000931323,
+      "toOrdinal": "6",
+      "limit": "6"
+    },
+    {
+      "module": "heap",
+      "event": "Finish segment",
+      "started": 27149.299999999814,
+      "fromOrdinal": "6",
+      "ms": 3.2000000001862645,
+      "toOrdinal": "6",
+      "limit": "6"
+    },
+    {
+      "module": "heap",
+      "event": "seek Home",
+      "started": 33380.5,
+      "fromOrdinal": "2",
+      "ms": 1.2999999998137355,
+      "toOrdinal": "0",
+      "limit": "2"
+    },
+    {
+      "module": "heap",
+      "event": "Return to question",
+      "started": 33421.799999999814,
+      "fromOrdinal": "0",
+      "ms": 2.8000000002793968,
+      "toOrdinal": "2",
+      "limit": "2"
+    },
+    {
+      "module": "heap",
+      "event": "Submit answer",
+      "started": 33688.5,
+      "fromOrdinal": "2",
+      "ms": 3.7999999998137355,
+      "toOrdinal": "3",
+      "limit": "6"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 33951.89999999991,
+      "fromOrdinal": "3",
+      "ms": 3.5,
+      "toOrdinal": "6",
+      "limit": "6"
+    },
+    {
+      "module": "heap",
+      "event": "Reveal without answering",
+      "started": 34333.89999999991,
+      "fromOrdinal": "1",
+      "ms": 3.5,
+      "toOrdinal": "2",
+      "limit": "8"
+    },
+    {
+      "module": "heap",
+      "event": "seek End",
+      "started": 34585.89999999991,
+      "fromOrdinal": "2",
+      "ms": 2,
+      "toOrdinal": "8",
+      "limit": "8"
+    },
+    {
+      "module": "heap",
+      "event": "seek Home",
+      "started": 34892.69999999972,
+      "fromOrdinal": "5",
+      "ms": 1.7000000001862645,
+      "toOrdinal": "0",
+      "limit": "5"
+    },
+    {
+      "module": "heap",
+      "event": "Reveal without answering",
+      "started": 34928.39999999991,
+      "fromOrdinal": "0",
+      "ms": 3,
+      "toOrdinal": "6",
+      "limit": "6"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 11340.19999999972,
+      "fromOrdinal": "0",
+      "ms": 3.1000000000931323,
+      "toOrdinal": "1",
+      "limit": "5"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 11596.799999999814,
+      "fromOrdinal": "1",
+      "ms": 2.3999999999068677,
+      "toOrdinal": "5",
+      "limit": "5"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 11637.099999999627,
+      "fromOrdinal": "5",
+      "ms": 2.8000000002793968,
+      "toOrdinal": "6",
+      "limit": "9"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 11897.599999999627,
+      "fromOrdinal": "6",
+      "ms": 1.900000000372529,
+      "toOrdinal": "9",
+      "limit": "9"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 11939.599999999627,
+      "fromOrdinal": "9",
+      "ms": 2.900000000372529,
+      "toOrdinal": "10",
+      "limit": "31"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 12199.899999999907,
+      "fromOrdinal": "10",
+      "ms": 2.1999999997206032,
+      "toOrdinal": "31",
+      "limit": "31"
+    },
+    {
+      "module": "graph",
+      "event": "Finish segment",
+      "started": 12239.399999999907,
+      "fromOrdinal": "31",
+      "ms": 2.8999999999068677,
+      "toOrdinal": "31",
+      "limit": "31"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 12789.799999999814,
+      "fromOrdinal": "0",
+      "ms": 2.2000000001862645,
+      "toOrdinal": "1",
+      "limit": "13"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 13043.5,
+      "fromOrdinal": "1",
+      "ms": 2,
+      "toOrdinal": "13",
+      "limit": "13"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 13082.899999999907,
+      "fromOrdinal": "13",
+      "ms": 2.5,
+      "toOrdinal": "14",
+      "limit": "16"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 13340.399999999907,
+      "fromOrdinal": "14",
+      "ms": 1.6999999997206032,
+      "toOrdinal": "16",
+      "limit": "16"
+    },
+    {
+      "module": "graph",
+      "event": "Continue guide",
+      "started": 13377.299999999814,
+      "fromOrdinal": "16",
+      "ms": 2.2999999998137355,
+      "toOrdinal": "17",
+      "limit": "26"
+    },
+    {
+      "module": "graph",
+      "event": "seek End",
+      "started": 13636.899999999907,
+      "fromOrdinal": "17",
+      "ms": 1.7999999998137355,
+      "toOrdinal": "26",
+      "limit": "26"
+    },
+    {
+      "module": "graph",
+      "event": "Finish segment",
+      "started": 13678.69999999972,
+      "fromOrdinal": "26",
+      "ms": 2.8000000002793968,
+      "toOrdinal": "26",
+      "limit": "26"
+    },
+    {
+      "module": "graph",
+      "event": "seek Home",
+      "started": 14769.299999999814,
+      "fromOrdinal": "8",
+      "ms": 1.6000000000931323,
+      "toOrdinal": "0",
+      "limit": "8"
+    },
+    {
+      "module": "graph",
+      "event": "Return to question",
+      "started": 14808.799999999814,
+      "fromOrdinal": "0",
+      "ms": 2.7999999998137355,
+      "toOrdinal": "8",
+      "limit": "8"
+    },
+    {
+      "module": "graph",
+      "event": "Submit answer",
+      "started": 15073.799999999814,
+      "fromOrdinal": "8",
+      "ms": 4,
+      "toOrdinal": "9",
+      "limit": "31"
+    },
+    {
+      "module": "graph",
+      "event": "Reveal without answering",
+      "started": 23031.099999999627,
+      "fromOrdinal": "20",
+      "ms": 3.3000000002793968,
+      "toOrdinal": "21",
+      "limit": "26"
+    },
+    {
+      "module": "graph",
+      "event": "seek Home",
+      "started": 23837.899999999907,
+      "fromOrdinal": "11",
+      "ms": 2,
+      "toOrdinal": "0",
+      "limit": "11"
+    },
+    {
+      "module": "graph",
+      "event": "Reveal without answering",
+      "started": 23880.299999999814,
+      "fromOrdinal": "0",
+      "ms": 5.100000000093132,
+      "toOrdinal": "12",
+      "limit": "26"
+    }
+  ],
+  "ownedRecords": [
+    {
+      "key": "dsa-atlas.settings",
+      "chars": 62,
+      "schemaVersion": 1
+    },
+    {
+      "key": "dsa-atlas.evidence",
+      "chars": 644,
+      "schemaVersion": 1,
+      "attempts": 2,
+      "guides": 2
+    },
+    {
+      "key": "dsa-atlas.input.heap",
+      "chars": 0
+    },
+    {
+      "key": "dsa-atlas.input.graph",
+      "chars": 0
+    }
+  ]
+}

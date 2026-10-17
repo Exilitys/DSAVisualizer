@@ -1,0 +1,74 @@
+[
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:40:21.117Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.WebGLRenderer: WEBGL_lose_context extension not supported.",
+    "timestamp": "2026-10-15T13:44:56.328Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:44:58.914Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:45:01.983Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "error",
+    "message": "THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context.",
+    "timestamp": "2026-10-15T13:45:01.983Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "error",
+    "message": "Error: THREE.WebGLRenderer: Error creating WebGL context.\n    at new uW (http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js:342:24177)\n    at h (http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js:761:85747)\n    at Object.configure (http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js:761:85870)\n    at http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js:761:87800\n    at ik (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:93001)\n    at i5 (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:103096)\n    at ud (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:116251)\n    at i5 (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:105357)\n    at ud (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:116251)\n    at i5 (http://127.0.0.1:3001/_next/static/chunks/34wvn5zw0a69w.js:1:103120)",
+    "timestamp": "2026-10-15T13:45:01.994Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/0hc-eqve6t5ng.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:46:42.844Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:49:15.181Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:51:05.229Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:51:24.285Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.WebGLRenderer: WEBGL_lose_context extension not supported.",
+    "timestamp": "2026-10-15T13:51:27.231Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  },
+  {
+    "level": "warn",
+    "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+    "timestamp": "2026-10-15T13:54:09.510Z",
+    "url": "http://127.0.0.1:3001/_next/static/chunks/3sba7org6n6db.js"
+  }
+]

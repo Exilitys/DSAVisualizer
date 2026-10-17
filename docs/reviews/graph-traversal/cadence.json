@@ -1,0 +1,32 @@
+[
+  {
+    "speed": "0.5",
+    "ticks": [
+      {
+        "milliseconds": 2018.7999999998137,
+        "ordinal": "1",
+        "playing": "true"
+      }
+    ]
+  },
+  {
+    "speed": "1",
+    "ticks": [
+      {
+        "milliseconds": 1016.5,
+        "ordinal": "1",
+        "playing": "true"
+      }
+    ]
+  },
+  {
+    "speed": "2",
+    "ticks": [
+      {
+        "milliseconds": 504.20000000018626,
+        "ordinal": "1",
+        "playing": "true"
+      }
+    ]
+  }
+]

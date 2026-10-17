@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "workflow",
+  "input": "C:\\Users\\jonthan carlo\\.codex\\worktrees\\heap-insertion\\ForgeHacks\\docs\\diagrams\\learning-challenges.workflow.json",
+  "output": "C:\\Users\\jonthan carlo\\.codex\\worktrees\\heap-insertion\\ForgeHacks\\docs\\diagrams\\learning-challenges.html",
+  "specification": {
+    "sha256": "1136d067b1ea94879a54ed8a8f1ad920260a8ea5ea60924c0bf05004f3457eb1",
+    "bytes": 2460
+  },
+  "artifact": {
+    "sha256": "b5855dbdf8d9eee054157595f4a1014d52da1e72bc5720025800660836028551",
+    "bytes": 709962
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}
