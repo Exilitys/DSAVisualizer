@@ -1,13 +1,16 @@
 # Slice 004: guided lessons, predictions and local continuity
 
-**Status.** Draft for owner review, 2026-10-16; no implementation authorized by this document yet.
+**Status.** Accepted 2026-10-16 by @Exilitys.
+**Reviewed.** Version 1 at `0ff8f4ab951d86d50b34be9601222d9e1bbd90e0`, including
+the flow diagram bound in the design-check receipt. The owner selected
+"Accept specification and diagram"; the written build plan still requires review.
 **Owner.** Jonathan Carlo (@Exilitys).
 **Version.** 1.
 **Source.** [Product requirements](../../prd.md), FR09/FR11/FR13/FR17;
 [technical contracts](../prd/prd.md), D-002 and learning evidence.
 **Baseline.** Graph head `6e211a65198b377c79814a8a211bf7b02aa48125`.
 [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) is awaiting owner review;
-this draft lives on `feature/learning-challenges` and depends on that work.
+this slice lives on `feature/learning-challenges` and depends on that work.
 **Diagram.** [Proposed challenge flow](../diagrams/learning-challenges.html), with
 [editable source](../diagrams/learning-challenges.workflow.json). The accepted
 [engine/player/view architecture](../architecture/system.md) remains the foundation.
@@ -40,7 +43,7 @@ module; code-authored content; shared controls and scene adapters; immutable
 snapshots; local, resettable progress; deterministic grading; free exploration
 remains available. Tutor development will use Ollama with provider choice open.
 
-This slice supplies Explore/Explain/Challenge controls, two short proposed guide
+This slice supplies Explore/Explain/Challenge controls, two short guide
 segments per module, all six prediction challenges, a shared playback gate,
 recent local evidence, saved settings and one explicitly saved input per module.
 Its acceptance amends the player seek/input-replacement integration for these
@@ -53,8 +56,8 @@ visual content editor, random question generator or adaptive diagnosis is needed
 ## 5. Decisions
 
 The owner chose D-401 and D-402 on 2026-10-16 through the two asynchronous
-question responses. D-403/D-404 and this complete packet remain recommendations
-for review; those individual answers do not approve the whole specification.
+question responses, then accepted the complete version-1 specification and
+diagram through the explicit review-packet response recorded above.
 
 ### D-401: one answer closes a prediction attempt
 
@@ -91,8 +94,8 @@ for review; those individual answers do not approve the whole specification.
   learning policy can hide its complexity behind one shared integration.
 - **Revisit when.** A third real module needs content or grading the interface
   cannot express; do not generalize for hypothetical algorithms.
-- **Provenance.** Proposed by Codex on 2026-10-16 for review with @Exilitys,
-  implementing settled D-002/D-004; whole-spec decision pending.
+- **Provenance.** Decided 2026-10-16 with @Exilitys through version-1 packet
+  acceptance, implementing settled D-002/D-004.
 
 ### D-404: bounded local continuity with explicit input loading
 
@@ -105,8 +108,8 @@ for review; those individual answers do not approve the whole specification.
   reset and heap finish/restart rules. Storage remains bounded and resettable.
 - **Revisit when.** Learners need history beyond 100 attempts, multiple saved
   inputs, cross-device access or session resumption.
-- **Provenance.** Proposed by Codex on 2026-10-16 for review with @Exilitys,
-  implementing FR13/P0 persistence; whole-spec decision pending.
+- **Provenance.** Decided 2026-10-16 with @Exilitys through version-1 packet
+  acceptance, implementing FR13/P0 persistence.
 
 ## 6. Activity lifecycle and scene ownership
 
@@ -338,9 +341,8 @@ owner's standing Native execution choice.
 
 ## 14. Open questions
 
-None. The owner answered both pedagogy questions on 2026-10-16. Whole-packet
-acceptance is still pending, including the proposed shared gate and local
-continuity policy. No additional provider, deployment or budget choice blocks it.
+None. The owner answered both pedagogy questions and accepted the complete
+packet on 2026-10-16. No additional provider, deployment or budget choice blocks it.
 
 ## 15. Deferred
 

@@ -1,7 +1,8 @@
-# Slice 004 draft design checks
+# Slice 004 design checks
 
-**Status.** Design checks recorded 2026-10-16; owner acceptance of the complete
-specification and diagram is pending. No application implementation in this change.
+**Status.** Specification and diagram accepted 2026-10-16 by @Exilitys through
+"Accept specification and diagram", reviewed at `0ff8f4a`. The checks below
+remain design evidence; application implementation has not started.
 **Specification.** [Slice 004, version 1](../specs/004-learning-challenges.md).
 
 ## Requirement and builder checks
