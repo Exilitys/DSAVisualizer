@@ -67,6 +67,8 @@ The executor resolved each excluded behavior explicitly, continuing the decision
 6. Keep physical phone, screen reader, real OS/background transitions and learning effectiveness unverified. Cost: device, accessibility and teaching assumptions remain uncertain.
 7. Rely on the prior graph review for inherited implementation while retaining this review of its learning integration and all existing graph regressions. Cost if wrong: an inherited graph defect may remain; PR #8 still needs owner acceptance.
 
+8. Preserve this plan's temporary scratch as a reversible local archive after automatic approval review rejected its deletion with "blocked by policy". Cost: local disk space; the archive remains ignored and is outside the feature PR.
+
 Deferred review minors: none.
 
 GitHub still reports [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) open and unmerged on 17 October 2026. Development is `3b3fe653291302f47baf4c6345ef41a676f75188`. This branch descends from graph head `6e211a65198b377c79814a8a211bf7b02aa48125`, so the learning PR includes inherited graph changes until #8 lands. The owner decides integration; nothing was merged or force pushed.
