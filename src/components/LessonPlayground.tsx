@@ -8,6 +8,7 @@ import { heapEngine, createPreset } from '../lessons/heap/engine.ts';
 import type { HeapState } from '../lessons/heap/engine.ts';
 import { getPseudocode, explainStep } from '../lessons/heap/content.ts';
 import {useLessonPlayer} from './useLessonPlayer';
+import {heapLearning} from '../lessons/heap/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
 import {LessonNavigation} from './LessonNavigation';
 
@@ -47,7 +48,7 @@ function SemanticHeap({snapshot,selectedId,select}: {
 }
 
 export default function LessonPlayground() {
-  const lesson=useLessonPlayer(heapEngine,createPreset());
+  const lesson=useLessonPlayer(heapEngine,createPreset(),heapLearning);
   const {player,go,select}=lesson;
   const [draft,setDraft] = useState('1');
   const [semanticOnly,setSemanticOnly] = useState(false);

@@ -11,6 +11,7 @@ const identity=(v:unknown):v is string=>typeof v==='string'&&/^[A-Za-z0-9][A-Za-
 const moduleId=(v:unknown):v is string=>v==='heap'||v==='graph';
 const positive=(v:unknown):v is number=>typeof v==='number'&&Number.isSafeInteger(v)&&v>0;
 const timestamp=(v:unknown):v is number=>typeof v==='number'&&Number.isFinite(v)&&v>=0;
+export const emptyLocalData=<I>():LocalData<I>=>({settings:Object.freeze({speed:1,semanticOnly:false}),attempts:[],guides:[],savedInput:null,notice:null});
 function settings(raw:unknown):Settings {
   if(!object(raw)||typeof raw.speed!=='number'||![.5,1,2].includes(raw.speed)||typeof raw.semanticOnly!=='boolean')throw Error('Invalid settings.');
   return Object.freeze({speed:raw.speed as Settings['speed'],semanticOnly:raw.semanticOnly});
@@ -25,8 +26,7 @@ function guide(raw:unknown):GuideReceipt {
   return Object.freeze({moduleId:raw.moduleId,guideId:raw.guideId,version:raw.version,completedAt:raw.completedAt});
 }
 export function createLearningStore<I>(resolveStorage:()=>StoragePort,owner:InputOwner<I>):LearningStore<I> {
-  const defaults=():LocalData<I>=>({settings:Object.freeze({speed:1,semanticOnly:false}),attempts:[],guides:[],savedInput:null,notice:null});
-  let data=defaults(),loaded=false;
+  let data=emptyLocalData<I>(),loaded=false;
   const blocked=new Set<string>(),inputKey=`dsa-atlas.input.${owner.id}`;
   const notice=(message:string)=>{data={...data,notice:message};};
   const restore=(key:string,apply:(raw:Record<string,unknown>)=>void)=>{
@@ -95,7 +95,7 @@ export function createLearningStore<I>(resolveStorage:()=>StoragePort,owner:Inpu
       return write(inputKey,{schemaVersion:1,engineVersion:owner.version,input:data.savedInput});
     },
     reset() {
-      read();data=defaults();blocked.clear();
+      read();data=emptyLocalData<I>();blocked.clear();
       for(const key of OWNED_KEYS) {
         try {resolveStorage().removeItem(key);}
         catch {blocked.add(key);notice('Your session was cleared, but some saved data could not be removed. Reloading may restore old data.');}

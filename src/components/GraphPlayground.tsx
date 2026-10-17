@@ -8,6 +8,7 @@ import type {GraphInput,GraphCommand} from '../lessons/graph/engine.ts';
 import {explainGraphStep,getGraphPseudocode} from '../lessons/graph/content.ts';
 import {parseGraphPosition,reconcileGraphPositions} from '../lessons/graph/layout.ts';
 import {useLessonPlayer} from './useLessonPlayer';
+import {graphLearning} from '../lessons/graph/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
 import {LessonNavigation} from './LessonNavigation';
 import {GraphSemanticViews} from './GraphViews';
@@ -15,7 +16,7 @@ import {GraphSemanticViews} from './GraphViews';
 const GraphScene=dynamic(()=>import('../lessons/graph/GraphScene'),{ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>});
 type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput};
 export default function GraphPlayground() {
-  const lesson=useLessonPlayer(graphEngine,createGraphPreset());
+  const lesson=useLessonPlayer(graphEngine,createGraphPreset(),graphLearning);
   const {player,go,select}=lesson,snapshot=currentSnapshot(player);
   const [positions,setPositions]=useState(()=>reconcileGraphPositions(createGraphPreset().nodes,{}));
   const [algorithmDraft,setAlgorithmDraft]=useState('bfs');
