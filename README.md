@@ -25,7 +25,8 @@ Guided lessons, six prediction challenges and bounded local continuity are imple
 on `feature/learning-challenges` under the accepted [Slice 004](docs/specs/004-learning-challenges.md)
 and [Native plan](docs/superpowers/plans/2026-10-17-learning-challenges.md).
 [Learning verification](docs/reviews/004-learning-challenges.md) records observed behavior,
-measurements and remaining limits. Owner review and merge remain pending.
+measurements and remaining limits. [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9)
+targets development for owner review and merge.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,

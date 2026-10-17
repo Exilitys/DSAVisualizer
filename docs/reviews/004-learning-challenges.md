@@ -1,6 +1,6 @@
 # Guided lessons and prediction challenges verification
 
-**Status:** Native implementation, runtime verification and fresh branch review complete, 17 October 2026. Owner review and merge remain separate.
+**Status:** Native implementation, runtime verification and fresh branch review complete, 17 October 2026. [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9) is open to development for owner review. Owner acceptance and merge remain separate.
 
 **Scope:** [Accepted Slice 004](../specs/004-learning-challenges.md) and [accepted Native plan](../superpowers/plans/2026-10-17-learning-challenges.md). The owner accepted specification version 1 at `0ff8f4a` and the plan at `354259f`. Both modules now provide Explore, Explain and Challenge through one learning lifecycle and panel. This report records technical observations, not learner acceptance.
 
@@ -72,3 +72,5 @@ Deferred review minors: none.
 GitHub still reports [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) open and unmerged on 17 October 2026. Development is `3b3fe653291302f47baf4c6345ef41a676f75188`. This branch descends from graph head `6e211a65198b377c79814a8a211bf7b02aa48125`, so the learning PR includes inherited graph changes until #8 lands. The owner decides integration; nothing was merged or force pushed.
 
 Tutor/Ollama, authored Browse relationships, learner/device evaluation and release acceptance remain required later work. Browser local evidence is guest convenience with the accepted single active tab limit.
+
+[PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9), Add guided lessons, prediction challenges and local practice history, targets development from feature/learning-challenges. It is a completed feature PR with the graph dependency disclosed. The managed worktree remains available for owner feedback.
