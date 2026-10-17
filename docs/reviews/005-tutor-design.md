@@ -1,8 +1,8 @@
-# Contextual tutor draft design check
+# Contextual tutor v1 design check
 
-**Status:** Draft review preparation, 17 October 2026. The owner has not accepted Slice 005. D-501 and D-502 remain unanswered. No product source or implementation plan was written.
+**Status:** Version 1 ready for owner review, 17 October 2026. The owner decided D-501 and D-502; the whole Slice 005 packet is not yet accepted. No product source or implementation plan was written.
 
-**Packet:** [Slice 005 draft](../specs/005-contextual-tutor.md), [request and Apply diagram](../diagrams/contextual-tutor.html) and [editable source](../diagrams/contextual-tutor.sequence.json). This packet is on feature/contextual-tutor, based on learning head 4ff498c. PRs #8 and #9 remain open; no merge or additional PR is authorized by a generic Continue.
+**Packet:** [Slice 005 v1](../specs/005-contextual-tutor.md), [request and Apply diagram](../diagrams/contextual-tutor.html) and [editable source](../diagrams/contextual-tutor.sequence.json). This packet is on feature/contextual-tutor, based on learning head 4ff498c. PRs #8 and #9 remain open; no merge or additional PR is authorized by a generic Continue.
 
 ## Existing authority and source inventory
 
@@ -22,15 +22,15 @@ A fresh read-only builder reviewed the written draft. The two owner policy choic
 | Do command proposals reset graph layout and selection like examples? | Command Apply retains positions and still-inspectable selection. Example Apply uses explicit seed replacement, clearing selection/resetting graph positions while keeping camera. Failed preview/Apply preserves the old scene. | Adapter behavior would diverge from ordinary operations unless regression journeys catch it. |
 | Can a cancelled call free its slot merely because its result is fenced off? | No. The single application transport slot remains occupied until fetch/body cleanup settles. Deadline/cancellation immediately invalidates display, but cannot prove remote GPU computation stopped. | A misbehaving adapter can keep the local service busy; authored fallback stays usable. |
 
-These are draft implementation proposals or clarifications of accepted behavior, not recorded owner acceptance. No additional product question was identified beyond D-501/D-502.
+These are draft implementation proposals or clarifications of accepted behavior, not recorded owner acceptance. No additional product question was identified. The owner has since resolved D-501/D-502.
 
 The draft stress pass also checked: pending challenge rewind cannot unlock AI accidentally; Apply stays in Explore and respects the true heap boundary; graph uses one final Keep/Apply dialog; selected extracted items can still be referenced; a change away and back invalidates old exchange IDs; unsafe output is rejected as a whole; no future trace/answer data reaches the provider; cancellation releases transport resources before another provider request; guest cookie limits make no deployment abuse guarantee. The fixed live evaluation lists 20 provider-answer questions. Pending-policy and cancellation checks are additional and cannot be counted as completed model answers.
 
 ## Checks performed
 
-The Blueprint checker passes with four draft decision records and two explicitly open questions. Context guard and whitespace checks pass. No application tests/build were repeated because no application source changed. Ollama is installed at the configured host machine, but http://127.0.0.1:11434/api/tags was unreachable during this run. No model was selected/downloaded, and no live tutor correctness or latency result is claimed.
+The Blueprint checker passes with four decision records and no open product questions. Context guard and whitespace checks pass. No application tests/build were repeated because no application source changed. Ollama is installed at the configured host machine, but http://127.0.0.1:11434/api/tags was unreachable during the earlier draft check on 17 October 2026. No model was selected/downloaded, and no live tutor correctness or latency result is claimed.
 
-Archify initially diagnosed unreadable projected labels, then desktop vertical overflow. The source was narrowed and redundant return arrows were removed; message spacing was corrected to the supported timeline. The final artifact passes all nine showcase checks with zero composition errors/warnings. Automated browser collection passes at 1440x900, 1600x1000, 1920x1080 and 2048x1320, including light/dark endpoint themes. All four endpoint screenshots were visually inspected: labels fit, routes are clear, cards are readable and the desktop page does not overflow. This validates a diagram, not the future application.
+Archify initially diagnosed unreadable projected labels, then desktop vertical overflow. The source was narrowed and redundant return arrows were removed; message spacing was corrected to the supported timeline. After the v1 policy-card update, validation and browser collection were rerun and all four endpoint images were inspected again. The final artifact passes all nine showcase checks with zero composition errors/warnings. Automated browser collection passes at 1440x900, 1600x1000, 1920x1080 and 2048x1320, including light/dark endpoint themes. All four endpoint screenshots were visually inspected: labels fit, routes are clear, cards are readable and the desktop page does not overflow. This validates a diagram, not the future application.
 
 ```text
 diagram_type: sequence
@@ -38,14 +38,14 @@ validation: 9/9 showcase, 0 errors, 0 warnings
 browser_evidence: passed
 visual_review: passed
 correction_rounds: 2
-specification_sha256: d6a7925ffb3bf56110dd3e2dbf4ab66baa73fcad138fb1fcf37ef6ae9197b30a
-artifact_sha256: 369e40c1db9cbc47fa923dd0ff32814169503100a048bb17f393f57e5f4d9ce4
+specification_sha256: 12ee48dc09b784bacecf5cab177f9ea949981f989741af03a9da97f75453af11
+artifact_sha256: 8dc9b59667c72a3cc5835e7b7de746702dcfb9db7aee18e6d7caf48895fb772e
 ```
 
 Receipts: [delivery](../diagrams/contextual-tutor.delivery.json), [validation](../diagrams/contextual-tutor.validation.json), [browser collection](../diagrams/contextual-tutor.visual-check.json), [browser report](../diagrams/contextual-tutor.visual-check.html). Screenshots: [1440 light](../diagrams/contextual-tutor.visual-check.1440x900.light.png), [1440 dark](../diagrams/contextual-tutor.visual-check.1440x900.dark.png), [2048 light](../diagrams/contextual-tutor.visual-check.2048x1320.light.png), [2048 dark](../diagrams/contextual-tutor.visual-check.2048x1320.dark.png).
 
-## Owner questions and gate
+## Owner decisions and packet gate
 
-D-501 asks authored guidance until Submit/Reveal versus live AI hints before answering. Recommendation remains authored guidance until the attempt is resolved. D-502 asks curated examples plus validated commands versus additional AI-generated inputs. Recommendation remains curated examples for this first tutor slice. Neither recommendation is treated as an answer.
+On 17 October 2026, @Exilitys answered D-501: "Authored guidance until Submit/Reveal (Recommended)" and D-502: "Curated examples plus validated commands (Recommended)". Version 1 records those choices, removes conditional policy branches and updates the diagram policy card. It also aligns AC-7 with the separate pending-policy check and the timeout row with transport cleanup; no other technical decision changes. The answers settle these policies; they do not accept the complete packet or a build plan.
 
-Review reconstruction/correlation, preview versus Apply, and cleanup/concurrency most closely. After the owner answers, revise the packet and request acceptance of the specification and diagram before writing a build plan. The root workflow requires a separately reviewed plan before implementation. Keep one completed feature PR per slice, and do not merge the existing PRs without an owner merge instruction.
+Review reconstruction/correlation, preview versus Apply, and cleanup/concurrency most closely. Request acceptance of version 1 and its diagram before writing a build plan. The root workflow requires a separately reviewed plan before implementation. Keep one completed feature PR per slice, and do not merge the existing PRs without an owner merge instruction.

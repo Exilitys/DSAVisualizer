@@ -1,11 +1,11 @@
 # Slice 005: contextual tutor and reviewed actions
 
-**Status.** Draft 2026-10-17. Not accepted; D-501 and D-502 await owner answers.
+**Status.** Ready for owner review, 2026-10-17. The owner decided D-501 and D-502; the complete packet is not yet accepted.
 **Owner.** Jonathan Carlo (@Exilitys).
-**Version.** 0, working review draft.
+**Version.** 1, specification and diagram review packet.
 **Source.** [Product PRD](../../prd.md), FR10/FR12/FR17 and AI section; [technical tutor contract](../prd/prd.md#7-interfaces-and-seams), D-003/D-006; [learning slice](004-learning-challenges.md).
 **Baseline.** Learning head `4ff498cc746bfd41a1a9dd6af1952bb7d462544a`. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) and [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9) remain open. Draft on feature/contextual-tutor, with no extra PR until the completed slice.
-**Diagram.** [Request and reviewed Apply](../diagrams/contextual-tutor.html), with [editable source](../diagrams/contextual-tutor.sequence.json) and [design check](../reviews/005-tutor-design.md). Both remain part of this draft, including its pending policy choices.
+**Diagram.** [Request and reviewed Apply](../diagrams/contextual-tutor.html), with [editable source](../diagrams/contextual-tutor.sequence.json) and [design check](../reviews/005-tutor-design.md). The specification and diagram form one review packet; their acceptance precedes the written build plan.
 
 ## 1. Problem
 
@@ -21,7 +21,7 @@ A short explanation grounded in the selected snapshot helps the learner explain 
 
 ## 4. Scope
 
-In: Explain this, Why this step, one free text question or hint, server reconstruction, local Ollama, one shared tutor panel, validated proposals with preview and explicit Apply, cancellation and authored fallback on both routes. The two pending decisions below determine unanswered prediction support and example generation.
+In: Explain this, Why this step, one free text question or hint, server reconstruction, local Ollama, one shared tutor panel, validated proposals with preview and explicit Apply, cancellation and authored fallback on both routes. Pending predictions use authored guidance until Submit/Reveal; examples use curated inputs plus validated commands.
 
 Existing commitments remain: Next.js Node route, lesson neutral provider seam, immutable engine authority, guest English use, no raw question persistence, 15 second cancellation, 32 KiB body / 2,000 character question / 3,000 character explanation / 3 proposal limits, 512 generated tokens initially, 6 requests per minute per guest and one provider call at a time locally.
 
@@ -29,21 +29,21 @@ Adjacent required work: authored Browse relationships, deployment provider/model
 
 ## 5. Decisions
 
-### D-501: unanswered predictions, proposed and awaiting the owner
+### D-501: authored guidance until Submit/Reveal
 
-- **Chosen.** Proposed: use existing authored guidance while a challenge is pending, including while rewound. Enable live AI only after Submit or Reveal, or after leaving that attempt.
-- **Rejected.** Alternative still available: permit live preanswer AI hints and add leakage evaluation for each pending question.
+- **Chosen.** Use existing authored guidance while a challenge is pending, including while rewound. Enable live AI only after Submit or Reveal, or after leaving that attempt.
+- **Rejected.** Live preanswer AI hints, which would require additional leakage evaluation for each pending question.
 - **Because.** A model can calculate a future answer from current state without receiving the answer key. Not sending the key alone cannot guarantee a hint does not answer the question.
-- **Revisit when.** The owner selects preanswer AI hints and accepts the additional evaluation requirement.
-- **Provenance.** Question posed 2026-10-17 with @Exilitys; unanswered. The proposed policy is not an accepted decision.
+- **Revisit when.** The owner requests preanswer AI hints and accepts the additional leakage evaluation requirement.
+- **Provenance.** Decided 2026-10-17 with @Exilitys: "Authored guidance until Submit/Reveal (Recommended)". This records the policy answer, not acceptance of the whole packet.
 
-### D-502: example scope, proposed and awaiting the owner
+### D-502: curated examples plus validated commands
 
-- **Chosen.** Proposed: known curated examples plus validated commands on the current scene. A model may name an allowed example ID; it cannot author an arbitrary replacement input.
-- **Rejected.** Alternative still available: AI-generated bounded inputs with full engine validation and a preview before Apply.
-- **Because.** Curated cases have known teaching intent and reusable trace oracles; either choice still uses the same engine validators.
-- **Revisit when.** The owner selects generated inputs, or observed questions need examples the catalog cannot express.
-- **Provenance.** Question posed 2026-10-17 with @Exilitys; unanswered. No option is recorded as accepted.
+- **Chosen.** Known curated examples plus validated commands on the current scene. A model may name an allowed example ID; it cannot author an arbitrary replacement input.
+- **Rejected.** AI-generated replacement inputs in this slice; curated inputs still require full engine validation and preview before Apply.
+- **Because.** Curated cases have known teaching intent and reusable trace oracles, with the same engine validators used for current-scene commands.
+- **Revisit when.** Observed questions need examples the catalog cannot express and the owner accepts generated inputs with their validation/evaluation scope.
+- **Provenance.** Decided 2026-10-17 with @Exilitys: "Curated examples plus validated commands (Recommended)". This records the policy answer, not acceptance of the whole packet.
 
 ### D-503: preserve the accepted engine and lesson ownership
 
@@ -92,20 +92,20 @@ type TutorRequest = {
 };
 type TutorProposal =
   | {kind:'command';command:unknown}
-  | {kind:'example';exampleId:string}; // D-502 proposal, not accepted yet
+  | {kind:'example';exampleId:string}; // Example IDs resolve only to the curated catalog (D-502).
 type TutorContent = {explanation:string;referencedIds:readonly string[];
   proposedCommands:readonly TutorProposal[];followUp?:string};
 type TutorReply = TutorContent & {requestId:string;runId:string;snapshotId:string};
 type TutorProvider = (context:VerifiedTutorContext,signal:AbortSignal)=>Promise<TutorContent>;
 ```
 
-The proposed curated branch of D-502 uses exactly two examples per module: heap equal-child extraction and heap order without sorting; graph BFS queue/discovery and DFS depth versus shortest distance. Reuse the existing bounded authored fixtures and give catalog records stable IDs, titles, objective IDs, normalized input and command. No new algorithm or random fixture generator is required. If generated inputs are selected, replace the example-ID-only policy with a separately validated input+command proposal shape before acceptance.
+The curated catalog uses exactly two examples per module: heap equal-child extraction and heap order without sorting; graph BFS queue/discovery and DFS depth versus shortest distance. Reuse the existing bounded authored fixtures and give catalog records stable IDs, titles, objective IDs, normalized input and command. No new algorithm or random fixture generator is required. AI-generated replacement inputs are deferred under D-502.
 
 The route independently validates JSON shape, sizes, engine version, normalized input, command, trace bounds, ordinal and snapshot ID. Reuse the player's 512 step/initial/final/invariant checks. Validate at most the one selected ID supported by the UI with engine.inspect, and verify any objective/activity ID/version against the named module. Active activity requests must match their authored seed/command and valid checkpoint range. The teaching status comes from the client; this is not a tamper-proof gradebook. A caller using developer tools can request unrelated Explore contexts; no authentication or server-side attempt store is introduced.
 
 A valid resting request calls createInitialSnapshot. A valid active request calls createTrace with original input/command and selects the ordinal. Never replay from a current intermediate heap or trust posted snapshot/counter data.
 
-VerifiedTutorContext includes the rest/run discriminator and normalized active command (or null), the selected reconstructed snapshot (state, event, variables, counters, invariants), selected inspection, question and narrowly selected authored current guidance/objective. The tutor panel shows this command and step as its visible context caption. Rest and active insertion s0 can have byte-identical heap snapshots; the explicit descriptor distinguishes their meaning without modifying engine output. It receives neither the full trace, future guide text, answer IDs, challenge feedback nor attempt history. Current snapshot values may logically imply future behavior; D-501 defines whether pending questions can call the model at all.
+VerifiedTutorContext includes the rest/run discriminator and normalized active command (or null), the selected reconstructed snapshot (state, event, variables, counters, invariants), selected inspection, question and narrowly selected authored current guidance/objective. The tutor panel shows this command and step as its visible context caption. Rest and active insertion s0 can have byte-identical heap snapshots; the explicit descriptor distinguishes their meaning without modifying engine output. It receives neither the full trace, future guide text, answer IDs, challenge feedback nor attempt history. Current snapshot values may logically imply future behavior; pending predictions therefore cannot call the model (D-501).
 
 Use one server function with built-in fetch. Ollama receives configured model, messages, stream:false, a JSON schema in format, temperature:0 and options.num_predict:512. Parse message.content and validate it afterward. A complete JSON object is required; missing, truncated, overlong or malformed output fails explicitly. Provider errors never produce a fabricated successful reply. Only validated current IDs may be referenced, with no duplicates and at most 20 IDs. Follow-up text is at most 500 characters. Reject the whole malformed/unsafe response, rather than showing a partly trusted proposal set. Render accepted text as text, never executable HTML or model-directed network links.
 
@@ -117,7 +117,7 @@ One shared controller/panel serves both modules. Explain this and Why this step 
 
 Capture the effective run/snapshot/selection/layer/activity tuple with a fresh request ID. An effective change of run, ordinal, selected ID, layer, guide/checkpoint, challenge attempt/status or reset aborts and invalidates the exchange synchronously. Starting Play also cancels first. Reject late results even if transport cancellation fails. Camera, graph positions, Fit/Focus, speed and semantic preference do not invalidate unchanged algorithm context. Same-layer no-ops preserve the exchange. Every returned request/run/snapshot field must match the active exchange before display; an older response cannot restore its text or proposals.
 
-Under proposed D-501, pending questions display the existing authored guidance and an explanation that AI opens after Submit/Reveal. The restriction remains active after rewind. Submit/Reveal invalidates old context and makes a new current-state request possible; no automatic request is made. If the owner selects preanswer hints instead, specify the provider hint context and leakage checks before acceptance.
+Under D-501, pending questions display the existing authored guidance and an explanation that AI opens after Submit/Reveal. The restriction remains active after rewind. Submit/Reveal invalidates old context and makes a new current-state request possible; no automatic request is made.
 
 A proposal is not an operation until the learner reviews a deterministic preview and selects Apply. Only Explore may apply. For a command, normalize input from the current selected snapshot and validate the command/trace. For a curated example, resolve its server-owned ID and validate its authored input/command. Preview may compute a candidate but cannot publish or persist it. A request or preview fails without replacing the current scene, selection, layout or gate.
 
@@ -128,11 +128,11 @@ Recheck correlation, mode, true run boundary, content version and proposal valid
 | Trigger | Result |
 | --- | --- |
 | Invalid JSON/state/version/selection/activity, oversized body or question | 400 with a typed error; no provider request. Read at most 32 KiB of body bytes even without Content-Length. |
-| Proposed D-501 pending activity | 400 challenge_locked; authored guidance remains available; no provider request. |
+| Pending prediction (D-501) | 400 challenge_locked; authored guidance remains available; no provider request. |
 | Seventh admitted request within 60 seconds for one guest | 429 rate_limited with Retry-After; no model call or automatic retry. |
 | Another provider call active, or bounded guest table full | 429 busy or rate_limited; no unbounded queue. |
 | Missing model configuration, unreachable provider, invalid output | 503 unavailable / invalid_provider_response; authored guidance and playback remain usable. |
-| 15 second deadline | 504 timeout on the server; client independently leaves waiting at its deadline and invalidates the exchange. Abort fetch/body read and release the local slot. |
+| 15 second deadline | 504 timeout on the server; client independently leaves waiting at its deadline and invalidates the exchange. Abort fetch/body read; release the local slot only after transport cleanup settles. |
 | Cancel, navigation or context change | Abort and discard; a later completion never displays or applies. |
 | Invalid/stale preview or command | Preserve current player and show guard failure; do not execute a subset of actions. |
 
@@ -146,11 +146,11 @@ Cap the buffered Ollama response at 64 KiB before JSON parsing. Empty response t
 | --- | --- |
 | AC-1 | Resting and active s0 use their explicit reconstruction paths and retain distinct run/command meaning even if heap snapshot bytes are equal; later snapshots match engine oracles. Invalid input, command, version, ordinal, ID and malformed/513-step traces reach no provider. |
 | AC-2 | Both routes can Explain this/Why this step/ask a bounded question from semantic or 3D views. Only reconstructed visible context reaches the provider; inspection of captured payloads finds no trace, answer keys, future checkpoints or stored history. |
-| AC-3 | D-501's selected policy holds while pending and rewound, then transitions after Submit/Reveal. No deterministic grade depends on model output. |
-| AC-4 | Preview/Apply supports both modules and the selected example policy. Heap ordered intermediate state cannot bypass Finish/Restart. Graph Keep/Escape retains run/selection/layout; Apply creates one paused run. |
+| AC-3 | Pending and rewound unanswered predictions use authored guidance without a provider call; live AI becomes available after Submit/Reveal. No deterministic grade depends on model output. |
+| AC-4 | Preview/Apply supports both modules, curated examples and validated current-scene commands; arbitrary generated inputs are rejected. Heap ordered intermediate state cannot bypass Finish/Restart. Graph Keep/Escape retains run/selection/layout; Apply creates one paused run. |
 | AC-5 | Deliberately delayed replies after run/step/selection/layer/attempt/reset/route changes cannot render or apply, even after returning to the original ordinal. Camera/layout changes retain an otherwise active response. |
 | AC-6 | Tests cover body/output caps, seventh request, bounded guest map, concurrent provider request, offline/unconfigured provider, invalid output, Cancel, timeout and resource cleanup. Authored learning and saved data remain usable. |
-| AC-7 | Real local Ollama evaluation records model tag, version, device and at least 20 questions split evenly between heap and graph, including initial/middle/final states, selected result/edge, negative/adversarial prompts and a pending-question policy check. At least 90 percent of the 20 answers must agree with the verified state. A critical state contradiction or hidden-answer leak blocks that tutor behavior. No mock-only live integration claim. |
+| AC-7 | Real local Ollama evaluation records model tag, version, device and at least 20 provider-answer questions split evenly between heap and graph, including initial/middle/final states, selected result/edge and negative/adversarial prompts, plus a separate pending-question policy check. At least 90 percent of the 20 answers must agree with the verified state. A critical state contradiction or hidden-answer leak blocks that tutor behavior. No mock-only live integration claim. |
 | AC-8 | At 360 and 1280 px, keyboard users can request, cancel/retry, inspect referenced IDs and review/Apply/Keep. All effective targets at least 44 px; prompt/status labels and live feedback are present. Request waiting clears within 15 seconds in the measured browser. |
 | AC-9 | Existing 52 tests plus focused tutor checks, typecheck, build, context guard, whitespace checks and one fresh whole-branch review pass. Report measured local response distribution separately from targets and model correctness judgments. |
 
@@ -169,21 +169,21 @@ No cold-entry, physical phone, sustained GPU rate, universal correctness or lear
 
 The first implementation milestone reconstructs one resting and one active heap request, returns a validated local Ollama explanation and rejects a late reply after seek. Then apply the same seam to graph, proposals/examples, failures and the complete evaluation. **Done when.** All AC-1 through AC-9 pass for both modules with real Ollama evidence and fresh review. The completed slice is one feature PR to development under Native execution; this milestone does not reduce either module's acceptance scope.
 
-Before implementation: resolve D-501/D-502, stress this packet, include its checked diagram, obtain named owner acceptance, then write and review the build plan. No product code, dependency installation or new PR is part of drafting this packet.
+D-501/D-502 are resolved. Before implementation: obtain named owner acceptance of this checked specification and diagram, then write and review the build plan. No product code, dependency installation or new PR is part of drafting this packet.
 
 ## 13. Deferred
 
 - Production provider/model/spending: Revisit when deployment integration begins; D-006 still applies.
 - Model download: outside this slice; Revisit when the owner explicitly chooses a model download because installed chat-capable models cannot meet the local evaluation.
-- Streaming, generated inputs if not selected, persistent conversation history and broader actions: Revisit when an explicit scope request or observed cases need capabilities this slice cannot express.
+- AI-generated replacement inputs: Revisit when D-502's observed-case and owner acceptance conditions hold.
+- Streaming, persistent conversation history and broader actions: Revisit when an explicit scope request or observed cases need capabilities this slice cannot express.
 - Authored Browse and learner/device evaluation: remain required next release work; Revisit when this tutor slice is technically verified and accepted.
 
 ## 14. Open questions
 
-- D-501: authored guidance until Submit/Reveal, or live AI hints while a prediction is pending? The answer blocks final eligibility and leakage evaluation.
-- D-502: curated examples and validated commands, or AI-generated inputs too? The answer blocks the final proposal schema and validation/evaluation surface.
+None. The owner answered both policy questions on 2026-10-17; D-501 and D-502 record the choices. Whole-packet acceptance remains the next gate.
 
-Model tag and live runtime measurements remain unestablished environment evidence, not a secretly selected product decision. The local API is currently unavailable; use its installed model inventory before choosing a live test profile.
+Model tag and live runtime measurements remain unestablished environment evidence, not a secretly selected product decision. The local API was unreachable during the draft check on 2026-10-17; use its installed model inventory before choosing a live test profile.
 
 ## 15. Library authority
 

@@ -113,10 +113,10 @@
   "cards": [
     {
       "dot": "violet",
-      "title": "Pending owner choices",
+      "title": "Selected policy",
       "items": [
-        "Preanswer AI policy",
-        "Curated or generated examples"
+        "AI after Submit or Reveal",
+        "Curated examples and validated commands"
       ]
     },
     {
