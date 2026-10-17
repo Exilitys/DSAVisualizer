@@ -16,14 +16,16 @@ export function createPlayer<I,C,S>(engine: LessonEngine<I,C,S>, raw: unknown): 
 export function currentSnapshot<I,S>(state: PlayerState<I,S>): Snapshot<S> {
   return state.steps ? state.steps[state.ordinal] : state.resting;
 }
+export function isRunBoundary<I,S>(state:PlayerState<I,S>):boolean {
+  return !state.steps || state.ordinal===0 || state.ordinal===state.steps.length-1;
+}
 export function seek<I,S>(state: PlayerState<I,S>, ordinal: number): PlayerState<I,S> {
   if (!state.steps || !Number.isInteger(ordinal) || ordinal < 0 || ordinal >= state.steps.length)
     return {...state,error:'Choose an existing step.'};
   return {...state,ordinal,error:null};
 }
 export function startCommand<I,C,S>(state: PlayerState<I,S>, engine: LessonEngine<I,C,S>, raw: unknown): PlayerState<I,S> {
-  const boundary = !state.steps || state.ordinal === 0 || state.ordinal === state.steps.length-1;
-  if (engine.commandStart === 'run-boundary' && !boundary)
+  if (engine.commandStart === 'run-boundary' && !isRunBoundary(state))
     return {...state,error:'Finish or restart first.'};
   const input = engine.validateInput(currentSnapshot(state).state);
   if (!input.ok) return {...state,error:input.message};
@@ -47,8 +49,7 @@ export function selectEntity<I,C,S>(state: PlayerState<I,S>, engine: LessonEngin
   return {...state,selectedId:id && engine.inspect(currentSnapshot(state),id) ? id : null};
 }
 export function replaceInput<I,C,S>(state:PlayerState<I,S>,engine:LessonEngine<I,C,S>,rawInput:unknown,selectedCommand:unknown|null):PlayerState<I,S> {
-  const boundary=!state.steps || state.ordinal===0 || state.ordinal===state.steps.length-1;
-  if(engine.commandStart==='run-boundary' && !boundary)
+  if(engine.commandStart==='run-boundary' && !isRunBoundary(state))
     return {...state,error:'Finish or restart first.'};
   try {
     const input=engine.validateInput(rawInput);

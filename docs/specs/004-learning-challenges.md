@@ -3,7 +3,8 @@
 **Status.** Accepted 2026-10-16 by @Exilitys.
 **Reviewed.** Version 1 at `0ff8f4ab951d86d50b34be9601222d9e1bbd90e0`, including
 the flow diagram bound in the design-check receipt. The owner selected
-"Accept specification and diagram"; the written build plan still requires review.
+"Accept specification and diagram". The [Native build plan](../superpowers/plans/2026-10-17-learning-challenges.md)
+was accepted 2026-10-17 by @Exilitys at `354259f` through "Accept plan; start Native execution".
 **Owner.** Jonathan Carlo (@Exilitys).
 **Version.** 1.
 **Source.** [Product requirements](../../prd.md), FR09/FR11/FR13/FR17;

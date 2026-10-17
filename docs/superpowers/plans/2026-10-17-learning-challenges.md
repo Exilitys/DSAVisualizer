@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's selected Native execution. Implement task by task with TDD, then one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
 
-**Status:** Draft for owner review, 2026-10-17. No implementation task is complete.
+**Status:** Accepted 2026-10-17 by @Exilitys through "Accept plan; start Native execution"; reviewed at `354259f18c8ce680bdd7ee84244c9b69ab55c270`. Implementation in progress.
 **Goal:** Deliver both guided lessons, six deterministic predictions, and bounded browser-local continuity through the existing DSA framework.
 **Architecture:** Pure learning transitions compose the existing player. The existing hook binds one learning session to the existing timer and a storage boundary. Both playgrounds use one learning panel while retaining scene, layout and graph-confirmation ownership.
 **Tech Stack:** Existing Node 24.15 or newer within Node 24, Next.js 16.3.8, React 19.3.0, R3F 9.8.1, Drei 10.7.9, Three 0.186.1 and TypeScript 5.9.3. Node's test runner; no new dependency.
@@ -97,7 +97,7 @@ export function playbackLimit<I,S>(session:LearningSession<I,S>):number;
 
 `run` is the exact trace object reference. No new identifier/time enters Snapshot. Content exports `heapLearning:LessonLearning<HeapInput,HeapCommand>` and `graphLearning:LessonLearning<GraphInput,GraphCommand>`, pinned to engine versions `1.1.0`/`1.0.0`. Guide IDs: `heap-guide`, `graph-guide`; segments: `heap-insert`, `heap-extract`, `graph-bfs`, `graph-dfs`. Keep the spec's challenge/objective IDs.
 
-- [ ] Add learning.test.ts to the explicit package test list. Write `authored activities match independent oracles`: assert two segments/three challenges per module, three unique options and key membership; independently assert the following rather than computing expectations from the answer key.
+- [x] Add learning.test.ts to the explicit package test list. Write `authored activities match independent oracles`: assert two segments/three challenges per module, three unique options and key membership; independently assert the following rather than computing expectations from the answer key.
 
   | Challenge | Literal assertion |
   | --- | --- |
@@ -108,14 +108,14 @@ export function playbackLimit<I,S>(session:LearningSession<I,S>):number;
   | graph-return | Paused at 20; next 21 returns C→D, top frame D at neighbor index 2. |
   | graph-depth | Paused at 11; next 12 has C depth 3; independent BFS finishes with C distance 1. |
 
-- [ ] Write `activity preparation preserves the prior session on failure`: from a selected mid-run graph, bad input/command, thrown or malformed/513-step trace, wrong engine version, duplicate options/missing key and checkpoint/event mismatch retain input/resting/steps/ordinal/selection/activity references and show an error. Valid guide starts at 0; challenge at its checkpoint; both clear selection. Invalid content must not disable unrelated valid activities or Explore.
-- [ ] Write `one pending attempt produces one result`: correct/incorrect emit the right objective/version/choice/outcome at injected time 1000 and seek to checkpoint+1. Reveal emits none. Stale token/run, unknown option, rewound submission, duplicate submit and submit after reveal/exit emit nothing and cannot unlock another activity. New-token retry clears feedback; Restart retains token/status/ceiling.
-- [ ] Write `guide acknowledgements are not grades`: test heap checkpoints 0/1/3/8 and 0/1/4/6; graph 0/5/9/31 and 0/13/16/26. Continue only at the ceiling, opens the next range and advances one step. Finish records a segment once; both segments in either order emit one guide receipt. Viewing, one segment, repeated Finish and replay emit none. Exit retains finished segments; a changed guide version resets partial progress.
-- [ ] Write `learning preserves Explore and boundary rules`: active seek clamps at its ceiling; ordinary Explore invalid-seek errors remain. An ordered intermediate heap rejects start/load/retry, while 0/final allow it. Start/replace/load outside Explore reject; selection/rewind work. Mode exit preserves snapshot/selection and abandons the gate without evidence; clicking the already active layer is a no-op.
-- [ ] Run `node --test tests/learning.test.ts` and record behavioral RED. Implement the minimum transitions/content, preparing an unpublished candidate with `createPlayer` → `startCommand` → checkpoint validation → `seek`. Reuse existing trace checks and `isRunBoundary`; preserve the old session on failure. Validate the requested activity plus shared ID ambiguity, not unrelated definitions. Successful explicit saved-input load clears selection.
-- [ ] Add the now-real learning.ts contract path to both mirrors, with its accepted invariant/test pointer.
-- [ ] Verify: focused test, `npm test`, `npm run typecheck`, `python scripts/check-context.py`, `git diff --check`; expected all PASS/exit 0.
-- [ ] Commit the Task 1 files as `feat: add shared learning lifecycle and authored activities` after PASS.
+- [x] Write `activity preparation preserves the prior session on failure`: from a selected mid-run graph, bad input/command, thrown or malformed/513-step trace, wrong engine version, duplicate options/missing key and checkpoint/event mismatch retain input/resting/steps/ordinal/selection/activity references and show an error. Valid guide starts at 0; challenge at its checkpoint; both clear selection. Invalid content must not disable unrelated valid activities or Explore.
+- [x] Write `one pending attempt produces one result`: correct/incorrect emit the right objective/version/choice/outcome at injected time 1000 and seek to checkpoint+1. Reveal emits none. Stale token/run, unknown option, rewound submission, duplicate submit and submit after reveal/exit emit nothing and cannot unlock another activity. New-token retry clears feedback; Restart retains token/status/ceiling.
+- [x] Write `guide acknowledgements are not grades`: test heap checkpoints 0/1/3/8 and 0/1/4/6; graph 0/5/9/31 and 0/13/16/26. Continue only at the ceiling, opens the next range and advances one step. Finish records a segment once; both segments in either order emit one guide receipt. Viewing, one segment, repeated Finish and replay emit none. Exit retains finished segments; a changed guide version resets partial progress.
+- [x] Write `learning preserves Explore and boundary rules`: active seek clamps at its ceiling; ordinary Explore invalid-seek errors remain. An ordered intermediate heap rejects start/load/retry, while 0/final allow it. Start/replace/load outside Explore reject; selection/rewind work. Mode exit preserves snapshot/selection and abandons the gate without evidence; clicking the already active layer is a no-op.
+- [x] Run `node --test tests/learning.test.ts` and record behavioral RED. Implement the minimum transitions/content, preparing an unpublished candidate with `createPlayer` → `startCommand` → checkpoint validation → `seek`. Reuse existing trace checks and `isRunBoundary`; preserve the old session on failure. Validate the requested activity plus shared ID ambiguity, not unrelated definitions. Successful explicit saved-input load clears selection.
+- [x] Add the now-real learning.ts contract path to both mirrors, with its accepted invariant/test pointer.
+- [x] Verify: focused test, `npm test`, `npm run typecheck`, `python scripts/check-context.py`, `git diff --check`; expected all PASS/exit 0.
+- [x] Commit the Task 1 files as `feat: add shared learning lifecycle and authored activities` after PASS.
 
 ### Task 2: bounded local storage
 
@@ -226,6 +226,6 @@ documents repeated development setup/cleanup; [HTML Web Storage](https://html.sp
 defines storage exceptions and the lack of cross-context locking. Keep replay
 free of writes/grades, catch storage failures and retain the accepted single-tab limit.
 
-**Next gate:** The owner reviews and accepts this written plan. Native is already
-chosen; do not ask for an execution method again. Then begin Task 1 in the same
-branch/worktree. No intermediate planning PR is needed.
+**Execution receipt:** The owner accepted this written plan and Native execution
+on 2026-10-17. Execute all tasks in the same branch/worktree, then present one
+completed feature PR. No intermediate planning PR is needed.

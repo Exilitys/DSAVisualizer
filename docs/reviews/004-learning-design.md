@@ -2,7 +2,7 @@
 
 **Status.** Specification and diagram accepted 2026-10-16 by @Exilitys through
 "Accept specification and diagram", reviewed at `0ff8f4a`. The checks below
-remain design evidence; application implementation has not started.
+remain design evidence; application implementation follows the accepted Native build plan.
 **Specification.** [Slice 004, version 1](../specs/004-learning-challenges.md).
 
 ## Requirement and builder checks

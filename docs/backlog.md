@@ -8,7 +8,7 @@ This file routes next work; it does not replace that spec or a build plan.
 ## Next
 
 1. Owner review of [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) to development, bundling the accepted spec/plan, implementation and [measured evidence](reviews/003-graph-traversal.md).
-2. Review the draft [Native learning build plan](superpowers/plans/2026-10-17-learning-challenges.md). The owner accepted the [learning specification](specs/004-learning-challenges.md) and [flow](diagrams/learning-challenges.html) on 16 October 2026; implementation follows plan acceptance. Complete this shared slice before the provider independent tutor with Ollama for development.
+2. Execute the accepted [Native learning build plan](superpowers/plans/2026-10-17-learning-challenges.md), accepted on 17 October 2026. Keep the shared learning implementation and evidence in one feature PR to development, then proceed to the provider independent tutor with Ollama.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.
