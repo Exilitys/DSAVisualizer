@@ -17,6 +17,7 @@ contract path list used by the root router and any later hook.
 | Heap commands start at original/completed boundaries | D-007 | Player boundary checks and runtime evidence. |
 | Graph neighbors follow node creation order; frontier and return steps rewind exactly | Slice 003 | Graph engine/player tests and [runtime evidence](../reviews/003-graph-traversal.md). |
 | Learning gates bound every advance path; attempts correlate to content version and trace | [Slice 004](../specs/004-learning-challenges.md) | `tests/learning.test.ts`; browser/timer evidence follows implementation. |
+| Local evidence is bounded, versioned and resettable; storage failure retains memory | Slice 004 section 10 | `tests/learning-storage.test.ts`; no storage writes on read. |
 | Tutor replies are validated, correlated, and unable to mutate runs directly | Tutor contract | Route and stale-response checks in implementation. |
 | Declared context paths are real; diagram evidence matches its HTML | Context integrity | `python scripts/check-context.py` is runnable now. |
 
@@ -32,6 +33,7 @@ docs/architecture/
 src/core/lesson.ts
 src/core/player.ts
 src/core/learning.ts
+src/core/learning-storage.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
 src/lessons/graph/engine.ts

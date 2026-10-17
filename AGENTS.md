@@ -58,6 +58,7 @@ docs/architecture/
 src/core/lesson.ts
 src/core/player.ts
 src/core/learning.ts
+src/core/learning-storage.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
 src/lessons/graph/engine.ts

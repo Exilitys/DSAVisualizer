@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test tests/heap-slice.test.ts tests/playback.test.ts tests/graph-slice.test.ts tests/graph-player.test.ts tests/graph-layout.test.ts tests/learning.test.ts",
+    "test": "node --test tests/heap-slice.test.ts tests/playback.test.ts tests/graph-slice.test.ts tests/graph-player.test.ts tests/graph-layout.test.ts tests/learning.test.ts tests/learning-storage.test.ts",
     "check:context": "python scripts/check-context.py"
   },
   "dependencies": {
