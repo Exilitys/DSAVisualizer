@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "sequence",
+  "input": "C:\\Users\\jonthan carlo\\.codex\\worktrees\\heap-insertion\\ForgeHacks\\docs\\diagrams\\contextual-tutor.sequence.json",
+  "output": "C:\\Users\\jonthan carlo\\.codex\\worktrees\\heap-insertion\\ForgeHacks\\docs\\diagrams\\contextual-tutor.html",
+  "specification": {
+    "sha256": "d6a7925ffb3bf56110dd3e2dbf4ab66baa73fcad138fb1fcf37ef6ae9197b30a",
+    "bytes": 2909
+  },
+  "artifact": {
+    "sha256": "369e40c1db9cbc47fa923dd0ff32814169503100a048bb17f393f57e5f4d9ce4",
+    "bytes": 707648
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}
