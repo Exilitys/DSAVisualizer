@@ -181,7 +181,7 @@ The owner accepted this specification and diagram on 2026-10-17. Before implemen
 
 ## 14. Open questions
 
-None. The owner answered both policy questions on 2026-10-17; D-501 and D-502 record the choices. The owner accepted the whole packet on 2026-10-17; written build-plan review is next.
+None. The owner answered both policy questions on 2026-10-17; D-501 and D-502 record the choices. The owner accepted the whole packet on 2026-10-17; the Native build plan was subsequently accepted on 2026-10-17, reviewed at `24a7d8dc0b86c1afc8dc659ae75118f368f3cf23`.
 
 Model tag and live runtime measurements remain unestablished environment evidence, not a secretly selected product decision. The local API was unreachable during the draft check on 2026-10-17; use its installed model inventory before choosing a live test profile.
 

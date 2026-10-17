@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans for the owner's preserved Native method. Implement task by task with TDD, then one fresh whole-branch review. Steps use checkbox (`- [ ]`) syntax.
 
-**Status:** Draft for owner review, 2026-10-17. Specification acceptance authorizes this plan, not implementation. No task below has started.
+**Status:** Accepted 2026-10-17 by @Exilitys through "Accept plan; start Native execution (Recommended)", reviewed at `24a7d8dc0b86c1afc8dc659ae75118f368f3cf23`. Native implementation is in progress.
 **Goal:** Ground the shared tutor in the exact heap or graph state, using local Ollama and reviewed, validated proposals without bypassing learning or replacement guards.
 **Architecture:** Retain the normalized command in the existing player, then reconstruct requests through the real pure engines. A bounded Node route calls one provider; an injected browser controller fences stale replies and binds to the existing hook. Both adapters share one panel and preserve their current presentation ownership.
 **Tech Stack:** Existing Node >=24.15.0 <25, Next.js 16.3.8, React 19.3.0, TypeScript 5.9.3, R3F 9.8.1, Drei 10.7.9 and Three 0.186.1. Built-in fetch/Request/Response/AbortController, Node test runner; no dependency additions.
@@ -110,7 +110,7 @@ module; provider examples expose IDs/titles/objectives only. Stable IDs reuse
 `heap-tie`, `heap-order`, `graph-enqueue`, `graph-depth`; project their existing
 seed/command/objective instead of copying answer-bearing records.
 
-- [ ] Write `retained command describes the actual run`: assert rest command null; insert/extract/BFS/DFS retain normalized command; seek 0/final and Restart retain it; rejected starts preserve input/resting/steps/command references. The next operation's original input is the selected prior final state. Graph removal of its start commits a new resting reference with command null even though it reports the former command error.
+- [x] Write `retained command describes the actual run`: assert rest command null; insert/extract/BFS/DFS retain normalized command; seek 0/final and Restart retain it; rejected starts preserve input/resting/steps/command references. The next operation's original input is the selected prior final state. Graph removal of its start commits a new resting reference with command null even though it reports the former command error.
 
   ```typescript
   const resting=createPlayer(heapEngine,createPreset());
@@ -120,12 +120,12 @@ seed/command/objective instead of copying answer-bearing records.
   assert.deepEqual(active.command,{type:'insert',value:1});
   ```
 
-- [ ] Write `reconstruction uses original input and explicit rest`: compare rest and active insertion s0 snapshots for equality but assert distinct run descriptors; assert H4/H7 and graph queue/frame/edge/result cases against spec §16 oracles. Null command with nonzero ordinal, wrong version/snapshot/selection, noninteger/out-of-range ordinal, malformed/513-step traces must fail. Exercise shared player trace checks with injected malformed engines in existing player tests; never make production engines injectable through HTTP.
-- [ ] Write `context is a narrow current projection`: assert no `answerId`, `feedback`, options, future guide text, trace or attempt evidence in serialized verified context. For guide ceiling 8 rewound to ordinal 1, include current-event guidance only; include checkpoint text only when its ordinal is the selected ordinal. Activity versions/seeds/commands and objective IDs must match registered content; checkpoint is a real authored ordinal, not its array index. Pending challenge eligibility is determined from status even after rewind.
-- [ ] Write `proposal validation is complete and nonmutating`: accept bounded insert/extract/BFS/DFS or one catalog ID; reject arbitrary replacement inputs, unknown IDs, extra fields, unsafe/overlong content, duplicate/unknown references, >3 proposals, >20 references, >500 follow-up, or any proposal outside Explore. Both command and example dry-runs validate the full candidate without changing original player/learning objects. Reject ordered intermediate heap preview; graph intermediate preview is allowed but uncommitted. Include max-size/empty scenes and selected extracted result/edge.
-- [ ] Run focused tests with `node --test tests/tutor-context.test.ts tests/heap-slice.test.ts tests/graph-player.test.ts tests/learning.test.ts`; record behavioral RED.
-- [ ] Implement metadata and parsers/reconstruction/preview. Reconstruct active input with fresh `createPlayer` → `startCommand` → requested `seek`, checking explicit ordinal/ID; rest uses initial snapshot only. Reuse the ≤512 trace checks. For preview normalize from current snapshot; resolve example IDs internally. Reject whole invalid provider content, rather than keeping a safe subset. `validateTutorReply` verifies all correlation fields, then uses the same content/preview checks.
-- [ ] Add tutor-context.test.ts to the explicit package script and the two now-real pure tutor contract paths to both mirrors. Verify focused checks, `npm test`, `npm run typecheck`, `python scripts/check-context.py`, `git diff --check`; all exit 0. Commit as `feat: reconstruct tutor context and validate proposals`.
+- [x] Write `reconstruction uses original input and explicit rest`: compare rest and active insertion s0 snapshots for equality but assert distinct run descriptors; assert H4/H7 and graph queue/frame/edge/result cases against spec §16 oracles. Null command with nonzero ordinal, wrong version/snapshot/selection, noninteger/out-of-range ordinal, malformed/513-step traces must fail. Exercise shared player trace checks with injected malformed engines in existing player tests; never make production engines injectable through HTTP.
+- [x] Write `context is a narrow current projection`: assert no `answerId`, `feedback`, options, future guide text, trace or attempt evidence in serialized verified context. For guide ceiling 8 rewound to ordinal 1, include current-event guidance only; include checkpoint text only when its ordinal is the selected ordinal. Activity versions/seeds/commands and objective IDs must match registered content; checkpoint is a real authored ordinal, not its array index. Pending challenge eligibility is determined from status even after rewind.
+- [x] Write `proposal validation is complete and nonmutating`: accept bounded insert/extract/BFS/DFS or one catalog ID; reject arbitrary replacement inputs, unknown IDs, extra fields, unsafe/overlong content, duplicate/unknown references, >3 proposals, >20 references, >500 follow-up, or any proposal outside Explore. Both command and example dry-runs validate the full candidate without changing original player/learning objects. Reject ordered intermediate heap preview; graph intermediate preview is allowed but uncommitted. Include max-size/empty scenes and selected extracted result/edge.
+- [x] Run focused tests with `node --test tests/tutor-context.test.ts tests/heap-slice.test.ts tests/graph-player.test.ts tests/learning.test.ts`; record behavioral RED.
+- [x] Implement metadata and parsers/reconstruction/preview. Reconstruct active input with fresh `createPlayer` → `startCommand` → requested `seek`, checking explicit ordinal/ID; rest uses initial snapshot only. Reuse the ≤512 trace checks. For preview normalize from current snapshot; resolve example IDs internally. Reject whole invalid provider content, rather than keeping a safe subset. `validateTutorReply` verifies all correlation fields, then uses the same content/preview checks.
+- [x] Add tutor-context.test.ts to the explicit package script and the two now-real pure tutor contract paths to both mirrors. Verify focused checks, `npm test`, `npm run typecheck`, `python scripts/check-context.py`, `git diff --check`; all exit 0. Commit as `feat: reconstruct tutor context and validate proposals`.
 
 ### Task 2: bounded tutor route and local Ollama adapter
 
@@ -286,5 +286,5 @@ remain evidence to collect, not acceptance already earned.
 
 Native execution is preserved. Review reconstruction and metadata, timeout/slot
 cleanup, and the shared preview versus graph confirmation most closely. The
-owner must accept this written plan before any implementation task starts;
+owner accepted this written plan on 2026-10-17 at 24a7d8d;
 specification acceptance is recorded separately above. No extra planning PR.

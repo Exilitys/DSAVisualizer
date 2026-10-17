@@ -17,6 +17,7 @@ test('valid edit reruns but deleting the start commits resting input',()=>{
   const deleted=editGraph(rerun.input,{type:'remove-node',id:'A'});assert.ok(deleted.ok);
   const rest=replaceInput(rerun,graphEngine,deleted.value,command);
   assert.equal(rest.steps,null);assert.equal(rest.ordinal,0);
+  assert.equal(rest.command,null);assert.deepEqual(rerun.command,{type:'dfs',startId:'A'});
   assert.equal(rest.input.nodes.some(n=>n.id==='A'),false);
   assert.deepEqual(rest.resting.state.discoveryOrder,[]);
   assert.match(rest.error!,/start node/);
@@ -27,6 +28,7 @@ test('invalid input and broken edited traces preserve the entire prior scene',()
   const assertPreserved=(after:typeof before)=>{
     assert.equal(after.input,before.input);assert.equal(after.resting,before.resting);
     assert.equal(after.steps,before.steps);assert.equal(after.ordinal,13);
+    assert.equal(after.command,before.command);
     assert.equal(after.selectedId,'C');assert.ok(after.error);
   };
   assertPreserved(replaceInput(before,graphEngine,{...before.input,edges:[{id:'E1',a:'A',b:'A'}]},null));

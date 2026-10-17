@@ -2,6 +2,7 @@ import type { LessonEngine, Snapshot } from './lesson.ts';
 
 export type PlayerState<I,S> = {
   input: I;
+  command: unknown|null;
   resting: Snapshot<S>;
   steps: readonly Snapshot<S>[] | null;
   ordinal: number;
@@ -11,7 +12,7 @@ export type PlayerState<I,S> = {
 export function createPlayer<I,C,S>(engine: LessonEngine<I,C,S>, raw: unknown): PlayerState<I,S> {
   const input = engine.validateInput(raw);
   if (!input.ok) throw new Error(input.message);
-  return {input:input.value,resting:engine.createInitialSnapshot(input.value),steps:null,ordinal:0,selectedId:null,error:null};
+  return {input:input.value,command:null,resting:engine.createInitialSnapshot(input.value),steps:null,ordinal:0,selectedId:null,error:null};
 }
 export function currentSnapshot<I,S>(state: PlayerState<I,S>): Snapshot<S> {
   return state.steps ? state.steps[state.ordinal] : state.resting;
@@ -40,7 +41,7 @@ export function startCommand<I,C,S>(state: PlayerState<I,S>, engine: LessonEngin
       throw new Error('Invalid trace boundaries.');
     const ordinal = Math.min(1,steps.length-1);
     const selectedId = state.selectedId && engine.inspect(steps[ordinal],state.selectedId) ? state.selectedId : null;
-    return {...state,input:input.value,resting:steps[0],steps,ordinal,selectedId,error:null};
+    return {...state,input:input.value,command:command.value,resting:steps[0],steps,ordinal,selectedId,error:null};
   } catch {
     return {...state,error:'The operation could not start. Your scene is preserved.'};
   }
@@ -54,7 +55,7 @@ export function replaceInput<I,C,S>(state:PlayerState<I,S>,engine:LessonEngine<I
   try {
     const input=engine.validateInput(rawInput);
     if(!input.ok) return {...state,error:input.message};
-    const candidate:PlayerState<I,S>={input:input.value,
+    const candidate:PlayerState<I,S>={input:input.value,command:null,
       resting:engine.createInitialSnapshot(input.value),steps:null,ordinal:0,
       selectedId:state.selectedId,error:null};
     if(selectedCommand===null) return selectEntity(candidate,engine,state.selectedId);

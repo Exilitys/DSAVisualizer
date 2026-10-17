@@ -34,6 +34,8 @@ src/core/lesson.ts
 src/core/player.ts
 src/core/learning.ts
 src/core/learning-storage.ts
+src/core/tutor.ts
+src/lessons/tutor.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
 src/lessons/graph/engine.ts
