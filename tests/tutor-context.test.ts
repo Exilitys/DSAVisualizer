@@ -23,6 +23,8 @@ test('tutor request parsing rejects extras, malformed identity, sizes and activi
   for(const patch of [{requestId:''},{runId:'x'.repeat(65)},{snapshotId:'bad id'},{ordinal:1.2},{ordinal:-1},
     {selectedIds:['H1','H2']},{selectedIds:['bad id']},{question:' '},{question:'x'.repeat(2001)},
     {mode:'execute'},{snapshot:{}},{model:'cloud'},{input:undefined},{command:undefined},
+    {learning:{mode:['explore'],activity:null}},
+    {learning:{mode:'challenge',activity:{kind:'challenge',id:'heap-swap',version:1,attemptId:'x',status:['pending']}}},
     {learning:{mode:'challenge',activity:{kind:'challenge',id:'heap-swap',version:1,attemptId:'x',status:'pending',answerId:'x'}}}])
     assert.equal(parseTutorRequest({...r,...patch}).ok,false,JSON.stringify(patch));
   assert.ok(parseTutorRequest({...r,question:'x'.repeat(2000)}).ok);

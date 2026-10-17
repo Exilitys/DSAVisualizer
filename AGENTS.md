@@ -63,6 +63,9 @@ src/core/learning.ts
 src/core/learning-storage.ts
 src/core/tutor.ts
 src/lessons/tutor.ts
+src/server/tutor.ts
+src/server/ollama.ts
+src/app/api/tutor/route.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
 src/lessons/graph/engine.ts

@@ -35,7 +35,7 @@ export function parseTutorRequest(raw:unknown):Validation<TutorRequest> {
     typeof raw.question!=='string'||!raw.question.trim()||raw.question.length>2000||
     (raw.mode!=='explain'&&raw.mode!=='hint')||('objectiveId' in raw&&!id(raw.objectiveId))||
     !object(raw.learning)||!only(raw.learning,['mode','activity'])||
-    !['explore','explain','challenge'].includes(String(raw.learning.mode)))return fail;
+    (raw.learning.mode!=='explore'&&raw.learning.mode!=='explain'&&raw.learning.mode!=='challenge'))return fail;
   const a=raw.learning.activity;
   if(a!==null) {
     if(!object(a)||!id(a.id)||!integer(a.version)||Number(a.version)<1)return fail;
@@ -44,7 +44,7 @@ export function parseTutorRequest(raw:unknown):Validation<TutorRequest> {
         !integer(a.checkpoint)||(a.status!=='active'&&a.status!=='finished'))return fail;
     } else if(a.kind==='challenge') {
       if(raw.learning.mode!=='challenge'||!only(a,['kind','id','version','attemptId','status'])||
-        !id(a.attemptId)||!['pending','graded','revealed'].includes(String(a.status)))return fail;
+        !id(a.attemptId)||(a.status!=='pending'&&a.status!=='graded'&&a.status!=='revealed'))return fail;
     } else return fail;
   }
   return {ok:true,value:raw as TutorRequest};
