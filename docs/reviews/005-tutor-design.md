@@ -1,6 +1,6 @@
 # Contextual tutor v1 design check
 
-**Status:** Version 1 ready for owner review, 17 October 2026. The owner decided D-501 and D-502; the whole Slice 005 packet is not yet accepted. No product source or implementation plan was written.
+**Status:** Version 1 accepted by @Exilitys on 17 October 2026 through "Accept specification and diagram (Recommended)", reviewed at `f2604fd039b6a8314ba6670da3cb10eca69dae51`. The [Native build plan](../superpowers/plans/2026-10-17-contextual-tutor.md) is drafted for a separate owner review gate; no product code is authorized by specification acceptance alone.
 
 **Packet:** [Slice 005 v1](../specs/005-contextual-tutor.md), [request and Apply diagram](../diagrams/contextual-tutor.html) and [editable source](../diagrams/contextual-tutor.sequence.json). This packet is on feature/contextual-tutor, based on learning head 4ff498c. PRs #8 and #9 remain open; no merge or additional PR is authorized by a generic Continue.
 
@@ -22,7 +22,7 @@ A fresh read-only builder reviewed the written draft. The two owner policy choic
 | Do command proposals reset graph layout and selection like examples? | Command Apply retains positions and still-inspectable selection. Example Apply uses explicit seed replacement, clearing selection/resetting graph positions while keeping camera. Failed preview/Apply preserves the old scene. | Adapter behavior would diverge from ordinary operations unless regression journeys catch it. |
 | Can a cancelled call free its slot merely because its result is fenced off? | No. The single application transport slot remains occupied until fetch/body cleanup settles. Deadline/cancellation immediately invalidates display, but cannot prove remote GPU computation stopped. | A misbehaving adapter can keep the local service busy; authored fallback stays usable. |
 
-These are draft implementation proposals or clarifications of accepted behavior, not recorded owner acceptance. No additional product question was identified. The owner has since resolved D-501/D-502.
+These resolutions were included in version 1 before its owner acceptance. No additional product question was identified. The owner has since resolved D-501/D-502.
 
 The draft stress pass also checked: pending challenge rewind cannot unlock AI accidentally; Apply stays in Explore and respects the true heap boundary; graph uses one final Keep/Apply dialog; selected extracted items can still be referenced; a change away and back invalidates old exchange IDs; unsafe output is rejected as a whole; no future trace/answer data reaches the provider; cancellation releases transport resources before another provider request; guest cookie limits make no deployment abuse guarantee. The fixed live evaluation lists 20 provider-answer questions. Pending-policy and cancellation checks are additional and cannot be counted as completed model answers.
 
@@ -46,6 +46,6 @@ Receipts: [delivery](../diagrams/contextual-tutor.delivery.json), [validation](.
 
 ## Owner decisions and packet gate
 
-On 17 October 2026, @Exilitys answered D-501: "Authored guidance until Submit/Reveal (Recommended)" and D-502: "Curated examples plus validated commands (Recommended)". Version 1 records those choices, removes conditional policy branches and updates the diagram policy card. It also aligns AC-7 with the separate pending-policy check and the timeout row with transport cleanup; no other technical decision changes. The answers settle these policies; they do not accept the complete packet or a build plan.
+On 17 October 2026, @Exilitys answered D-501: "Authored guidance until Submit/Reveal (Recommended)" and D-502: "Curated examples plus validated commands (Recommended)". Version 1 records those choices, removes conditional policy branches and updates the diagram policy card. It also aligns AC-7 with the separate pending-policy check and the timeout row with transport cleanup; no other technical decision changes. The policy answers settled these choices. In a subsequent reply, @Exilitys explicitly accepted version 1 and its diagram, reviewed at `f2604fd039b6a8314ba6670da3cb10eca69dae51`; build-plan acceptance remains separate.
 
-Review reconstruction/correlation, preview versus Apply, and cleanup/concurrency most closely. Request acceptance of version 1 and its diagram before writing a build plan. The root workflow requires a separately reviewed plan before implementation. Keep one completed feature PR per slice, and do not merge the existing PRs without an owner merge instruction.
+Review reconstruction/correlation, preview versus Apply, and cleanup/concurrency most closely. Specification/diagram acceptance is recorded; the five-task Native build plan is now drafted for owner review. Its author checked spec coverage, interface consistency and failure cases; read-only inventories informed file/caller mapping without delegating that self-review. No implementation has started. The root workflow requires a separately reviewed plan before implementation. Keep one completed feature PR per slice, and do not merge the existing PRs without an owner merge instruction.

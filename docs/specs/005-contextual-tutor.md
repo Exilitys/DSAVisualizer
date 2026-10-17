@@ -1,10 +1,10 @@
 # Slice 005: contextual tutor and reviewed actions
 
-**Status.** Ready for owner review, 2026-10-17. The owner decided D-501 and D-502; the complete packet is not yet accepted.
+**Status.** Accepted 2026-10-17 by @Exilitys through "Accept specification and diagram (Recommended)"; version 1 reviewed at `f2604fd039b6a8314ba6670da3cb10eca69dae51`. The accepted diagram is bound by its [delivery receipt](../diagrams/contextual-tutor.delivery.json).
 **Owner.** Jonathan Carlo (@Exilitys).
-**Version.** 1, specification and diagram review packet.
+**Version.** 1, accepted specification and diagram.
 **Source.** [Product PRD](../../prd.md), FR10/FR12/FR17 and AI section; [technical tutor contract](../prd/prd.md#7-interfaces-and-seams), D-003/D-006; [learning slice](004-learning-challenges.md).
-**Baseline.** Learning head `4ff498cc746bfd41a1a9dd6af1952bb7d462544a`. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) and [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9) remain open. Draft on feature/contextual-tutor, with no extra PR until the completed slice.
+**Baseline.** Learning head `4ff498cc746bfd41a1a9dd6af1952bb7d462544a`. [PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) and [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9) remain open. Accepted packet on feature/contextual-tutor, with no extra PR until the completed slice.
 **Diagram.** [Request and reviewed Apply](../diagrams/contextual-tutor.html), with [editable source](../diagrams/contextual-tutor.sequence.json) and [design check](../reviews/005-tutor-design.md). The specification and diagram form one review packet; their acceptance precedes the written build plan.
 
 ## 1. Problem
@@ -47,11 +47,11 @@ Adjacent required work: authored Browse relationships, deployment provider/model
 
 ### D-503: preserve the accepted engine and lesson ownership
 
-- **Chosen.** Draft implementation proposal: retain the normalized command alongside player run metadata. Browser session identity owns runId; engine/Snapshot interfaces and deterministic IDs remain unchanged. A pure server lesson registry imports the two real engines and narrowly projected tutor guidance.
+- **Chosen.** Retain the normalized command alongside player run metadata. Browser session identity owns runId; engine/Snapshot interfaces and deterministic IDs remain unchanged. A pure server lesson registry imports the two real engines and narrowly projected tutor guidance.
 - **Rejected.** Deriving commands from events; trusting a browser-supplied snapshot; importing React scenes on the server.
 - **Because.** The player currently stores original input and trace, but loses the command. A server must distinguish a resting s0 from an active command's s0 and reconstruct the same state.
 - **Revisit when.** A third actual lesson exposes a different reconstruction requirement.
-- **Provenance.** Agent proposal 2026-10-17 for review with @Exilitys, pending this packet's acceptance. This amends the player metadata contract only; algorithms and Snapshot stay intact.
+- **Provenance.** Agent proposal accepted 2026-10-17 with @Exilitys as part of version 1 and its diagram, reviewed at `f2604fd039b6a8314ba6670da3cb10eca69dae51`. This amends the player metadata contract only; algorithms and Snapshot stay intact.
 
 ### D-504: keep Apply inside the existing learning guards
 
@@ -76,7 +76,7 @@ No chat or question enters learning-storage or analytics. No provider credential
 
 ## 7. Requests, reconstruction and provider seam
 
-Refine the existing TutorRequest/TutorReply shapes as follows, pending acceptance. `command: null` explicitly means rest and requires ordinal 0. A non-null command reconstructs an active trace from original input, including active ordinal 0. Both use the actual reconstructed snapshot ID. IDs are nonempty ASCII identity tokens, at most 64 characters; versions must exactly match the registered engine/content.
+Refine the existing TutorRequest/TutorReply shapes as follows. `command: null` explicitly means rest and requires ordinal 0. A non-null command reconstructs an active trace from original input, including active ordinal 0. Both use the actual reconstructed snapshot ID. IDs are nonempty ASCII identity tokens, at most 64 characters; versions must exactly match the registered engine/content.
 
 ```typescript
 type TutorActivity = null
@@ -169,7 +169,7 @@ No cold-entry, physical phone, sustained GPU rate, universal correctness or lear
 
 The first implementation milestone reconstructs one resting and one active heap request, returns a validated local Ollama explanation and rejects a late reply after seek. Then apply the same seam to graph, proposals/examples, failures and the complete evaluation. **Done when.** All AC-1 through AC-9 pass for both modules with real Ollama evidence and fresh review. The completed slice is one feature PR to development under Native execution; this milestone does not reduce either module's acceptance scope.
 
-D-501/D-502 are resolved. Before implementation: obtain named owner acceptance of this checked specification and diagram, then write and review the build plan. No product code, dependency installation or new PR is part of drafting this packet.
+The owner accepted this specification and diagram on 2026-10-17. Before implementation, write and obtain owner review of the Native build plan. Keep planning and implementation in the feature branch with one completed PR per slice.
 
 ## 13. Deferred
 
@@ -181,7 +181,7 @@ D-501/D-502 are resolved. Before implementation: obtain named owner acceptance o
 
 ## 14. Open questions
 
-None. The owner answered both policy questions on 2026-10-17; D-501 and D-502 record the choices. Whole-packet acceptance remains the next gate.
+None. The owner answered both policy questions on 2026-10-17; D-501 and D-502 record the choices. The owner accepted the whole packet on 2026-10-17; written build-plan review is next.
 
 Model tag and live runtime measurements remain unestablished environment evidence, not a secretly selected product decision. The local API was unreachable during the draft check on 2026-10-17; use its installed model inventory before choosing a live test profile.
 
