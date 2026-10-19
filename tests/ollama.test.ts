@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createOllamaProvider} from '../src/server/ollama.ts';
 import {reconstructTutorContext} from '../src/lessons/tutor.ts';
 import {heapEngine,createPreset} from '../src/lessons/heap/engine.ts';
+import {graphEngine,createGraphPreset} from '../src/lessons/graph/engine.ts';
 import type {TutorRequest} from '../src/core/tutor.ts';
 
 const request:TutorRequest={requestId:'r1',runId:'run1',lessonId:'heap',lessonVersion:heapEngine.version,input:createPreset(),command:null,
@@ -21,8 +22,28 @@ test('Ollama sends only verified current context with bounded nonstreaming JSON 
   }));
   assert.deepEqual(await provider(context,signal),answer);
   const body=captured! as Record<string,unknown>;assert.equal(body.model,'installed:local');assert.equal(body.stream,false);
+  const messages=body.messages as {role:string;content:string}[];
+  assert.deepEqual(messages.at(-1),{role:'user',content:context.question});
   assert.deepEqual(body.options,{temperature:0,num_predict:512});assert.equal(typeof body.format,'object');assert.equal('tools' in body,false);
+  const format=body.format as {properties:{referencedIds:{items:{enum:string[]}}}};
+  assert.deepEqual(format.properties.referencedIds.items.enum,['H1','H2','H3','H4','H5','H6','H7']);
   const sent=JSON.stringify(body);for(const hidden of ['answerId','feedback','checkpoints','input','attemptId'])assert.equal(sent.includes(`"${hidden}"`),false,hidden);
+});
+
+test('Ollama reference grammar includes removed results and graph edges, and closes empty scenes',async()=>{
+  for(const r of [{...request,command:{type:'extract'},ordinal:1,snapshotId:'s1'},
+    {...request,lessonId:'graph' as const,lessonVersion:graphEngine.version,input:createGraphPreset(),selectedIds:['E2']},
+    {...request,input:{items:[],nextId:1},selectedIds:[]}]) {
+    const rebuilt=reconstructTutorContext(r);assert.ok(rebuilt.ok);let format:any;
+    await createOllamaProvider({baseUrl:'http://localhost:11434',model:'local'},fake(async(_url,init)=>{
+      format=JSON.parse(String(init?.body)).format;return response({...answer,referencedIds:[]});
+    }))(rebuilt.value,new AbortController().signal);
+    const refs=format.properties.referencedIds;
+    if(r.lessonId==='graph')assert.ok(refs.items.enum.includes('E2'));
+    else if(r.selectedIds.length)assert.ok(refs.items.enum.includes('H1'));
+    else assert.equal(refs.maxItems,0);
+    assert.equal(refs.items.enum?.includes('heap-tie')??false,false);
+  }
 });
 
 test('Ollama rejects cloud/unconfigured calls without network or sensitive error content',async()=>{

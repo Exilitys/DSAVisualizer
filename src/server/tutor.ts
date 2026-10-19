@@ -58,7 +58,9 @@ export function createTutorHandler(options:{provider:TutorProvider;now?:()=>numb
       try {
         aborter.signal.throwIfAborted();
         const origin=request.headers.get('origin');
-        if(origin&&origin!==new URL(request.url).origin)return error(400,'invalid_request');
+        const internal=new URL(request.url),authority=new URL(`${internal.protocol}//${request.headers.get('host')??internal.host}`);
+        if(authority.username||authority.password||authority.pathname!=='/'||authority.search||authority.hash||
+          (origin&&origin!==authority.origin))return error(400,'invalid_request');
         const raw=await readBoundedJson(request.body,32768,aborter.signal);
         const checked=parseTutorRequest(raw);if(!checked.ok)return error(400,'invalid_request');
         parsed=checked.value;

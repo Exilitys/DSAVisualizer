@@ -14,6 +14,16 @@ const request=(raw:unknown=scene(),headers:HeadersInit={cookie:cookie()},signal?
   {method:'POST',headers,body:typeof raw==='string'?raw:JSON.stringify(raw),signal});
 const tick=()=>new Promise<void>(resolve=>setImmediate(resolve));
 
+test('origin validation uses the incoming host when Next canonicalizes the internal URL',async()=>{
+  const post=createTutorHandler({provider:async()=>answer});
+  const incoming=new Request('http://localhost:3000/api/tutor',{method:'POST',body:JSON.stringify(scene()),
+    headers:{host:'127.0.0.1:3000',origin:'http://127.0.0.1:3000'}});
+  assert.equal((await post(incoming)).status,200);
+  const foreign=new Request('http://localhost:3000/api/tutor',{method:'POST',body:JSON.stringify(scene()),
+    headers:{host:'127.0.0.1:3000',origin:'http://localhost:3000'}});
+  assert.equal((await post(foreign)).status,400);
+});
+
 test('bounded JSON counts actual bytes including split UTF-8 and cancels overflow',async()=>{
   const bytes=new TextEncoder().encode(JSON.stringify('é'));
   const body=new ReadableStream<Uint8Array>({start(c){for(const byte of bytes)c.enqueue(new Uint8Array([byte]));c.close();}});

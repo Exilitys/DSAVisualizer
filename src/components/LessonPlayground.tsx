@@ -12,6 +12,7 @@ import {heapLearning} from '../lessons/heap/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
 import {LessonNavigation} from './LessonNavigation';
 import {LearningPanel} from './LearningPanel';
+import {TutorPanel,describeTutorCommand} from './TutorPanel';
 
 const HeapScene = dynamic(()=>import('../lessons/heap/HeapScene'),{
   ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>,
@@ -126,6 +127,7 @@ export default function LessonPlayground() {
         <SemanticHeap snapshot={snapshot} selectedId={player.selectedId} select={select} />
       </div>
       <aside className="details-column"><InspectionPanel inspection={inspection} />
+        <TutorPanel lesson={lesson} contextCaption={describeTutorCommand(player.command)} guidance={player.command===null?'Choose an operation or inspect an item in this resting min heap.':explainStep(snapshot)}/>
         <section className="panel code" aria-label="Heap pseudocode"><p className="eyebrow">Follow the current decision</p><h2>{extraction ? 'Sift down' : 'Sift upward'}</h2>
           <ol>{getPseudocode(snapshot).map(line=><li key={line.id} aria-current={snapshot.event.codeLineId===line.id ? 'step' : undefined}>{line.text}</li>)}</ol>
           <p className="muted">{extraction ? 'Children: 2 × index + 1 and 2 × index + 2. Choose the smaller; prefer the left on equality.' : 'Parent index = ⌊(index − 1) / 2⌋. Only a smaller value swaps.'}</p>

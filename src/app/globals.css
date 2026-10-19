@@ -176,3 +176,20 @@ dialog::backdrop { background:#17203366; }
 .storage-notice:empty { margin:0; }
 .graph-logical { border:0; padding:0; margin:0; min-width:0; display:flex; flex-direction:column; gap:12px; }
 @media(max-width:700px) { .challenge-cards { grid-template-columns:1fr; } }
+.tutor { min-width:0; }
+.tutor .section-heading .eyebrow { margin:0; }
+.tutor-context { color:var(--selected); font-size:12px; overflow-wrap:anywhere; }
+.tutor-notice { border-left:3px solid var(--selected); padding-left:12px; font-size:13px; }
+.tutor form { display:flex; flex-direction:column; gap:8px; margin-top:16px; }
+.tutor label { display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted); }
+.tutor textarea,.tutor select { width:100%; min-width:0; font:inherit; padding:10px; border:1px solid var(--border); border-radius:8px; color:var(--ink); background:var(--surface); }
+.tutor textarea { resize:vertical; min-height:96px; }
+.tutor select { min-height:44px; }
+.tutor-form-actions { display:flex; align-items:end; gap:8px; }
+.tutor-form-actions label { flex:1; }
+.tutor-example { margin-top:12px; }
+.tutor-status p { margin:12px 0; font-size:13px; }
+.tutor-reply { border-top:1px solid var(--border); margin-top:16px; padding-top:16px; }
+.tutor-reply p { white-space:pre-wrap; overflow-wrap:anywhere; font-size:14px; }
+.tutor-reply .learning-actions { margin-bottom:12px; }
+.tutor-preview { overflow-wrap:anywhere; font-size:14px; }
