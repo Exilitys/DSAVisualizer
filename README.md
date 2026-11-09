@@ -28,6 +28,13 @@ and [Native plan](docs/superpowers/plans/2026-10-17-learning-challenges.md).
 measurements and remaining limits. [PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9)
 targets development for owner review and merge.
 
+The contextual tutor is implemented on `feature/contextual-tutor` under the accepted
+[Slice 005](docs/specs/005-contextual-tutor.md) and [Native plan](docs/superpowers/plans/2026-10-17-contextual-tutor.md).
+[Tutor verification](docs/reviews/005-contextual-tutor.md) records a live local-model run:
+20/20 schema-valid answers and 18/20 agreements with the verified state. Mounted-browser
+journeys at 360/1280 px and the owner's reading of the answers remain open, so the feature
+PR stays a draft until they are recorded.
+
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,
 shared visual primitives with a scene adapter per lesson, and immutable
@@ -44,6 +51,10 @@ snapshots for replay. The accepted technical specification owns the contracts.
 - [Extraction and playback verification](docs/reviews/002-heap-extraction-playback.md)
 - [Editable graph, BFS and DFS](docs/specs/003-graph-traversal.md)
 - [Graph verification](docs/reviews/003-graph-traversal.md)
+- [Contextual tutor and reviewed actions](docs/specs/005-contextual-tutor.md)
+- [Tutor build plan](docs/superpowers/plans/2026-10-17-contextual-tutor.md)
+- [Tutor design check](docs/reviews/005-tutor-design.md)
+- [Tutor verification](docs/reviews/005-contextual-tutor.md)
 - [Architecture and state flow](docs/architecture/system.md)
 
 Groundwork establishes the accepted project context, development lanes, and
@@ -93,8 +104,10 @@ git diff --check
 ```
 
 The engine/player and playback tests use Node's built in runner. Type checking
-generates Next's route types before checking TypeScript. No AI service is needed
-for this slice.
+generates Next's route types before checking TypeScript. The tutor route needs a
+local Ollama daemon and an installed model tag in an ignored `.env.local`; without
+one, authored guidance, playback and saved practice still work and the panel
+reports the fallback. No cloud provider is used.
 
 ## Project context
 
@@ -123,7 +136,8 @@ are separate commands in the package manifest.
 
 PR #1 established the brief and was merged into `development` on 5 October
 2026. PR #2 accepted the technical specification and context. Heap insertion
-was merged in PR #4; extraction/autoplay was merged in PR #7. Graph traversal uses `feature/graph-traversal`.
+was merged in PR #4; extraction/autoplay was merged in PR #7. Graph traversal uses `feature/graph-traversal`,
+learning uses `feature/learning-challenges`, and the contextual tutor uses `feature/contextual-tutor`.
 The owner requested fewer PRs: bundle planning and context updates with each
 feature, record their acceptance in chat, then open one completed PR to `development`.
 User acceptance is required before merging a

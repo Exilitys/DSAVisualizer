@@ -1,0 +1,100 @@
+{
+  "purpose": "Explicit development diagnostic; not production logging",
+  "durationMs": 1486,
+  "request": {
+    "requestId": "example-diagnostic",
+    "runId": "graph-dfs",
+    "lessonId": "graph",
+    "lessonVersion": "1.0.0",
+    "input": {
+      "nodes": [
+        {
+          "id": "A",
+          "creationOrder": 1
+        },
+        {
+          "id": "B",
+          "creationOrder": 2
+        },
+        {
+          "id": "C",
+          "creationOrder": 3
+        },
+        {
+          "id": "D",
+          "creationOrder": 4
+        },
+        {
+          "id": "E",
+          "creationOrder": 5
+        },
+        {
+          "id": "F",
+          "creationOrder": 6
+        }
+      ],
+      "edges": [
+        {
+          "id": "E1",
+          "a": "A",
+          "b": "B"
+        },
+        {
+          "id": "E2",
+          "a": "A",
+          "b": "C"
+        },
+        {
+          "id": "E3",
+          "a": "B",
+          "b": "D"
+        },
+        {
+          "id": "E4",
+          "a": "C",
+          "b": "D"
+        },
+        {
+          "id": "E5",
+          "a": "D",
+          "b": "E"
+        }
+      ],
+      "nextNodeId": 7,
+      "nextEdgeId": 6
+    },
+    "command": {
+      "type": "dfs",
+      "startId": "A"
+    },
+    "ordinal": 1,
+    "snapshotId": "s1",
+    "selectedIds": [
+      "A"
+    ],
+    "question": "Choose one listed curated example ID and include it in proposedCommands as an example proposal for me to review. Explain what it teaches.",
+    "mode": "explain",
+    "learning": {
+      "mode": "explore",
+      "activity": null
+    }
+  },
+  "raw": {
+    "model": "llama3.1:8b",
+    "created_at": "2026-10-19T13:57:19.8877629Z",
+    "message": {
+      "role": "assistant",
+      "content": "{\n  \"explanation\": \"This example teaches how to compare shortest distance and DFS tree depth.\",\n  \"referencedIds\": [\"graph-depth\"],\n  \"proposedCommands\": [\n    {\n      \"kind\": \"example\",\n      \"exampleId\": \"graph-depth\"\n    }\n  ]\n}"
+    },
+    "done": true,
+    "done_reason": "stop",
+    "total_duration": 1441499100,
+    "load_duration": 14724400,
+    "prompt_eval_count": 779,
+    "prompt_eval_cached_count": 778,
+    "prompt_eval_duration": 293558000,
+    "eval_count": 64,
+    "eval_duration": 1099667000
+  },
+  "error": "Error: invalid_provider_response"
+}

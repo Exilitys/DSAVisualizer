@@ -13,3 +13,9 @@ The accepted [learning slice](../docs/specs/004-learning-challenges.md) owns act
 [learning.ts](core/learning.ts) owns pure activity transitions; [learning-storage.ts](core/learning-storage.ts) owns browser persistence.
 [useLessonPlayer.ts](components/useLessonPlayer.ts) binds the existing timer and storage; [LearningPanel.tsx](components/LearningPanel.tsx) is shared by both adapters.
 Keep grading and persistence outside React updater functions. Current learning checks are in [the report](../docs/reviews/004-learning-challenges.md).
+
+The accepted [tutor slice](../docs/specs/005-contextual-tutor.md) owns the request, provider and Apply contracts.
+[tutor.ts](core/tutor.ts) owns the request and reply types; [lessons/tutor.ts](lessons/tutor.ts) rebuilds the verified context and validates replies;
+[server/tutor.ts](server/tutor.ts) enforces the route limits and [server/ollama.ts](server/ollama.ts) is the only provider call.
+[components/tutor.ts](components/tutor.ts) fences exchanges; [TutorPanel.tsx](components/TutorPanel.tsx) is shared by both adapters.
+Only Explore may apply a proposal, and presentation must not bypass the learner review dialog. Current tutor checks are in [the report](../docs/reviews/005-contextual-tutor.md).

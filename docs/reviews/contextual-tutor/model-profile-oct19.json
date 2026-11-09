@@ -1,0 +1,41 @@
+{
+  "observedAt": "2026-10-19T20:51:09.9061924+07:00",
+  "version": {
+    "version": "0.40.3"
+  },
+  "models": {
+    "models": [
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 5271715839,
+        "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-19T21:01:07.516938+07:00",
+        "size_vram": 5271715839,
+        "context_length": 4096,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU, 8192 MiB, 5387 MiB, 2634 MiB, 581.29",
+  "cpu": {
+    "Name": "AMD Ryzen 9 5900HX with Radeon Graphics        ",
+    "NumberOfCores": 8,
+    "NumberOfLogicalProcessors": 16
+  },
+  "memory": {
+    "TotalVisibleMemorySize": 32932224,
+    "FreePhysicalMemory": 18798436
+  },
+  "cloudDisabled": "time=2026-10-19T20:44:23.626+07:00 level=INFO source=routes.go:2375 msg=\"Ollama cloud disabled: true\""
+}
