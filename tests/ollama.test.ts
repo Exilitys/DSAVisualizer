@@ -25,8 +25,9 @@ test('Ollama sends only verified current context with bounded nonstreaming JSON 
   const messages=body.messages as {role:string;content:string}[];
   assert.deepEqual(messages.at(-1),{role:'user',content:context.question});
   assert.deepEqual(body.options,{temperature:0,num_predict:512});assert.equal(typeof body.format,'object');assert.equal('tools' in body,false);
-  const format=body.format as {properties:{referencedIds:{items:{enum:string[]}}}};
+  const format=body.format as {properties:{referencedIds:{items:{enum:string[]};maxItems:number}}};
   assert.deepEqual(format.properties.referencedIds.items.enum,['H1','H2','H3','H4','H5','H6','H7']);
+  assert.equal(format.properties.referencedIds.maxItems,3);
   const sent=JSON.stringify(body);for(const hidden of ['answerId','feedback','checkpoints','input','attemptId'])assert.equal(sent.includes(`"${hidden}"`),false,hidden);
 });
 
