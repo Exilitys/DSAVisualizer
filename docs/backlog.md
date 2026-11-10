@@ -1,6 +1,6 @@
 # Next work and deferrals
 
-**Status:** Accepted 2026-10-05 by @Exilitys; reviewed at 220124f and merged in PR #2. Tutor state synced 9 November 2026.
+**Status:** Accepted 2026-10-05 by @Exilitys; reviewed at 220124f and merged in PR #2. Tutor state synced 10 November 2026.
 
 The source of release scope is the accepted [technical spec](prd/prd.md).
 This file routes next work; it does not replace that spec or a build plan.
@@ -10,7 +10,7 @@ This file routes next work; it does not replace that spec or a build plan.
 1. Owner review of [graph PR #8](https://github.com/Exilitys/DSAVisualizer/pull/8) to development, bundling the accepted spec/plan, implementation and [measured evidence](reviews/003-graph-traversal.md).
 2. Owner review of [learning PR #9](https://github.com/Exilitys/DSAVisualizer/pull/9) and the completed [learning implementation and evidence](reviews/004-learning-challenges.md), built under the [accepted Native plan](superpowers/plans/2026-10-17-learning-challenges.md). Keep one feature PR to development, then proceed to the provider independent tutor with Ollama.
 
-3. Owner review of the draft tutor PR on feature/contextual-tutor. The owner accepted the [Slice 005 v1 specification and diagram](specs/005-contextual-tutor.md) and the [Native plan](superpowers/plans/2026-10-17-contextual-tutor.md) on 17 October 2026 at 24a7d8d. Implementation and the local-model evaluation are recorded in the [tutor verification report](reviews/005-contextual-tutor.md): 20/20 schema-valid live answers, 18/20 agreements. Mounted-browser journeys at 360/1280 px, the owner's reading of the 20 answers, and target-learner evidence remain open, so the PR stays a draft.
+3. Owner review of [draft tutor PR #10](https://github.com/Exilitys/DSAVisualizer/pull/10) on `feature/contextual-tutor`. The owner accepted the [Slice 005 v1 specification and diagram](specs/005-contextual-tutor.md) and the [Native plan](superpowers/plans/2026-10-17-contextual-tutor.md) on 17 October 2026 at 24a7d8d. Implementation and the local-model evaluation are recorded in the [tutor verification report](reviews/005-contextual-tutor.md): 20/20 schema-valid live answers, 18/20 agreements. Mounted-browser journeys at 360/1280 px, the owner's reading of the 20 answers, and target-learner evidence remain open, so the PR stays a draft.
 
 The first slice's acceptance is defined by its insertion fixture and user
 journey. The owner accepted the written plan and Native execution on 6 October 2026.

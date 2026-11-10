@@ -81,6 +81,9 @@ test('content validation and previews use complete candidates without touching o
     {proposedCommands:[{kind:'command',command:{type:'extract',url:'bad'}}]}])
     assert.equal(validateTutorContent({...answer,...patch},c).ok,false,JSON.stringify(patch));
   assert.ok(validateTutorContent({...answer,explanation:'x'.repeat(3000),followUp:'x'.repeat(500)},c).ok);
+  const wide=context({...request(),input:{items:Array.from({length:15},(_,i)=>({id:`H${i+1}`,value:i+1})),nextId:16}});
+  assert.ok(validateTutorContent({...answer,referencedIds:Array.from({length:15},(_,i)=>`H${i+1}`)},wide).ok);
+  assert.equal(validateTutorContent({...answer,referencedIds:Array.from({length:16},(_,i)=>`H${i+1}`)},wide).ok,false);
   const guide={...r,learning:{mode:'explain' as const,activity:null}};
   assert.equal(validateTutorContent(reply,context(guide)).ok,false);
   assert.equal(previewTutorProposal(guide,{kind:'command',command:{type:'extract'}}).ok,false);

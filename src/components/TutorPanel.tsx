@@ -19,7 +19,7 @@ export function TutorPreviewDetails({preview}:{preview:TutorPreview}) {
   const edges=Array.isArray(input.edges)?input.edges.filter(object):null;
   return <div className="tutor-preview">
     <p><strong>{preview.title}</strong></p>
-    <p>{preview.kind==='example'?'Replace the scene with a curated example. Selection clears and graph layout resets.':'Use the current scene. Selection and graph layout stay when still applicable.'}</p>
+    <p>{preview.kind==='example'?(items?'Replace the heap with a curated example. Selection clears and the heap is rebuilt.':'Replace the graph with a curated example. Selection clears and graph layout resets.'):'Use the current scene. Selection and graph layout stay when still applicable.'}</p>
     <p><strong>{describeTutorCommand(preview.command)}</strong> · {preview.stepCount} steps including the initial scene.</p>
     {items&&<p>Heap input: {items.length?items.map(item=>`${String(item.id)}: ${String(item.value)}`).join(', '):'empty'}.</p>}
     {nodes&&<><p>Nodes: {nodes.map(node=>String(node.id)).join(', ')||'none'}.</p><p>Edges: {edges?.map(edge=>`${String(edge.a)}–${String(edge.b)}`).join(', ')||'none'}.</p></>}

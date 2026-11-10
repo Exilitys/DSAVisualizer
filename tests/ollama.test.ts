@@ -28,7 +28,7 @@ test('Ollama sends only verified current context with bounded nonstreaming JSON 
   const format=body.format as {properties:{referencedIds:{items:{enum:string[]};maxItems:number}}};
   assert.deepEqual(format.properties.referencedIds.items.enum,['H1','H2','H3','H4','H5','H6','H7']);
   assert.equal(format.properties.referencedIds.maxItems,3);
-  const sent=JSON.stringify(body);for(const hidden of ['answerId','feedback','checkpoints','input','attemptId'])assert.equal(sent.includes(`"${hidden}"`),false,hidden);
+  const sent=JSON.stringify(body);for(const hidden of ['answerId','feedback','checkpoints','input','attemptId','trace'])assert.equal(sent.includes(`"${hidden}"`),false,hidden);
 });
 
 test('Ollama reference grammar includes removed results and graph edges, and closes empty scenes',async()=>{

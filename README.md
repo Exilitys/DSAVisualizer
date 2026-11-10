@@ -32,8 +32,8 @@ The contextual tutor is implemented on `feature/contextual-tutor` under the acce
 [Slice 005](docs/specs/005-contextual-tutor.md) and [Native plan](docs/superpowers/plans/2026-10-17-contextual-tutor.md).
 [Tutor verification](docs/reviews/005-contextual-tutor.md) records a live local-model run:
 20/20 schema-valid answers and 18/20 agreements with the verified state. Mounted-browser
-journeys at 360/1280 px and the owner's reading of the answers remain open, so the feature
-PR stays a draft until they are recorded.
+journeys at 360/1280 px and the owner's reading of the answers remain open, so
+[PR #10](https://github.com/Exilitys/DSAVisualizer/pull/10) stays a draft until they are recorded.
 
 The build is solo, with 2–3 hours available per day. The selected technical
 direction is Next.js with React Three Fiber and an integrated tutor endpoint,

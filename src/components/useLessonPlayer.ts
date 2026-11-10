@@ -41,7 +41,8 @@ export function useLessonPlayer<I,C,S>(engine:LessonEngine<I,C,S>,initial:unknow
       const activity:TutorActivity=a?.kind==='guide'?{kind:a.kind,id:a.id,version:a.version,checkpoint:a.checkpoint,status:a.status}
         :a?.kind==='challenge'?{kind:a.kind,id:a.id,version:a.version,attemptId:a.attemptId,status:a.status}:null;
       return {runId:runIdentity.current.id,lessonId:engine.id as TutorScene['lessonId'],lessonVersion:engine.version,
-        input:p.input,command:p.command,ordinal:p.ordinal,snapshotId:currentSnapshot(p).id,selectedIds:p.selectedId?[p.selectedId]:[],learning:{mode:s.mode,activity}};
+        input:p.input,command:p.command,ordinal:p.ordinal,snapshotId:currentSnapshot(p).id,
+        selectedIds:p.selectedId&&engine.inspect(currentSnapshot(p),p.selectedId)?[p.selectedId]:[],learning:{mode:s.mode,activity}};
     },
     pause:controller.pause,changed:setTutor,fetcher:(...args)=>fetch(...args),id:()=>crypto.randomUUID(),
     schedule:(ms,callback)=>{const timer=setTimeout(callback,ms);return()=>clearTimeout(timer);},
