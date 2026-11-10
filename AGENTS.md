@@ -21,6 +21,9 @@ and decision explanations in their owning documents.
 | Graph verification | [Graph runtime and review evidence](docs/reviews/003-graph-traversal.md) |
 | Accepted learning slice | [Guides, predictions and local continuity](docs/specs/004-learning-challenges.md) |
 | Accepted learning build plan | [Learning implementation plan](docs/superpowers/plans/2026-10-17-learning-challenges.md) |
+| Accepted tutor slice | [Contextual tutor and reviewed actions](docs/specs/005-contextual-tutor.md) |
+| Accepted tutor build plan | [Native tutor build plan](docs/superpowers/plans/2026-10-17-contextual-tutor.md) |
+| Tutor verification and open gates | [Tutor evaluation evidence](docs/reviews/005-contextual-tutor.md) |
 | Architecture and data ownership | [Architecture review](docs/architecture/system.md) |
 | Invariants and contract paths | [Invariants](docs/architecture/invariants.md) |
 | Standards and library authority | [Development guide](docs/development.md) |
@@ -59,6 +62,11 @@ src/core/lesson.ts
 src/core/player.ts
 src/core/learning.ts
 src/core/learning-storage.ts
+src/core/tutor.ts
+src/lessons/tutor.ts
+src/server/tutor.ts
+src/server/ollama.ts
+src/app/api/tutor/route.ts
 src/components/playback.ts
 src/lessons/heap/engine.ts
 src/lessons/graph/engine.ts

@@ -1,0 +1,183 @@
+{
+  "run": "live-nov09-evaluation.jsonl",
+  "gradedAt": "2026-11-09T15:06:18.666Z",
+  "model": "llama3.1:8b",
+  "evaluator": "Root implementation agent, for owner review; not a learner pilot or independent human verdict.",
+  "rule": "An answer agrees when every material claim about the verified state is true. Secondary wording that is imprecise but not false does not fail a case.",
+  "counts": {
+    "validated": 20,
+    "agree": 18,
+    "incorrect": 2,
+    "criticalContradiction": 0,
+    "inventedReference": 0,
+    "hiddenAnswerLeak": 0
+  },
+  "threshold": "18/20 agree; a critical state contradiction or hidden-answer leak would block the behavior.",
+  "cases": [
+    {
+      "id": "H1",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Root item H1 is identified as the minimum with value 3; agrees with the completed heap."
+    },
+    {
+      "id": "H2",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Identifies the active insertion from command metadata; does not claim a swap. The inserted value 1 is not named."
+    },
+    {
+      "id": "H3",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "H8 at index 7 in the active run; agrees."
+    },
+    {
+      "id": "H4",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "H8 at index 3 and H4 at index 7 with the swap named. The verb 'inserted at index 3' is imprecise for a swap, but no positional claim is false."
+    },
+    {
+      "id": "H5",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "States that completed heap order is not array sorting; agrees."
+    },
+    {
+      "id": "H6",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Extracted minimum 3 is the result item with no active index; agrees."
+    },
+    {
+      "id": "H7",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "H7 at index 2; agrees."
+    },
+    {
+      "id": "H8",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Empty heap, no removed item; no fabricated result entity."
+    },
+    {
+      "id": "H9",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Equal children resolved by the left-child tie rule to H2; the earlier 'smaller than 6' claim is gone."
+    },
+    {
+      "id": "H10",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Rejects the false premise: a completed heap is not a sorted array."
+    },
+    {
+      "id": "G1",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "No active traversal and null start; agrees."
+    },
+    {
+      "id": "G2",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "B is discovered but not queued; queue empty."
+    },
+    {
+      "id": "G3",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "B at the frontier front; agrees with queue [B,C]."
+    },
+    {
+      "id": "G4",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "C distance 1, F unvisited; agrees."
+    },
+    {
+      "id": "G5",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Frames hold a node ID and next neighbor index, not a visited-node list; agrees."
+    },
+    {
+      "id": "G6",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Current node D returning from C; does not claim E discovered."
+    },
+    {
+      "id": "G7",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "DFS depth is not BFS shortest distance; agrees, without restating the numeric oracle."
+    },
+    {
+      "id": "G8",
+      "verdict": "correct",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "E2 connects existing nodes A and C; no invented entity."
+    },
+    {
+      "id": "G9",
+      "verdict": "incorrect",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Correct that C is not processed, but claims the processed list contains A; the verified processed list is empty. Secondary detail, not the central answer."
+    },
+    {
+      "id": "G10",
+      "verdict": "incorrect",
+      "criticalContradiction": false,
+      "inventedReference": false,
+      "hiddenAnswerLeak": false,
+      "note": "Identifies DFS from A correctly, then says it 'has not yet reached the end of the graph' while the verified event is complete; the closing claim contradicts both the state and its own opening."
+    }
+  ],
+  "notes": [
+    "The two incorrect answers fail on secondary details (processed-list contents; completion wording). Neither invents an entity, leaks a hidden answer, nor misstates positions or counters.",
+    "The same fixed cases produced 15/20 schema-valid replies before the reference cap and 12/20 with the uniqueness instruction alone; see runs A-C.",
+    "Grading is a single reviewer's judgment and is presented for owner review, not as established learner benefit."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-11-09T15:06:29.272Z",
+  "purpose": "Environment and model profile for the 9 November 2026 live tutor evaluation.",
+  "ollama": {
+    "version": "0.40.3",
+    "endpoint": "http://127.0.0.1:11434"
+  },
+  "model": {
+    "tag": "llama3.1:8b",
+    "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+    "sizeBytes": 4920753328,
+    "quantization": "Q4_K_M",
+    "parameters": "8.0B",
+    "contextLength": 4096
+  },
+  "processEnvironment": {
+    "OLLAMA_NO_CLOUD": "true",
+    "OLLAMA_HOST": "http://127.0.0.1:11434"
+  },
+  "daemonBanner": [
+    "msg=\"Ollama cloud disabled: true\"",
+    "msg=\"Listening on 127.0.0.1:11434 (version 0.40.3)\""
+  ],
+  "bannerNote": "The daemon serving the run used the same process-scoped environment. This banner was re-captured after the run; no global Ollama setting was changed.",
+  "device": {
+    "os": "Windows 10.0.19045",
+    "cpu": "AMD Ryzen 9 5900HX with Radeon Graphics (8 cores, 16 logical)",
+    "memoryKiB": 32932224,
+    "gpu": "NVIDIA GeForce RTX 3070 Laptop GPU, 8192 MiB",
+    "gpuDriver": "581.29"
+  },
+  "application": {
+    "next": "16.3.8",
+    "node": "24.15.0",
+    "mode": "production build served by next start on 127.0.0.1:3013"
+  },
+  "limits": [
+    "One laptop and one GPU; no sustained-load or thermal measurement.",
+    "GPU layers and physical display rate were not separately established for this run.",
+    "Model correctness judgments are the implementer's, not a learner pilot."
+  ]
+}

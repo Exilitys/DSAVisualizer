@@ -12,11 +12,12 @@ import {graphLearning} from '../lessons/graph/learning.ts';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
 import {LessonNavigation} from './LessonNavigation';
 import {LearningPanel} from './LearningPanel';
+import {TutorPanel,TutorPreviewDetails,describeTutorCommand} from './TutorPanel';
 import type {ActivityRequest} from '../core/learning.ts';
 import {GraphSemanticViews} from './GraphViews';
 
 const GraphScene=dynamic(()=>import('../lessons/graph/GraphScene'),{ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>});
-type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput}|{kind:'activity';request:ActivityRequest}|{kind:'load'};
+type PendingAction={kind:'start';command:GraphCommand}|{kind:'edit';input:GraphInput}|{kind:'activity';request:ActivityRequest}|{kind:'load'}|{kind:'tutor'};
 export default function GraphPlayground() {
   const lesson=useLessonPlayer(graphEngine,createGraphPreset(),graphLearning);
   const {player,go,select}=lesson,snapshot=currentSnapshot(player);
@@ -24,9 +25,11 @@ export default function GraphPlayground() {
   const [algorithmDraft,setAlgorithmDraft]=useState('bfs');
   const [startDraft,setStartDraft]=useState(''),[fromDraft,setFromDraft]=useState(''),[toDraft,setToDraft]=useState('');
   const [xDraft,setXDraft]=useState(''),[yDraft,setYDraft]=useState('');
-  const [activeCommand,setActiveCommand]=useState<GraphCommand|null>(null);
   const [pending,setPending]=useState<PendingAction|null>(null),[localError,setLocalError]=useState<string|null>(null);
   const dialogRef=useRef<HTMLDialogElement>(null);
+  useEffect(()=>{
+    if(pending?.kind==='tutor'&&!lesson.tutor.preview){dialogRef.current?.close();setPending(null);}
+  },[pending,lesson.tutor.preview]);
   const semanticOnly=lesson.local.settings.semanticOnly;
   const [webglAvailable,setWebglAvailable]=useState(true);
   const [reducedMotion,setReducedMotion]=useState(false),[fitRequest,setFitRequest]=useState(0),[focusRequest,setFocusRequest]=useState(0);
@@ -48,17 +51,24 @@ export default function GraphPlayground() {
 
   const clearDrafts=()=>{setStartDraft('');setFromDraft('');setToDraft('');setXDraft('');setYDraft('');};
   const resetData=()=>{
-    lesson.resetSavedData();setActiveCommand(null);setAlgorithmDraft('bfs');clearDrafts();setLocalError(null);
+    lesson.resetSavedData();setAlgorithmDraft('bfs');clearDrafts();setLocalError(null);
     setPositions(reconcileGraphPositions(createGraphPreset().nodes,{}));
   };
   const apply=(action:PendingAction)=>{
-    const next=action.kind==='start'?lesson.start(action.command):action.kind==='edit'?lesson.replaceInput(action.input,activeCommand)
+    if(action.kind==='tutor') {
+      const applied=lesson.applyTutorPreview();
+      if(applied?.kind==='example') {
+        clearDrafts();setPositions(reconcileGraphPositions(applied.player.input.nodes,{}));
+        const command=graphEngine.validateCommand(applied.player.command,applied.player.input);
+        if(command.ok){setAlgorithmDraft(command.value.type);setStartDraft(command.value.startId);}
+      }
+      return;
+    }
+    const next=action.kind==='start'?lesson.start(action.command):action.kind==='edit'?lesson.replaceInput(action.input,player.command)
       :action.kind==='activity'?lesson.begin(action.request):lesson.loadSavedInput();
     if(next.error&&next.input===player.input)return;
-    if(action.kind==='start'&&next.steps!==player.steps)setActiveCommand(action.command);
     if(action.kind==='edit'&&next.input!==player.input) {
       setPositions(previous=>reconcileGraphPositions(next.input.nodes,previous));
-      if(!next.steps)setActiveCommand(null);
       if(!next.input.nodes.some(node=>node.id===startDraft))setStartDraft('');
       if(!next.input.nodes.some(node=>node.id===fromDraft))setFromDraft('');
       if(!next.input.nodes.some(node=>node.id===toDraft))setToDraft('');
@@ -66,12 +76,12 @@ export default function GraphPlayground() {
     if((action.kind==='activity'||action.kind==='load')&&next.input!==player.input) {
       clearDrafts();setPositions(reconcileGraphPositions(next.input.nodes,{}));
       const definition=action.kind==='activity'?(action.request.kind==='guide'?graphLearning.guide.segments:graphLearning.challenges).find(d=>d.id===action.request.id):null;
-      const command=definition?.command??null;setActiveCommand(command);setAlgorithmDraft(command?.type??'bfs');setStartDraft(command?.startId??'');
+      const command=definition?.command??null;setAlgorithmDraft(command?.type??'bfs');setStartDraft(command?.startId??'');
     }
   };
   const request=(action:PendingAction)=>{
     lesson.pause();setLocalError(null);
-    if(player.steps&&player.ordinal>0&&player.ordinal<lastOrdinal) {
+    if(action.kind==='tutor'||(player.steps&&player.ordinal>0&&player.ordinal<lastOrdinal)) {
       setPending(action);dialogRef.current!.showModal();
     } else apply(action);
   };
@@ -85,7 +95,7 @@ export default function GraphPlayground() {
     if(!result.ok){setLocalError(result.message);return;}
     request({kind:'start',command:result.value});
   };
-  const keepTraversal=()=>{dialogRef.current!.close();setPending(null);};
+  const keepTraversal=()=>{if(pending?.kind==='tutor')lesson.clearTutorPreview();dialogRef.current!.close();setPending(null);};
   const applyPending=()=>{const action=pending;dialogRef.current!.close();setPending(null);if(action)apply(action);};
   const moveSelected=()=>{
     if(!selectedNode) return;
@@ -145,13 +155,16 @@ export default function GraphPlayground() {
       </section>
       <GraphSemanticViews snapshot={snapshot} selectedId={player.selectedId} select={select}/>
     </div><aside className="details-column"><InspectionPanel inspection={inspection}/>
+      <TutorPanel lesson={lesson} guidance={explainGraphStep(snapshot)} contextCaption={describeTutorCommand(player.command)}
+        reviewProposal={index=>{if(lesson.previewTutor(index).ok)request({kind:'tutor'});}}/>
       <section className="panel code" aria-label="Graph pseudocode"><p className="eyebrow">Follow the current decision</p><h2>{algorithm?String(algorithm).toUpperCase():'Choose a traversal'}</h2>
         <ol>{getGraphPseudocode(snapshot).map(line=><li key={line.id} aria-current={snapshot.event.codeLineId===line.id?'step':undefined}>{line.text}</li>)}</ol>
         <p className="muted">BFS distances are shortest in an unweighted graph. DFS tree depth describes the discovered path, which can be longer.</p>
       </section><p className="learning-note">When is a node discovered? When is it finished? Follow the frontier to explain the difference.</p>
     </aside></div>
     <dialog ref={dialogRef} aria-labelledby="replace-title" onCancel={event=>{event.preventDefault();keepTraversal();}}>
-      <h2 id="replace-title">Replace this traversal?</h2><p>Apply replaces the current run with the requested traversal, activity or resting saved input. Keep traversal retains your paused steps and learning checkpoint.</p>
+      <h2 id="replace-title">{pending?.kind==='tutor'?'Review tutor proposal':'Replace this traversal?'}</h2>
+      {pending?.kind==='tutor'&&lesson.tutor.preview?<TutorPreviewDetails preview={lesson.tutor.preview}/>:<p>Apply replaces the current run with the requested traversal, activity or resting saved input. Keep traversal retains your paused steps and learning checkpoint.</p>}
       <div className="graph-actions"><button autoFocus onClick={keepTraversal}>Keep traversal</button><button className="primary" onClick={applyPending}>Apply</button></div>
     </dialog>
     <footer>DSA Atlas <span>See the structure. Explain the change.</span></footer>

@@ -1,0 +1,13 @@
+{
+  "purpose": "Diagnostic only; 60s direct adapter budget, not an accepted endpoint answer",
+  "durationMs": 1337,
+  "reply": {
+    "explanation": "The heap is currently in a resting state, and the minimum value is 3, which is located at index 0.",
+    "referencedIds": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "proposedCommands": []
+  }
+}

@@ -75,3 +75,27 @@ Git contract hooks and registry configuration are deferred until scaffolding.
 Type checking and engine tests are runnable now. Additional formatting,
 import linting, and UI token checks remain future tooling.
 The manual contract review applies meanwhile; no placeholder enforcement is claimed.
+
+## Local tutor development
+
+Copy the repository `.env.example` to an ignored `.env.local` and set
+`OLLAMA_MODEL` to an already installed local chat tag. `OLLAMA_BASE_URL` defaults
+to `http://127.0.0.1:11434`; both settings are server-only. Restart the Next.js
+process after configuration changes. No browser setting chooses a model or URL.
+
+Use a local Ollama daemon with cloud features disabled and verify its own startup
+log reports `Ollama cloud disabled: true` before evaluation. For a task-owned
+helper, process-scoped `OLLAMA_NO_CLOUD=1` and a free loopback `OLLAMA_HOST` avoid
+changing global settings or interrupting another service. Do not use cloud tags,
+download a model automatically, or assume localhost alone proves local inference.
+Official authority: [chat API](https://docs.ollama.com/api/chat),
+[installed model inventory](https://docs.ollama.com/api/tags), and
+[local-only configuration](https://docs.ollama.com/faq#how-do-i-disable-ollamas-cloud-features), checked 17 October 2026.
+
+The integrated `POST /api/tutor` reconstructs engine state before using the
+provider. Its local process limits are six admitted requests per minute per
+cookie guest, at most 256 live buckets and one active provider transport. These
+are development limits; public deployment requires a separate abuse/identity
+review. Failure leaves authored guidance, playback and saved practice usable.
+The tutor stores no questions or replies. Explicit development evaluation evidence
+is separate from content-free runtime logging.

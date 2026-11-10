@@ -1,0 +1,41 @@
+{
+ "run": "live-nov09-run-e-extra-rules.jsonl",
+ "gradedAt": "2026-11-10T13:09:02.921Z",
+ "model": "llama3.1:8b",
+ "evaluator": "Root implementation agent, for owner review; not a learner pilot or independent human verdict.",
+ "rule": "An answer agrees when every material claim about the verified state is true.",
+ "counts": {
+  "validated": 20,
+  "agree": 16,
+  "incorrect": 4,
+  "inventedReference": 0,
+  "hiddenAnswerLeak": 0
+ },
+ "outcome": "Rejected experiment: the two added rules fixed G9 and G10 but introduced four regressions, so they were reverted before this branch was committed.",
+ "cases": [
+  {
+   "id": "H4",
+   "note": "Contradicts itself and the oracle: H8 at 3 then 7, and H4 moved to index 3 although H4 is at index 7."
+  },
+  {
+   "id": "H5",
+   "note": "Says the root holds the largest item at the completed step 8, where H8 (value 1) is the root minimum."
+  },
+  {
+   "id": "H10",
+   "note": "Rejects the sorted premise but supports it with a false parent/child pair: H2 (9) is not H6's parent and H6 is 7."
+  },
+  {
+   "id": "G8",
+   "note": "Enumerates all five edges instead of identifying the two nodes E2 connects."
+  },
+  {
+   "id": "G9",
+   "note": "Correct: processed list empty."
+  },
+  {
+   "id": "G10",
+   "note": "Correct: DFS complete."
+  }
+ ]
+}
