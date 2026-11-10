@@ -1,0 +1,152 @@
+[
+  {
+    "label": "max-21st-node-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentShortest distance (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-41st-edge-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentShortest distance (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-BFS-complete",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateProcessedNeighbors (creation order)A, BPredecessorAShortest distance (edges)1Frontier positionAbsentDiscovery position10DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "161",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-DFS-complete",
+    "backtracking": [
+      "E",
+      "D",
+      "C",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "B",
+      "A"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateProcessedNeighbors (creation order)A, BPredecessorBDFS tree depth (edges)2Frontier positionAbsentDiscovery position10DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "141",
+    "playing": "false",
+    "selected": "J"
+  }
+]

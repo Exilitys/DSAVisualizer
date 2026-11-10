@@ -35,6 +35,6 @@ export function InspectionPanel({inspection}: {inspection:Inspection|null}) {
     <h2>{inspection?.label ?? 'Inspect an item'}</h2>
     {inspection ? <dl>{inspection.fields.map(field=><div key={field.label}>
       <dt>{field.label}</dt><dd>{field.value}</dd>
-    </div>)}</dl> : <p className="muted">Select an item in either view to see its value, index, and relationships at this step.</p>}
+    </div>)}</dl> : <p className="muted">Select an item to inspect its state and relationships at this step.</p>}
   </section>;
 }

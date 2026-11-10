@@ -9,6 +9,7 @@ import type { HeapState } from '../lessons/heap/engine.ts';
 import { getPseudocode, explainStep } from '../lessons/heap/content.ts';
 import {useLessonPlayer} from './useLessonPlayer';
 import {PlaybackControls,InspectionPanel} from './LessonControls';
+import {LessonNavigation} from './LessonNavigation';
 
 const HeapScene = dynamic(()=>import('../lessons/heap/HeapScene'),{
   ssr:false,loading:()=> <p className="scene-notice">Loading the 3D view…</p>,
@@ -73,7 +74,7 @@ export default function LessonPlayground() {
   const repairing = snapshot.invariants.some(x=>x.status==='repairing');
 
   return <main className="playground" data-selected-id={player.selectedId ?? ''} data-ordinal={player.ordinal} data-playing={lesson.playback.playing}>
-    <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><span className="lesson-tag">01 / Min heap</span></header>
+    <header className="masthead"><a className="brand" href="/" aria-label="DSA Atlas home"><span className="brand-mark">A</span>DSA Atlas</a><LessonNavigation active="heap"/><span className="lesson-tag">01 / Min heap</span></header>
     <div className="intro"><p className="eyebrow">Learn by following the change</p><h1>Follow the smallest value.</h1>
       <p>Insert an item or remove the minimum. See why the heap changes.</p></div>
     <section className="panel operation" aria-label="Heap operations">

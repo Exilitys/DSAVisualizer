@@ -1,0 +1,11 @@
+{
+  "request": "Actual WebGL context loss requested",
+  "canvas": 0,
+  "counters": [
+    "3",
+    "1"
+  ],
+  "inspection": "Follow an identityItem H1Value3LocationExtracted minimumIndexAbsentParentAbsentLeft childAbsentRight childAbsent",
+  "ordinal": "6",
+  "selected": "H1"
+}

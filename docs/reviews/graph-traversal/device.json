@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-15",
+  "os": {
+    "Caption": "Microsoft Windows 10 Home Single Language",
+    "Version": "10.0.19045",
+    "TotalVisibleMemorySize": 32932224
+  },
+  "cpu": {
+    "Name": "AMD Ryzen 9 5900HX with Radeon Graphics        "
+  },
+  "gpus": [
+    {
+      "Name": "AMD Radeon(TM) Graphics"
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 3070 Laptop GPU"
+    }
+  ],
+  "node": "v24.15.0",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "activeGpu": "Not established",
+  "physicalPhone": "Not tested"
+}

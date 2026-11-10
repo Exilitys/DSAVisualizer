@@ -1,0 +1,47 @@
+[
+  {
+    "path": "docs/architecture/system.architecture.json",
+    "unchanged": true,
+    "sha256": "42e742d7e90e43ef5dffdfb0e7bf712c54aeff1c80992f43ac47bfdd29ee27ed"
+  },
+  {
+    "path": "docs/architecture/system.html",
+    "unchanged": true,
+    "sha256": "ae19b244810c674df6d6a7f4c00bb39002524c408bdc8bd3ce2b935cd13ea9d4"
+  },
+  {
+    "path": "docs/architecture/system.md",
+    "unchanged": true,
+    "sha256": "776cbfeb7ed3378e2d029aed93253882ce35539e9461e3f459e6e2fc381b672c"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.1440x900.dark.png",
+    "unchanged": true,
+    "sha256": "3aa97cc8ccd439b69d45a9db43b85186390416bf80005fd7bb2eeea07189d20f"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.1440x900.light.png",
+    "unchanged": true,
+    "sha256": "aaaa62cc995fafab23990a2dadffb28199dcb9c36150666c2e2a1dfd16a41c7c"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.2048x1320.dark.png",
+    "unchanged": true,
+    "sha256": "fbce59b2f30fa5057e301e2240c477351aa961be986e825e68a235c5fe9d97ec"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.2048x1320.light.png",
+    "unchanged": true,
+    "sha256": "d38c54c87a570c572ebc0065639cd4357ce7ac98b37bcae42443921560392c9e"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.html",
+    "unchanged": true,
+    "sha256": "ac9e2b9ba49a372e295184fc015f605af0e0faa6be2232bfe75f80afd98836ed"
+  },
+  {
+    "path": "docs/architecture/system.visual-check.json",
+    "unchanged": true,
+    "sha256": "0b59c8feb7f6222285aa3580d36962b371f393669523743e2bd7771f2758038a"
+  }
+]

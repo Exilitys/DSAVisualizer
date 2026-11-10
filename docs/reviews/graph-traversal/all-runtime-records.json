@@ -1,0 +1,1199 @@
+[
+  {
+    "label": "BFS5",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected B",
+    "code": "Mark the node discovered and record its predecessor and distance",
+    "counters": [
+      "2",
+      "1",
+      "1",
+      "1"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B"
+    ],
+    "explanation": "discoverDiscover B from A; record shortest distance 1.",
+    "frontier": [],
+    "inspection": "Follow an identityNode BStateDiscoveredNeighbors (creation order)A, DPredecessorAShortest distance (edges)1Frontier positionAbsentDiscovery position2DFS next neighborAbsentCurrent nodeAExamined edgeE1",
+    "labels": 6,
+    "ordinal": "5",
+    "playing": "false",
+    "selected": "B"
+  },
+  {
+    "label": "BFS9",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected B",
+    "code": "Add the discovered node to the back of the queue",
+    "counters": [
+      "3",
+      "2",
+      "3",
+      "1"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "enqueueAdd C to the back of the queue.",
+    "frontier": [
+      "BFrontier",
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode BStateFrontierNeighbors (creation order)A, DPredecessorAShortest distance (edges)1Frontier position1 (front first)Discovery position2DFS next neighborAbsentCurrent nodeAExamined edgeE2",
+    "labels": 6,
+    "ordinal": "9",
+    "playing": "false",
+    "selected": "B"
+  },
+  {
+    "label": "BFS31-C",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected C",
+    "code": "Finish when the queue is empty; other components stay unvisited",
+    "counters": [
+      "5",
+      "10",
+      "5",
+      "5"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": "completeTraversal complete: 5 reached, 1 unvisited. Other components remain undiscovered.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorAShortest distance (edges)1Frontier positionAbsentDiscovery position3DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "31",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "DFS13-C",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Push a frame beginning at the first neighbor",
+    "counters": [
+      "4",
+      "5",
+      "4",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C"
+    ],
+    "explanation": "pushPush a new frame for C, beginning with neighbor index 0.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DFrontier",
+      "CCurrent"
+    ],
+    "inspection": "Follow an identityNode CStateCurrentNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier position4 (bottom first)Discovery position4DFS next neighbor0 / 2Current nodeCExamined edgeE4",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "DFS16-return-C",
+    "backtracking": [
+      "C"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Pop the exhausted frame and return to its parent",
+    "counters": [
+      "4",
+      "7",
+      "4",
+      "1"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C"
+    ],
+    "explanation": "returnFinish C and pop its frame. Return to D and resume its next neighbor.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DCurrent"
+    ],
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier positionAbsentDiscovery position4DFS next neighborAbsentCurrent nodeDExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "16",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "DFS18-discover-E",
+    "backtracking": [
+      "C"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "5",
+      "8",
+      "4",
+      "1"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C",
+      "E"
+    ],
+    "explanation": "discoverDiscover E from D; record DFS tree depth 3.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DCurrent"
+    ],
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier positionAbsentDiscovery position4DFS next neighborAbsentCurrent nodeDExamined edgeE5",
+    "labels": 6,
+    "ordinal": "18",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "DFS26-C",
+    "backtracking": [
+      "C",
+      "E",
+      "D",
+      "B",
+      "A"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Finish when the stack is empty; other components stay unvisited",
+    "counters": [
+      "5",
+      "10",
+      "5",
+      "5"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C",
+      "E"
+    ],
+    "explanation": "completeTraversal complete: 5 reached, 1 unvisited. Other components remain undiscovered.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier positionAbsentDiscovery position4DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "26",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "DFS25-rewind",
+    "backtracking": [
+      "C",
+      "E",
+      "D",
+      "B",
+      "A"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Pop the exhausted frame and return to its parent",
+    "counters": [
+      "5",
+      "10",
+      "5",
+      "5"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C",
+      "E"
+    ],
+    "explanation": "returnFinish A and pop its frame. The root has returned.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier positionAbsentDiscovery position4DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "25",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "edit-dialog-paused",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected E2",
+    "code": "Push a frame beginning at the first neighbor",
+    "counters": [
+      "4",
+      "5",
+      "4",
+      "0"
+    ],
+    "dialog": true,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C"
+    ],
+    "explanation": "pushPush a new frame for C, beginning with neighbor index 0.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DFrontier",
+      "CCurrent"
+    ],
+    "inspection": "Follow an identityEdge E2EndpointsA ↔ CStatePresentNode AFrontierNode CCurrentCurrent nodeCExamined edgeE4",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "E2"
+  },
+  {
+    "label": "edit-kept",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected E2",
+    "code": "Push a frame beginning at the first neighbor",
+    "counters": [
+      "4",
+      "5",
+      "4",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C"
+    ],
+    "explanation": "pushPush a new frame for C, beginning with neighbor index 0.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DFrontier",
+      "CCurrent"
+    ],
+    "inspection": "Follow an identityEdge E2EndpointsA ↔ CStatePresentNode AFrontierNode CCurrentCurrent nodeCExamined edgeE4",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "E2"
+  },
+  {
+    "label": "edit-escaped",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected E2",
+    "code": "Push a frame beginning at the first neighbor",
+    "counters": [
+      "4",
+      "5",
+      "4",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C"
+    ],
+    "explanation": "pushPush a new frame for C, beginning with neighbor index 0.",
+    "frontier": [
+      "AFrontier",
+      "BFrontier",
+      "DFrontier",
+      "CCurrent"
+    ],
+    "inspection": "Follow an identityEdge E2EndpointsA ↔ CStatePresentNode AFrontierNode CCurrentCurrent nodeCExamined edgeE4",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "E2"
+  },
+  {
+    "label": "edit-applied-rerun",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelect a node or edge",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A"
+    ],
+    "explanation": "discoverDiscover A from start; record DFS tree depth 0.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 6,
+    "ordinal": "1",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "unsent-drafts-and-move",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A"
+    ],
+    "explanation": "discoverDiscover A from start; record DFS tree depth 0.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateUndiscoveredNeighbors (creation order)DPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "invalid-coordinate",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A"
+    ],
+    "error": "Use X and Y from −10 to 10 in 0.5 steps.",
+    "explanation": "discoverDiscover A from start; record DFS tree depth 0.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateUndiscoveredNeighbors (creation order)DPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "reversed-duplicate-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A"
+    ],
+    "error": "These nodes are already connected.",
+    "explanation": "discoverDiscover A from start; record DFS tree depth 0.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateUndiscoveredNeighbors (creation order)DPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "self-loop-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected C",
+    "code": "Mark the node discovered and record its predecessor and tree depth",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A"
+    ],
+    "error": "Connect two different existing nodes.",
+    "explanation": "discoverDiscover A from start; record DFS tree depth 0.",
+    "frontier": [],
+    "inspection": "Follow an identityNode CStateUndiscoveredNeighbors (creation order)DPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "labels": 6,
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "start-deleted-resting",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "No traversal startedSelect a node or edge",
+    "counters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [],
+    "error": "Choose an existing start node.",
+    "explanation": "initialChoose BFS or DFS and an existing start node to begin.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 5,
+    "ordinal": "0",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "all-nodes-deleted",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "No traversal startedSelect a node or edge",
+    "counters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [],
+    "explanation": "initialChoose BFS or DFS and an existing start node to begin.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 0,
+    "ordinal": "0",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "retained-ID-G-isolated-complete",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from GSelect a node or edge",
+    "code": "Finish when the queue is empty; other components stay unvisited",
+    "counters": [
+      "1",
+      "0",
+      "1",
+      "1"
+    ],
+    "dialog": false,
+    "discovery": [
+      "G"
+    ],
+    "explanation": "completeTraversal complete: 1 reached, 0 unvisited. Other components remain undiscovered.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 1,
+    "ordinal": "5",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "adjacency-select-C-and-camera",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected C",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode CStateFrontierNeighbors (creation order)A, DPredecessorAShortest distance (edges)1Frontier position1 (front first)Discovery position3DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "mesh-node-A-picked",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected A",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode AStateProcessedNeighbors (creation order)B, CPredecessorAbsentShortest distance (edges)0Frontier positionAbsentDiscovery position1DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "A"
+  },
+  {
+    "label": "mesh-edge-E1-picked",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected A",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode AStateProcessedNeighbors (creation order)B, CPredecessorAbsentShortest distance (edges)0Frontier positionAbsentDiscovery position1DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "A"
+  },
+  {
+    "label": "semantic-reduced-motion",
+    "backtracking": [],
+    "canvas": 0,
+    "caption": "BFS from ASelected A",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode AStateProcessedNeighbors (creation order)B, CPredecessorAbsentShortest distance (edges)0Frontier positionAbsentDiscovery position1DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 0,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "A"
+  },
+  {
+    "label": "mesh-horizontal-edge-picked",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected A",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode AStateProcessedNeighbors (creation order)B, CPredecessorAbsentShortest distance (edges)0Frontier positionAbsentDiscovery position1DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "A"
+  },
+  {
+    "label": "mesh-edge-E5-picked",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected A",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode AStateProcessedNeighbors (creation order)B, CPredecessorAbsentShortest distance (edges)0Frontier positionAbsentDiscovery position1DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "A"
+  },
+  {
+    "label": "desktop-edge-pick",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected E5",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityEdge E5EndpointsD ↔ EStatePresentNode DUndiscoveredNode EUndiscoveredCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "false",
+    "selected": "E5"
+  },
+  {
+    "label": "move-while-playing",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected C",
+    "code": "Examine the next neighbor in creation order",
+    "counters": [
+      "3",
+      "4",
+      "3",
+      "2"
+    ],
+    "dialog": false,
+    "discovery": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": "examineExamine B–D (E3). D is undiscovered; discover it next.",
+    "frontier": [
+      "CFrontier"
+    ],
+    "inspection": "Follow an identityNode CStateFrontierNeighbors (creation order)A, DPredecessorAShortest distance (edges)1Frontier position1 (front first)Discovery position3DFS next neighborAbsentCurrent nodeBExamined edgeE3",
+    "labels": 6,
+    "ordinal": "13",
+    "playing": "true",
+    "selected": "C"
+  },
+  {
+    "label": "history-back-graph-resting",
+    "backtracking": [],
+    "canvas": 0,
+    "caption": "No traversal startedSelect a node or edge",
+    "counters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [],
+    "explanation": "initialChoose BFS or DFS and an existing start node to begin.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 0,
+    "ordinal": "0",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "max-21st-node-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentShortest distance (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-41st-edge-rejected",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentShortest distance (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-BFS-complete",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "BFS from ASelected J",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "error": "Use at most 20 nodes and 40 edges.",
+    "inspection": "Follow an identityNode JStateProcessedNeighbors (creation order)A, BPredecessorAShortest distance (edges)1Frontier positionAbsentDiscovery position10DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "161",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "max-DFS-complete",
+    "backtracking": [
+      "E",
+      "D",
+      "C",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "B",
+      "A"
+    ],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateProcessedNeighbors (creation order)A, BPredecessorBDFS tree depth (edges)2Frontier positionAbsentDiscovery position10DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "141",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "visibility-hidden-paused",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "visibility-shown-stays-paused",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "manual-next-pauses",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "1",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "2",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "manual-previous-pauses",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "DFS from ASelected J",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode JStateUndiscoveredNeighbors (creation order)A, BPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "J"
+  },
+  {
+    "label": "actual-context-loss-complete",
+    "backtracking": [
+      "E",
+      "D",
+      "C",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "B",
+      "A"
+    ],
+    "canvas": 0,
+    "caption": "DFS from ASelected C",
+    "counters": [
+      "20",
+      "80",
+      "20",
+      "20"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T"
+    ],
+    "edges": 40,
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, B, D, EPredecessorBDFS tree depth (edges)2Frontier positionAbsentDiscovery position3DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "141",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "edit-after-context-loss",
+    "backtracking": [],
+    "canvas": 0,
+    "caption": "DFS from ASelect a node or edge",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 39,
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "nodes": 20,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "persisted-pageshow-simulation-resting",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "No traversal startedSelect a node or edge",
+    "counters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [],
+    "edges": 5,
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "nodes": 6,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "0",
+    "playing": "false",
+    "selected": ""
+  },
+  {
+    "label": "before-boot-creation-failure",
+    "backtracking": [
+      "C",
+      "E",
+      "D",
+      "B",
+      "A"
+    ],
+    "canvas": 0,
+    "caption": "DFS from ASelected C",
+    "counters": [
+      "5",
+      "10",
+      "5",
+      "5"
+    ],
+    "discovery": [
+      "A",
+      "B",
+      "D",
+      "C",
+      "E"
+    ],
+    "edges": 5,
+    "inspection": "Follow an identityNode CStateProcessedNeighbors (creation order)A, DPredecessorDDFS tree depth (edges)3Frontier positionAbsentDiscovery position4DFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 6,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "26",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "edit-after-creation-failure",
+    "backtracking": [],
+    "canvas": 0,
+    "caption": "DFS from ASelected C",
+    "counters": [
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    "discovery": [
+      "A"
+    ],
+    "edges": 5,
+    "inspection": "Follow an identityNode CStateUndiscoveredNeighbors (creation order)A, DPredecessorAbsentDFS tree depth (edges)AbsentFrontier positionAbsentDiscovery positionAbsentDFS next neighborAbsentCurrent nodeAbsentExamined edgeAbsent",
+    "nodes": 7,
+    "notice": "3D is unavailable. Use the structure and step controls below.",
+    "ordinal": "1",
+    "playing": "false",
+    "selected": "C"
+  },
+  {
+    "label": "final-direct-maximum-ready",
+    "backtracking": [],
+    "canvas": 1,
+    "caption": "No traversal startedSelect a node or edge",
+    "counters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "dialog": false,
+    "discovery": [],
+    "explanation": "initialChoose BFS or DFS and an existing start node to begin.",
+    "frontier": [],
+    "inspection": "Follow an identityInspect an itemSelect an item to inspect its state and relationships at this step.",
+    "labels": 20,
+    "ordinal": "0",
+    "playing": "false",
+    "selected": ""
+  }
+]

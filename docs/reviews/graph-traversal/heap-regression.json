@@ -1,0 +1,50 @@
+[
+  {
+    "label": "insert1-H8-step3",
+    "canvas": 1,
+    "counters": [
+      "1",
+      "1"
+    ],
+    "inspection": "Follow an identityItem H8Value1LocationActive heapIndex3ParentH2 · 7Left childH4 · 12Right childAbsentHeap orderrepairing",
+    "ordinal": "3",
+    "playing": "false",
+    "selected": "H8"
+  },
+  {
+    "label": "extract-H7-step4",
+    "canvas": 1,
+    "counters": [
+      "2",
+      "1"
+    ],
+    "inspection": "Follow an identityItem H7Value6LocationActive heapIndex2ParentH3 · 5Left childH6 · 8Right childAbsentHeap orderholds",
+    "ordinal": "4",
+    "playing": "false",
+    "selected": "H7"
+  },
+  {
+    "label": "result-H1-step4",
+    "canvas": 1,
+    "counters": [
+      "2",
+      "1"
+    ],
+    "inspection": "Follow an identityItem H1Value3LocationExtracted minimumIndexAbsentParentAbsentLeft childAbsentRight childAbsent",
+    "ordinal": "4",
+    "playing": "false",
+    "selected": "H1"
+  },
+  {
+    "label": "heap-autoplay-completed",
+    "canvas": 1,
+    "counters": [
+      "3",
+      "1"
+    ],
+    "inspection": "Follow an identityItem H1Value3LocationExtracted minimumIndexAbsentParentAbsentLeft childAbsentRight childAbsent",
+    "ordinal": "6",
+    "playing": "false",
+    "selected": "H1"
+  }
+]
