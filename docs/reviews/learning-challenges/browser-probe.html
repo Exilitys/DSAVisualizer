@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Disposable Slice 004 QA</title>
+<style>body{font:14px system-ui;margin:8px}button,select{min-height:44px}iframe{width:100%;height:800px;border:1px solid #777}pre{white-space:pre-wrap}</style>
+<h1>Disposable local learning QA</h1><p>Only the four dsa-atlas owned keys are read or changed. Fixtures are disposable.</p>
+<label>Module <select id="module"><option value="heap">Heap</option><option value="graph">Graph</option></select></label>
+<label>Scenario <select id="scenario"><option value="clean">Clean seeded settings</option><option value="preserve">Preserve saved records</option><option value="malformed">Malformed evidence</option><option value="future">Future settings schema</option><option value="oversized">Oversized evidence</option><option value="input">Invalid saved input</option><option value="getter">Storage getter failure</option><option value="read">Storage read failure</option><option value="write">Storage write failure</option><option value="remove">Evidence removal failure</option><option value="webgl">WebGL unavailable and OS reduced motion</option></select></label>
+<button id="load">Load fixture</button><button id="report">Capture report</button><button id="hidden">Simulate hidden document</button><button id="visible">Simulate visible document</button><output id="status"></output><iframe title="Lesson under test" id="lesson"></iframe><pre id="result"></pre>
+<script>
+const keys=['dsa-atlas.settings','dsa-atlas.evidence','dsa-atlas.input.heap','dsa-atlas.input.graph'];
+let samples=[],changes=[],frame=document.querySelector('iframe');
+const root=document.querySelector('#result');
+const instrumentation=(scenario,module)=>{
+  const owned=k=>['dsa-atlas.settings','dsa-atlas.evidence','dsa-atlas.input.heap','dsa-atlas.input.graph'].includes(k);
+  if(scenario==='getter')Object.defineProperty(window,'localStorage',{get(){throw new DOMException('QA blocked getter','SecurityError')}});
+  for(const [mode,method] of [['read','getItem'],['write','setItem'],['remove','removeItem']])if(scenario===mode){const original=Storage.prototype[method];Storage.prototype[method]=function(k,...v){if(owned(k)&&(mode!=='remove'||k==='dsa-atlas.evidence'))throw new DOMException('QA storage fault',mode==='write'?'QuotaExceededError':'SecurityError');return original.call(this,k,...v)}}
+  if(scenario==='webgl'){
+    const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...rest){return /webgl/.test(kind)?null:original.call(this,kind,...rest)};
+    const media=window.matchMedia;window.matchMedia=q=>q==='(prefers-reduced-motion: reduce)'?{matches:true,media:q,addEventListener(){},removeEventListener(){}}:media.call(window,q);
+  }
+  document.addEventListener('DOMContentLoaded',()=>{
+    let pending=null;
+    const observer=new MutationObserver(records=>{
+      if(!pending||!records.some(r=>r.target.closest?.('.learning,.execution')||r.target.nodeType===3&&r.target.parentElement?.closest('.learning,.execution')||r.type==='attributes'&&r.attributeName==='data-ordinal'))return;
+      const item=pending;pending=null;
+      requestAnimationFrame(()=>parent.recordSample({...item,ms:performance.now()-item.started,toOrdinal:document.querySelector('main')?.dataset.ordinal,limit:document.querySelector('#step-range')?.max}));
+    });observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true});
+    const begin=e=>{
+      const button=e.target.closest?.('button'),range=e.target.id==='step-range';
+      if(!(e.type==='click'&&button&&/^(Continue guide|Finish segment|Submit answer|Reveal without answering|Return to question|Return to checkpoint)$/.test(button.textContent.trim()))&&!(e.type==='keydown'&&range&&/^(Home|End|ArrowLeft|ArrowRight)$/.test(e.key)))return;
+      pending={module,event:button?.textContent.trim()??'seek '+e.key,started:performance.now(),fromOrdinal:document.querySelector('main')?.dataset.ordinal};
+    };document.addEventListener('click',begin,true);document.addEventListener('keydown',begin,true);
+    parent.document.querySelector('#status').textContent='Lesson loaded: '+module+' / '+scenario;
+  });
+};
+window.recordSample=item=>{samples.push(item);document.querySelector('#status').textContent='Measured gate responses: '+samples.length;};
+document.querySelector('#load').onclick=async()=>{
+  const module=document.querySelector('#module').value,scenario=document.querySelector('#scenario').value;
+  if(scenario!=='preserve'){
+    for(const k of keys)localStorage.removeItem(k);
+    localStorage.setItem(keys[0],JSON.stringify({schemaVersion:1,settings:{speed:2,semanticOnly:scenario!=='webgl'}}));
+    if(scenario==='malformed')localStorage.setItem(keys[1],'{broken');
+    if(scenario==='future')localStorage.setItem(keys[0],JSON.stringify({schemaVersion:99,settings:{speed:.5,semanticOnly:true}}));
+    if(scenario==='oversized')localStorage.setItem(keys[1],'x'.repeat(65537));
+    if(scenario==='input')localStorage.setItem('dsa-atlas.input.'+module,JSON.stringify({schemaVersion:1,engineVersion:'obsolete',input:{}}));
+    if(scenario==='remove')localStorage.setItem(keys[1],JSON.stringify({schemaVersion:1,attempts:[{attemptId:'qa-old',moduleId:'heap',challengeId:'heap-swap',version:1,objectiveId:'heap.index-mapping',optionId:'index-2',outcome:'correct',timestamp:1}],guides:[]}));
+  }
+  const html=await(await fetch(module==='heap'?'/':'/graph')).text();
+  const injection='<script>('+instrumentation.toString()+')('+JSON.stringify(scenario)+','+JSON.stringify(module)+');<'+ '/script>';
+  const next=document.createElement('iframe');next.title='Lesson under test';
+  next.onload=()=>{if(next.contentWindow.location.pathname!=='/__learning-qa-blank.html')return;next.onload=null;const w=next.contentWindow;w.history.replaceState(null,'',module==='heap'?'/':'/graph');w.document.open();w.document.write(html.replace('<head>','<head>'+injection));w.document.close();};
+  next.src='/__learning-qa-blank.html';frame.replaceWith(next);frame=next;
+};
+for(const id of ['hidden','visible'])document.querySelector('#'+id).onclick=()=>{const d=frame.contentDocument;Object.defineProperty(d,'hidden',{get:()=>id==='hidden',configurable:true});d.dispatchEvent(new frame.contentWindow.Event('visibilitychange'));};
+document.querySelector('#report').onclick=()=>{
+  const data={userAgent:navigator.userAgent,samples,ownedRecords:keys.map(key=>{const value=localStorage.getItem(key);let parsed;try{parsed=JSON.parse(value)}catch{}return {key,chars:value?.length??0,schemaVersion:parsed?.schemaVersion,attempts:parsed?.attempts?.length,guides:parsed?.guides?.length}})};
+  root.textContent=JSON.stringify(data,null,2);
+};
+</script></html>

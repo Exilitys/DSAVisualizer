@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Prediction challenges: proposed learning flow",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    {"id": "activity", "label": "Shared learning controller"},
+    {"id": "evidence", "label": "Browser-local evidence"},
+    {"id": "ungraded", "label": "Learner chooses to reveal"}
+  ],
+  "mainPath": ["choose", "prepare", "gate", "grade", "feedback", "trace"],
+  "nodes": [
+    {"id": "choose", "lane": "activity", "col": 0, "width": 140, "type": "frontend", "label": "Choose challenge", "sublabel": "Heap or graph"},
+    {"id": "prepare", "lane": "activity", "col": 1, "width": 130, "type": "backend", "label": "Prepare seed", "sublabel": "Validate before replacing"},
+    {"id": "gate", "lane": "activity", "col": 2, "width": 155, "type": "security", "label": "Pause at checkpoint", "sublabel": "Seek and autoplay bounded"},
+    {"id": "grade", "lane": "activity", "col": 3, "width": 150, "type": "backend", "label": "Submit one answer", "sublabel": "Authored answer key"},
+    {"id": "feedback", "lane": "activity", "col": 4, "type": "frontend", "label": "Show feedback", "sublabel": "Correct or incorrect"},
+    {"id": "trace", "lane": "activity", "col": 5, "width": 140, "type": "frontend", "label": "Unlock the trace", "sublabel": "Rewind and inspect"},
+    {"id": "save", "lane": "evidence", "col": 4, "width": 145, "type": "database", "label": "Record attempt", "sublabel": "Latest 100; resettable"},
+    {"id": "skip", "lane": "ungraded", "col": 2, "width": 135, "type": "frontend", "label": "Reveal or leave", "sublabel": "No graded evidence"}
+  ],
+  "edges": [
+    {"from": "choose", "to": "prepare"},
+    {"from": "prepare", "to": "gate"},
+    {"from": "gate", "to": "grade"},
+    {"from": "grade", "to": "feedback"},
+    {"from": "feedback", "to": "trace"},
+    {"from": "feedback", "to": "save", "label": "One record", "role": "branch"},
+    {"from": "gate", "to": "skip", "label": "Optional", "role": "branch"},
+    {"from": "skip", "to": "trace", "label": "Ungraded", "role": "branch"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "One player for both modules", "items": ["Existing engines own immutable snapshots", "Camera and inspection never change an answer"]},
+    {"dot": "amber", "title": "Progress has limits", "items": ["Storage failure keeps feedback usable in memory", "Watching or revealing never demonstrates mastery"]}
+  ]
+}

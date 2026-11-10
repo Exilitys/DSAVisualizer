@@ -1,0 +1,25 @@
+{
+  "keepResult": {
+    "coordinates": [
+      "5",
+      "4"
+    ],
+    "focused": "Prediction 2Resume an explicit DFS frame",
+    "ordinal": "8",
+    "selected": "A"
+  },
+  "modeResult": {
+    "coordinates": [
+      "5",
+      "4"
+    ],
+    "ordinal": "8",
+    "selected": "A"
+  },
+  "applyResult": {
+    "algorithm": "dfs",
+    "ordinal": "20",
+    "selected": "",
+    "start": "A"
+  }
+}
